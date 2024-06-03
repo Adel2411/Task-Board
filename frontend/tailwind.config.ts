@@ -9,10 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Authentification Page colors
+        auth_bg: {
+          DEFAULT: "#F1F3F9",
+          dark: "#202020",
+        },
+
+        // Inactive button color
+        inactive_button: {
+          DEFAULT: "#D1D5DB",
+          dark: "#4B5563",
+        },
+
         // Background for theme switcher
         switch_bg: {
-          DEFAULT: "#CBD5E0",
-          dark: "#4B5563",
+          DEFAULT: "#F1F3F9",
+          dark: "#202020",
         },
 
         // Background color
