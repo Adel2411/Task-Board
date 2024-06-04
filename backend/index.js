@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const authMiddleware = require("./middleware/auth");
 const swaggerJSDoc = require("swagger-jsdoc");
@@ -26,6 +27,14 @@ const option = {
 dotenv.config();
 
 const app = express();
+
+const corsOptions = {
+  origin: [process.env.FRONTEND_URL_LOCAL, process.env.FRONTEND_URL_PROD],
+  optionsSuccessStatus: 200, // For legacy browser support
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 const swaggerSpec = swaggerJSDoc(option);
