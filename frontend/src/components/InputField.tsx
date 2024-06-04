@@ -15,7 +15,7 @@ const InputField = ({
 
   return (
     <div className="flex flex-col justify-center">
-      <div className="flex justify-between text-sm text-gray-500">
+      <div className="flex justify-between text-sm text-background-dark dark:text-background opacity-50">
         <label htmlFor={name}>{placeholder}</label>
         {type === "password" && (
           <button
@@ -31,7 +31,7 @@ const InputField = ({
         )}
       </div>
       <input
-        className="bg-auth_bg dark:bg-auth_bg-dark border-[1px] border-gray-500 w-full h-12 px-3 rounded-xl"
+        className="bg-auth_bg dark:bg-auth_bg-dark border-[1px] w-full h-12 px-3 rounded-xl border-background-dark dark:border-background opacity-50"
         type={type === "password" && showPassword ? "text" : type}
         name={name}
         value={value}

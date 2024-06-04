@@ -30,8 +30,8 @@ const config: Config = {
 
         // Background color
         background: {
-          DEFAULT: "#F8FAFC",
-          dark: "#252525",
+          DEFAULT: "#F1F3F9",
+          dark: "#202020",
         },
 
         // Text color
