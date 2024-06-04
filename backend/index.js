@@ -17,7 +17,7 @@ const option = {
     },
     servers: [
       {
-        url: process.env.HOST_URL,
+        url: `${process.env.HOST_URL}/${process.env.HOST_URL_ENDPOINTS}`,
       },
     ],
   },
@@ -49,7 +49,7 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error(err));
 
-app.use("/api/auth", authRoutes);
+app.use(`/${process.env.HOST_URL_ENDPOINTS}/auth`, authRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
