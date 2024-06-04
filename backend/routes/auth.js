@@ -19,16 +19,42 @@ var transporter = nodemailer.createTransport({
   },
 });
 
-
-// Registration route
-
+/**
+ * @swagger
+ * /register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *       400:
+ *         description: Username or Email already exists
+ *       500:
+ *         description: Internal server error
+ */
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
   try {
     let user = await User.findOne({ $or: [{ email }, { username }] });
 
     if (user) {
-      return res.status(400).json({ message: "Username or Email already exists" });
+      return res
+        .status(400)
+        .json({ message: "Username or Email already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10); // Hash password
@@ -55,7 +81,27 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Email confirmation route
+/**
+ * @swagger
+ * /confirm/{token}:
+ *   get:
+ *     summary: Confirm a user's email
+ *     tags: [Auth]
+ *     parameters:
+ *       - in: path
+ *         name: token
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Email confirmation token
+ *     responses:
+ *       302:
+ *         description: Redirect to login page
+ *       400:
+ *         description: Invalid token
+ *       404:
+ *         description: User not found
+ */
 router.get("/confirm/:token", async (req, res) => {
   const token = req.params.token;
   try {
@@ -72,11 +118,37 @@ router.get("/confirm/:token", async (req, res) => {
   }
 });
 
-// Login route
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: Login a user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               auth_identifier:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: User logged in successfully
+ *       400:
+ *         description: Invalid credentials
+ *       500:
+ *         description: Internal server error
+ */
 router.post("/login", async (req, res) => {
   const { auth_identifier, password } = req.body;
   try {
-    const user = await User.findOne({ $or: [{ email: auth_identifier }, { username: auth_identifier }] });
+    const user = await User.findOne({
+      $or: [{ email: auth_identifier }, { username: auth_identifier }],
+    });
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
     const isMatch = await bcrypt.compare(password, user.password);
