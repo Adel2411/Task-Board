@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressContentEditableWarning>
       <body
-        className={`${poppins.className} bg-background dark:bg-background-dark text-text dark:text-text-dark transition-colors duration-300 ease-in-out`}
+        className={`${poppins.className} bg-background dark:bg-background-dark text-text dark:text-text-dark transition-colors duration-500 ease-in-out`}
       >
         <Providers>
           {children}

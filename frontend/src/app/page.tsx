@@ -1,7 +1,9 @@
+"use client";
+
 export default function Home() {
   return (
-    <main className=" flex min-h-screen flex-col items-center justify-between p-24">
-      Hello
+    <main className="pt-16 flex justify-center h-screen w-screen bg-auth_bg dark:bg-auth_bg-dark">
+      Home
     </main>
   );
 }
