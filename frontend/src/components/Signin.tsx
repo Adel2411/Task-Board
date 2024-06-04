@@ -3,7 +3,7 @@
 import { FaGoogle } from "react-icons/fa";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useFormStatus } from "react-dom";
 import { SignInInputs } from "@/components";
 import { signInInputsType } from "@/types";
@@ -17,6 +17,15 @@ const Signin = () => {
     password: "",
   });
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await postLogin(inputs);
+    setInputs({
+      auth_identifier: "",
+      password: "",
+    });
+  };
+
   return (
     <main className="w-full h-full flex flex-col items-center justify-evenly md:px-9">
       <div>
@@ -25,14 +34,7 @@ const Signin = () => {
         </h1>
       </div>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          postLogin(inputs);
-          setInputs({
-            auth_identifier: "",
-            password: "",
-          });
-        }}
+        onSubmit={handleSubmit}
         className="w-full flex flex-col items-center gap-9"
       >
         <SignInInputs inputs={inputs} setInputs={setInputs} />
