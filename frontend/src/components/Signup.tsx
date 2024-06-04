@@ -20,9 +20,11 @@ const Signup = () => {
   });
 
   return (
-    <main className="w-full h-full flex flex-col gap-5 items-center md:px-9">
+    <main className="w-full h-full flex flex-col justify-evenly items-center md:px-9">
       <div>
-        <h1 className="text-bold text-2xl md:text-3xl lg:text-4xl">Sign Up</h1>
+        <h1 className="font-semibold text-2xl md:text-3xl lg:text-4xl">
+          Sign Up
+        </h1>
       </div>
       <form
         onSubmit={(e) => {
@@ -35,7 +37,7 @@ const Signup = () => {
             confirmPassword: "",
           });
         }}
-        className="w-full h-full flex flex-col items-center gap-9"
+        className="w-full flex flex-col items-center gap-9"
       >
         <SignUpInputs inputs={inputs} setInputs={setInputs} />
         <motion.button
@@ -49,11 +51,11 @@ const Signup = () => {
         </motion.button>
       </form>
       <div
-        className={`divider ${theme === "dark" ? "" : "divider-primary opacity-70"}`}
+        className={`divider ${theme === "dark" ? "divider-error" : "divider-info"} opacity-50`}
       >
         OR
       </div>
-      <div className="w-full h-full flex justify-center">
+      <div className="w-full flex justify-center">
         <button className="btn btn-ghost w-full  hover:bg-gray-300 dark:hover:bg-gray-700">
           <FaGoogle />
           Sign up with Google

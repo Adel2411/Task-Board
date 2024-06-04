@@ -22,7 +22,13 @@ export interface signUpInputsProps {
 }
 
 // Sign In Types
+
 export type signInInputsType = {
   auth_identifier: string;
   password: string;
 };
+
+export interface signInInputsProps {
+  inputs: signInInputsType;
+  setInputs: React.Dispatch<React.SetStateAction<signInInputsType>>;
+}
