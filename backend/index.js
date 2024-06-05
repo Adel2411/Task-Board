@@ -7,7 +7,7 @@ const helloWorldRoutes = require("./routes/hello.js");
 const authMiddleware = require("./middleware/auth");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-// const boardRoutes = require('./routes/board');
+const boardRoutes = require('./routes/board');
 // const taskRoutes = require('./routes/task');
 const option = {
   definition: {
