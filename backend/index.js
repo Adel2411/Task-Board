@@ -51,6 +51,7 @@ mongoose
   .catch((err) => console.error(err));
 
 app.use(`/${process.env.HOST_URL_ENDPOINTS}/auth`, authRoutes);
+app.use(`/${process.env.HOST_URL_ENDPOINTS}/boards`, boardRoutes);
 app.use(`/${process.env.HOST_URL_ENDPOINTS}`, helloWorldRoutes);
 
 const port = process.env.PORT || 3000;
