@@ -20,3 +20,13 @@ router.post("/add", authMiddleware, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Get all boards
+router.get("/getAll", authMiddleware, async (req, res) => {
+  try {
+    const boards = await Board.find({ owner: req.user._id });
+    res.json(boards);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
