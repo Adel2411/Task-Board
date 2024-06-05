@@ -8,6 +8,7 @@ import { useFormStatus } from "react-dom";
 import { SignUpInputs } from "@/components";
 import { signUpInputsType } from "@/types";
 import { postRegister } from "@/utils";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const { theme } = useTheme();
@@ -21,13 +22,30 @@ const Signup = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await postRegister(inputs);
-    setInputs({
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
+    const response = await postRegister(inputs);
+    if (response === "success") {
+      toast.success(response, {
+        duration: 5000,
+      });
+      setInputs({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    } else {
+      if (response === "Response is not OK") {
+        setInputs({
+          username: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
+      }
+      toast.error(response, {
+        duration: 5000,
+      });
+    }
   };
 
   return (

@@ -7,12 +7,12 @@ const SignUpInputs = ({ inputs, setInputs }: signInInputsProps) => {
   return (
     <div className="w-full flex flex-col gap-4">
       <InputField
-        name="username"
+        name="auth_identifier"
         value={auth_identifier}
         onChange={(e) =>
           setInputs({ ...inputs, auth_identifier: e.target.value })
         }
-        placeholder="Username"
+        placeholder="Username or Email"
         type="text"
       />
       <InputField

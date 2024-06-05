@@ -8,6 +8,7 @@ import { useFormStatus } from "react-dom";
 import { SignInInputs } from "@/components";
 import { signInInputsType } from "@/types";
 import { postLogin } from "@/utils";
+import toast from "react-hot-toast";
 
 const Signin = () => {
   const { theme } = useTheme();
@@ -19,11 +20,26 @@ const Signin = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await postLogin(inputs);
-    setInputs({
-      auth_identifier: "",
-      password: "",
-    });
+    const response = await postLogin(inputs);
+    if (response === "success") {
+      toast.success(response, {
+        duration: 5000,
+      });
+      setInputs({
+        auth_identifier: "",
+        password: "",
+      });
+    } else {
+      if (response === "Response is not OK") {
+        setInputs({
+          auth_identifier: "",
+          password: "",
+        });
+      }
+      toast.error(response, {
+        duration: 5000,
+      });
+    }
   };
 
   return (
