@@ -63,7 +63,7 @@ router.post("/register", async (req, res) => {
 
     // Send email confirmation
     const confirmationToken = user.generateAuthToken(); // Ensure this method exists in your User model
-    const confirmationLink = `${process.env.HOST_URL}/api/auth/confirm/${confirmationToken}`;
+    const confirmationLink = `${process.env.HOST_URL}/${process.env.HOST_URL_ENDPOINTS}/auth/confirm/${confirmationToken}`;
     const mailOptions = {
       from: process.env.MAIL_SENDER,
       to: email,
@@ -112,7 +112,8 @@ router.get("/confirm/:token", async (req, res) => {
     user.confirmed = true;
     await user.save();
 
-    res.redirect(process.env.REDIRECT_URL); // Redirect to login page
+    const authToken = user.generateAuthToken();
+    res.redirect(`${process.env.REDIRECT_URL}/token?${authToken}`); // Redirect to login page
   } catch (err) {
     res.status(400).json({ message: "Invalid token" });
   }
@@ -150,7 +151,6 @@ router.post("/login", async (req, res) => {
       $or: [{ email: auth_identifier }, { username: auth_identifier }],
     });
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
-
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials" });
