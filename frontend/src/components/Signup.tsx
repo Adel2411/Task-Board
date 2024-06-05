@@ -53,7 +53,7 @@ const Signup = () => {
         </motion.button>
       </form>
       <div
-        className={`divider ${theme === "dark" ? "divider-error" : "divider-info"} opacity-50`}
+        className={`divider ${theme === "dark" ? "divider-error" : "divider-accent"} opacity-50`}
       >
         OR
       </div>

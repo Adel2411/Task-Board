@@ -49,14 +49,14 @@ const Signin = () => {
         </motion.button>
       </form>
       <div
-        className={`divider ${theme === "dark" ? "divider-error" : "divider-info"} opacity-50`}
+        className={`divider ${theme === "dark" ? "divider-error" : "divider-accent"} opacity-50`}
       >
         OR
       </div>
       <div className="w-full flex justify-center">
         <button className="btn btn-ghost w-full  hover:bg-gray-300 dark:hover:bg-gray-700">
           <FaGoogle />
-          Sign up with Google
+          Sign in with Google
         </button>
       </div>
     </main>
