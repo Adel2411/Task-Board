@@ -10,9 +10,8 @@ dotenv.config();
 const router = express.Router();
 
 // Email configuration
-var transporter = nodemailer.createTransport({
-  host: process.env.MAIL_HOST,
-  port: process.env.MAIL_PORT,
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
