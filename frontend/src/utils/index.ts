@@ -18,7 +18,7 @@ export async function postRegister(inputs: signUpInputsType) {
   const body = { username: username, email: email, password: password };
 
   try {
-    const response = await fetch(`${process.env.CURRENT_URL}/register`, {
+    const response = await fetch(`${process.env.CURRENT_URL}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export async function postLogin(inputs: signInInputsType) {
   }
 
   try {
-    const response = await fetch(`${process.env.CURRENT_URL}/login`, {
+    const response = await fetch(`${process.env.CURRENT_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
