@@ -11,7 +11,7 @@ const router = express.Router();
 
 // Email configuration
 let transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
@@ -45,6 +45,7 @@ let transporter = nodemailer.createTransport({
  *       500:
  *         description: Internal server error
  */
+
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
   try {
@@ -73,34 +74,12 @@ router.post("/register", async (req, res) => {
 
     res.status(201).json({
       message: "User registered successfully. Please confirm your email.",
-      token: confirmationToken,
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-/**
- * @swagger
- * /auth/confirm/{token}:
- *   get:
- *     summary: Confirm a user's email
- *     tags: [Auth]
- *     parameters:
- *       - in: path
- *         name: token
- *         schema:
- *           type: string
- *         required: true
- *         description: Email confirmation token
- *     responses:
- *       302:
- *         description: Redirect to login page
- *       400:
- *         description: Invalid token
- *       404:
- *         description: User not found
- */
 router.get("/confirm/:token", async (req, res) => {
   const token = req.params.token;
   try {
@@ -110,9 +89,8 @@ router.get("/confirm/:token", async (req, res) => {
 
     user.confirmed = true;
     await user.save();
-
     const authToken = user.generateAuthToken();
-    res.redirect(`${process.env.REDIRECT_URL}/token?${authToken}`); // Redirect to login page
+    res.redirect(`${process.env.REDIRECT_URL}?token=${authToken}`); // Redirect to login page
   } catch (err) {
     res.status(400).json({ message: "Invalid token" });
   }
