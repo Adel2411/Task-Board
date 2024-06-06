@@ -12,15 +12,6 @@ const userSchema = new mongoose.Schema({
   confirmed: { type: Boolean, default: false }, // Flag to track email confirmation
 });
 
-// Hash the password before saving
-userSchema.pre("save", async function (next) {
-  const user = this;
-  if (user.isModified("password")) {
-    user.password = await bcrypt.hash(user.password, 10);
-  }
-  next();
-});
-
 // Generate JWT token
 userSchema.methods.generateAuthToken = function () {
   const user = this;
@@ -44,7 +35,7 @@ userSchema.methods.generateConfirmationToken = function () {
 userSchema.methods.generateResetToken = function () {
   const user = this;
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "15min", 
+    expiresIn: "15min",
   });
   return token;
 };
