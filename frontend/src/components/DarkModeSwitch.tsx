@@ -10,32 +10,27 @@ export default function DarkModeSwitch() {
 
   useEffect(() => setMounted(true), []);
 
-  if (!mounted)
-    return (
-      <div className="text-xs fixed top-4 right-4 p-2 text-background-dark dark:text-background">
-        Loading...
-      </div>
-    );
-
-  if (theme === "dark") {
-    return (
-      <button
-        className="fixed top-4 right-4 p-2 rounded-full bg-switch_bg-dark text-background"
-        onClick={() => setTheme("light")}
-      >
-        <MdOutlineLightMode />
-      </button>
-    );
-  }
-
-  if (theme === "light") {
-    return (
-      <button
-        className="fixed top-4 right-4 p-2 rounded-full bg-switch_bg text-background-dark"
-        onClick={() => setTheme("dark")}
-      >
-        <MdOutlineDarkMode />
-      </button>
-    );
-  }
+  return (
+    <>
+      {!mounted ? (
+        <div className="text-xs fixed top-4 right-4 p-2 text-background-dark dark:text-background">
+          Loading...
+        </div>
+      ) : theme === "dark" ? (
+        <button
+          className="fixed top-4 right-4 p-2 rounded-full bg-switch_bg-dark text-background"
+          onClick={() => setTheme("light")}
+        >
+          <MdOutlineLightMode />
+        </button>
+      ) : (
+        <button
+          className="fixed top-4 right-4 p-2 rounded-full bg-switch_bg text-background-dark"
+          onClick={() => setTheme("dark")}
+        >
+          <MdOutlineDarkMode />
+        </button>
+      )}
+    </>
+  );
 }

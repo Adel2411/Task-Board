@@ -4,7 +4,6 @@ import { FaGoogle } from "react-icons/fa";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { useState, FormEvent } from "react";
-import { useFormStatus } from "react-dom";
 import { SignUpInputs } from "@/components";
 import { signUpInputsType } from "@/types";
 import { postRegister } from "@/utils";
@@ -12,7 +11,7 @@ import toast from "react-hot-toast";
 
 const Signup = () => {
   const { theme } = useTheme();
-  const { pending } = useFormStatus();
+  const [loading, setLoading] = useState(false);
   const [inputs, setInputs] = useState<signUpInputsType>({
     username: "",
     email: "",
@@ -22,7 +21,10 @@ const Signup = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+
     const response = await postRegister(inputs);
+
     if (response === "success") {
       toast.success(response, {
         duration: 5000,
@@ -46,6 +48,8 @@ const Signup = () => {
         duration: 5000,
       });
     }
+
+    setLoading(false);
   };
 
   return (
@@ -64,10 +68,13 @@ const Signup = () => {
           type="submit"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          disabled={pending}
-          className="w-full h-10 text-sm font-semibold bg-background-dark dark:bg-background text-background dark:text-background-dark rounded-l-full rounded-r-full disabled:bg-opacity-50 hover:bg-opacity-50 dark:hover:bg-opacity-50"
+          disabled={loading}
+          className={`w-full h-10 text-sm font-semibold bg-background-dark dark:bg-background text-background dark:text-background-dark rounded-l-full rounded-r-full disabled:bg-opacity-50 hover:bg-opacity-50 dark:hover:bg-opacity-50 ${loading ? "cursor-not-allowed" : ""}`}
         >
-          Sign up
+          {loading ? "Signing up" : "Sign up"}
+          {loading && (
+            <span className="loading loading-spinner loading-sm"></span>
+          )}
         </motion.button>
       </form>
       <div

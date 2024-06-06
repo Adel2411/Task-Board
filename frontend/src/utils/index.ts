@@ -6,16 +6,16 @@ export async function postRegister(inputs: signUpInputsType) {
   const { username, email, password, confirmPassword } = inputs;
 
   if (username.trim() === "") {
-    return "please provide a username";
+    return "Please provide a username.";
   } else if (email.trim() === "") {
-    return "please provide a email address";
+    return "Please provide an email address.";
   } else if (password.trim() === "") {
-    return "please provide a password";
+    return "Please provide a password.";
   } else if (password.trim() !== confirmPassword.trim()) {
-    return "passwords provided are not matching";
+    return "Passwords provided are not matching.";
   }
 
-  const body = { username: username, email: email, password: password };
+  const body = { username, email, password };
 
   try {
     const response = await fetch(`${process.env.CURRENT_URL}/auth/register`, {
@@ -26,26 +26,25 @@ export async function postRegister(inputs: signUpInputsType) {
       body: JSON.stringify(body),
     });
 
-    console.log(response);
     if (!response.ok) {
-      return "Response is not OK";
+      const errorData = await response.json();
+      return errorData.message || "An error occurred during registration.";
     }
 
-    const data = response.json();
-    console.log(data);
     return "success";
   } catch (err) {
-    console.error(err);
-    return "error";
+    console.error("Registration error:", err);
+    return "An error occurred during registration.";
   }
 }
 
 export async function postLogin(inputs: signInInputsType) {
   const { auth_identifier, password } = inputs;
+
   if (auth_identifier.trim() === "") {
-    return "please provide a username or email address";
+    return "Please provide a username or email address.";
   } else if (password.trim() === "") {
-    return "please provide a password";
+    return "Please provide a password.";
   }
 
   try {
@@ -54,19 +53,18 @@ export async function postLogin(inputs: signInInputsType) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(inputs),
+      body: JSON.stringify({ auth_identifier, password }),
     });
 
-    console.log(response);
     if (!response.ok) {
-      return "Response is not OK";
+      const errorData = await response.json();
+      return errorData.message || "An error occurred during login.";
     }
 
-    const data = response.json();
-    console.log(data);
-    return "success";
+    const data = await response.json();
+    return data;
   } catch (err) {
-    console.error(err);
-    return "error";
+    console.error("Login error:", err);
+    return "An error occurred during login.";
   }
 }

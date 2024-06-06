@@ -9,6 +9,7 @@ import { gradientBackground, gradientBackgroundDark } from "@/animations";
 export default function Login() {
   const { theme } = useTheme();
   const [showSignin, setShowSignin] = useState(true);
+
   return (
     <main className="w-screen h-screen flex justify-center items-center bg-center bg-cover bg-[url('/auth_page_bg_light.png')] dark:bg-[url('/auth_page_bg_dark.png')]">
       <motion.div

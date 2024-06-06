@@ -16,14 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressContentEditableWarning>
+    <html lang="en" suppressContentEditableWarning suppressHydrationWarning>
       <body
         className={`${poppins.className} bg-background dark:bg-background-dark text-text dark:text-text-dark transition-colors duration-500 ease-in-out`}
       >
         <Providers>
           <Toaster position="bottom-left" />
-          {children}
 
+          {children}
           <DarkModeSwitch />
         </Providers>
       </body>
