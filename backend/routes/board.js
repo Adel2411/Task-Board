@@ -1,6 +1,7 @@
 const express = require("express");
 const Board = require("../models/Board");
 const authMiddleware = require("../middleware/auth");
+const Task = require("../models/Task");
 
 const router = express.Router();
 
@@ -63,6 +64,46 @@ router.delete("/delete/:id", authMiddleware, async (req, res) => {
     }
     await Board.findByIdAndDelete(boardId);
     res.json({ message: "Board deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// get board by id with all tasks
+router.get("/:id", authMiddleware, async (req, res) => {
+  const boardId = req.params.id;
+  try {
+    const board = await board.findById(boardId);
+    if (!board) return res.status(404).json({ message: "Board not found" });
+    if (board.owner !== req.user.id && !board.is_public) {
+      return res.status(403).json({ message: "Unauthorized access" });
+    }
+
+    const tasks = await Task.find({ board: boardId });
+    board.tasks.push(tasks, {
+      is_requester_owner: board.owner === req.user.id,
+    });
+    res.json(board);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// same as before but no autherization needed
+
+router.get("/:id", async (req, res) => {
+  const boardId = req.params.id;
+  try {
+    const board = await board.findById(boardId);
+    if (!board) return res.status(404).json({ message: "Board not found" });
+
+    if (!board.is_public) {
+      return res.status(403).json({ message: "Unauthorized access" });
+    }
+
+    const tasks = await Task.find({ board: boardId });
+    board.tasks.push(tasks);
+    res.json(board);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
