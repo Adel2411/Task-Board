@@ -51,4 +51,21 @@ router.put("/update/:id", authMiddleware, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Delete board
+router.delete("/delete/:id", authMiddleware, async (req, res) => {
+  const boardId = req.params.id;
+  try {
+    const board = await Board.findById(boardId);
+    if (!board) return res.status(404).json({ message: "Board not found" });
+    if (board.owner !== req.user.id) {
+      return res.status(403).json({ message: "Unauthorized access" });
+    }
+    await Board.findByIdAndDelete(boardId);
+    res.json({ message: "Board deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
