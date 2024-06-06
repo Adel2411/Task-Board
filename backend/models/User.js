@@ -10,11 +10,11 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   confirmed: { type: Boolean, default: false }, // Flag to track email confirmation
-  googleId,
+  googleId: { type: String, default: null },
 });
 
 // Generate JWT token
-userSchema.methods.generateAuthToken = function () {
+userSchema.methods.generateAuthToken = function() {
   const user = this;
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "24h", // Set expiration to 24 hours
@@ -23,7 +23,7 @@ userSchema.methods.generateAuthToken = function () {
 };
 
 // Generate email confirmation token
-userSchema.methods.generateConfirmationToken = function () {
+userSchema.methods.generateConfirmationToken = function() {
   const user = this;
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "15min", // Set expiration to 15 minutes
@@ -33,7 +33,7 @@ userSchema.methods.generateConfirmationToken = function () {
 };
 
 // Generate password reset token
-userSchema.methods.generateResetToken = function () {
+userSchema.methods.generateResetToken = function() {
   const user = this;
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "15min",
