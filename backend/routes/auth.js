@@ -20,7 +20,7 @@ let transporter = nodemailer.createTransport({
 
 /**
  * @swagger
- * /register:
+ * /auth/register:
  *   post:
  *     summary: Register a new user
  *     tags: [Auth]
@@ -82,7 +82,7 @@ router.post("/register", async (req, res) => {
 
 /**
  * @swagger
- * /confirm/{token}:
+ * /auth/confirm/{token}:
  *   get:
  *     summary: Confirm a user's email
  *     tags: [Auth]
@@ -120,7 +120,7 @@ router.get("/confirm/:token", async (req, res) => {
 
 /**
  * @swagger
- * /login:
+ * /auth/login:
  *   post:
  *     summary: Login a user
  *     tags: [Auth]
