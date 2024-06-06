@@ -4,6 +4,7 @@ import Signup from "./Signup";
 import SignInInputs from "./SignInInputs";
 import SignUpInputs from "./SignUpInputs";
 import InputField from "./InputField";
+import ProtectedRoute from "./ProtectedRoute";
 
 export {
   DarkModeSwitch,
@@ -12,4 +13,5 @@ export {
   SignInInputs,
   SignUpInputs,
   InputField,
+  ProtectedRoute,
 };

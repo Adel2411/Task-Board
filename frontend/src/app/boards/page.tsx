@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { ProtectedRoute } from "@/components";
 
 const Boards = () => {
   const searchParams = useSearchParams();
@@ -22,9 +23,11 @@ const Boards = () => {
   }, [searchParams, router]);
 
   return (
-    <main className="h-screen w-screen flex items-center justify-center">
-      <h1 className="text-3xl font-bold">Boards</h1>
-    </main>
+    <ProtectedRoute>
+      <main className="h-screen w-screen flex items-center justify-center">
+        <h1 className="text-3xl font-bold">Boards</h1>
+      </main>
+    </ProtectedRoute>
   );
 };
 

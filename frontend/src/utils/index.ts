@@ -68,3 +68,19 @@ export async function postLogin(inputs: signInInputsType) {
     return "An error occurred during login.";
   }
 }
+
+export async function checkValidToken(token: string): Promise<boolean> {
+  try {
+    const response = await fetch(`${process.env.CURRENT_URL}/boards/getAll`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.ok;
+  } catch (error) {
+    console.error("Failed to verify token", error);
+    return false;
+  }
+}

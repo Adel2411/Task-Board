@@ -1,5 +1,6 @@
 "use client";
 
+import { ProtectedRoute } from "@/components";
 import { useRouter } from "next/navigation";
 
 const Home = () => {
@@ -14,17 +15,19 @@ const Home = () => {
   };
 
   return (
-    <main className="h-screen w-screen flex flex-col items-center justify-center gap-10">
-      <h1 className="text-2xl font-semibold">Welcome Home</h1>
-      <div className="w-full flex items-center justify-evenly">
-        <button className="btn" onClick={handleBoards}>
-          Boards
-        </button>
-        <button className="btn" onClick={handleAuth}>
-          Login
-        </button>
-      </div>
-    </main>
+    <ProtectedRoute>
+      <main className="h-screen w-screen flex flex-col items-center justify-center gap-10">
+        <h1 className="text-2xl font-semibold">Welcome Home</h1>
+        <div className="w-full flex items-center justify-evenly">
+          <button className="btn" onClick={handleBoards}>
+            Boards
+          </button>
+          <button className="btn" onClick={handleAuth}>
+            Login
+          </button>
+        </div>
+      </main>
+    </ProtectedRoute>
   );
 };
 

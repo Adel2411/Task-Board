@@ -4,6 +4,7 @@ import { Providers } from "./providers";
 import { DarkModeSwitch } from "@/components";
 import { poppins } from "@/fonts";
 import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "@/hooks";
 
 export const metadata: Metadata = {
   title: "Task Board App",
@@ -18,12 +19,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressContentEditableWarning suppressHydrationWarning>
       <body
-        className={`${poppins.className} bg-background dark:bg-background-dark text-text dark:text-text-dark transition-colors duration-500 ease-in-out`}
+        className={`${poppins.className} bg-background dark:bg-background-dark text-text dark:text-text-dark transition-colors duration-500 ease-in-out h-screen w-screen overflow-auto`}
       >
         <Providers>
-          <Toaster position="bottom-left" />
+          <AuthProvider>
+            <Toaster position="bottom-left" />
 
-          {children}
+            {children}
+          </AuthProvider>
           <DarkModeSwitch />
         </Providers>
       </body>

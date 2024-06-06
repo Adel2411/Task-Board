@@ -32,3 +32,9 @@ export interface signInInputsProps {
   inputs: signInInputsType;
   setInputs: React.Dispatch<React.SetStateAction<signInInputsType>>;
 }
+
+// Auth Context Types
+export interface AuthContextType {
+  isAuthorized: boolean;
+  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>;
+}
