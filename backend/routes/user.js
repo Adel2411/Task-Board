@@ -4,7 +4,7 @@ const authMiddleware = require("../middleware/auth");
 const router = express.Router();
 /**
  * @swagger
- * /user-data:
+ * /user/user-data:
  *   get:
  *     summary: Retrieve user data
  *     description: Retrieve the username and email of the authenticated user.
