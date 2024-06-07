@@ -21,9 +21,15 @@ const Boards = () => {
     }
   }, [searchParams, router]);
 
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    location.reload();
+  };
+
   return (
     <main className="h-screen w-screen flex items-center justify-center">
       <h1 className="text-3xl font-bold">Boards</h1>
+      <button onClick={handleLogOut}>Log out</button>
     </main>
   );
 };
