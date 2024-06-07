@@ -139,4 +139,30 @@ router.post("/login", async (req, res) => {
   }
 });
 
+
+router.post("/forgot-password", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+
+    // send email with reset password link
+    const resetToken = User.generateResetToken();
+    const confirmationLink = `${process.env.HOST_URL}/${process.env.HOST_URL_ENDPOINTS}/auth/password-reset/${resetToken}`;
+    const mailOptions = {
+      from: process.env.MAIL_SENDER,
+      to: email,
+      subject: "reset your password",
+      html: `Click <a href="${confirmationLink}">here</a> to reset your password.`,
+    };
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.post("/password-reset/:token", async (req, res) => { });
+
+
 module.exports = router;
