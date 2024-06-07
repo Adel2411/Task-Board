@@ -2,6 +2,9 @@
 
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { motion } from "framer-motion";
+import { GradientDiv } from "@/components";
+import { User } from "@/types";
 
 const Boards = () => {
   const searchParams = useSearchParams();
@@ -27,9 +30,18 @@ const Boards = () => {
   };
 
   return (
-    <main className="h-screen w-screen flex items-center justify-center">
+    <main className="h-screen w-screen flex flex-col gap-5 items-center justify-center">
       <h1 className="text-3xl font-bold">Boards</h1>
-      <button onClick={handleLogOut}>Log out</button>
+      <GradientDiv className="rounded-xl p-1">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleLogOut}
+          className="btn btn-ghost bg-white dark:bg-black"
+        >
+          Log out
+        </motion.button>
+      </GradientDiv>
     </main>
   );
 };

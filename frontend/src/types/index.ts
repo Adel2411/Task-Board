@@ -14,7 +14,6 @@ export interface inputFieldProps {
 }
 
 // Sign Up Types
-
 export type signUpInputsType = {
   username: string;
   email: string;
@@ -28,7 +27,6 @@ export interface signUpInputsProps {
 }
 
 // Sign In Types
-
 export type signInInputsType = {
   auth_identifier: string;
   password: string;
@@ -43,4 +41,10 @@ export interface signInInputsProps {
 export type AuthContextType = {
   isAuthorized: boolean;
   setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+// User Types
+export type User = {
+  username: string;
+  email: string;
 };
