@@ -26,7 +26,6 @@ const Signin = () => {
     if (response.token) {
       // Successful login
       localStorage.setItem("token", response.token);
-      location.reload();
       toast.success("Successfuly Signed in", {
         duration: 5000,
       });
@@ -34,6 +33,7 @@ const Signin = () => {
         auth_identifier: "",
         password: "",
       });
+      location.reload();
     } else {
       // Handle different types of errors
       toast.error(response, {
