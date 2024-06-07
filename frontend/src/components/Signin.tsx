@@ -67,12 +67,15 @@ const Signin = () => {
         <SignInInputs inputs={inputs} setInputs={setInputs} />
         <motion.button
           type="submit"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={loading ? { scale: 1 } : { scale: 1.05 }}
+          whileTap={loading ? { scale: 1 } : { scale: 0.95 }}
           disabled={loading}
-          className={`w-full h-10 text-sm font-semibold bg-background-dark dark:bg-background text-background dark:text-background-dark rounded-l-full rounded-r-full disabled:bg-opacity-50 hover:bg-opacity-50 dark:hover:bg-opacity-50 ${loading ? "cursor-not-allowed" : ""}`}
+          className={`w-full h-10 text-sm font-semibold bg-background-dark dark:bg-background text-background dark:text-background-dark rounded-l-full rounded-r-full ${loading ? "flex justify-center items-center gap-5 bg-opacity-25 dark:bg-opacity-25 cursor-not-allowed" : "hover:bg-opacity-50 dark:hover:bg-opacity-50"}`}
         >
-          {loading ? "Signing in..." : "Sign in"}
+          {loading && (
+            <span className="loading loading-spinner loading-xs"></span>
+          )}
+          {loading ? "Signing in" : "Sign in"}
         </motion.button>
       </form>
       <div

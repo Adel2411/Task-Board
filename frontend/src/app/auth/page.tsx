@@ -3,9 +3,8 @@
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Signin, Signup } from "@/components";
+import { ProtectedRoute, Signin, Signup } from "@/components";
 import { gradientBackground, gradientBackgroundDark } from "@/animations";
-import { ProtectedRoute } from "@/components";
 
 export default function Login() {
   const { theme } = useTheme();

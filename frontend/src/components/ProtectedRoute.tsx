@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/authContext";
 
 export default function ProtectedRoute({
@@ -11,13 +11,18 @@ export default function ProtectedRoute({
 }) {
   const { isAuthorized } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     console.log("isAuthorized", isAuthorized);
     if (!isAuthorized) {
-      router.push("/home");
+      if (pathname !== "/home" && pathname !== "/auth") {
+        router.push("/home");
+      }
     } else {
-      router.push("/boards");
+      if (pathname !== "/boards") {
+        router.push("/boards");
+      }
     }
   }, [isAuthorized, router]);
 
