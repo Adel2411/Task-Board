@@ -40,7 +40,7 @@ export interface signInInputsProps {
 // Auth Context Types
 export type AuthContextType = {
   isAuthorized: boolean;
-  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>;
+  user: User | null;
 };
 
 // User Types

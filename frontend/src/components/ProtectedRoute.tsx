@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { useAuth } from "@/hooks/authContext";
+import { useAuth } from "@/hooks";
 
 export default function ProtectedRoute({
   children,
@@ -14,8 +14,6 @@ export default function ProtectedRoute({
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log("isAuthorized", isAuthorized);
-
     if (!isAuthorized) {
       if (pathname !== "/home" && pathname !== "/auth") {
         router.push("/home");

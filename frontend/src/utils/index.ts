@@ -30,8 +30,7 @@ export async function postRegister(inputs: signUpInputsType) {
       const errorData = await response.json();
       return errorData.message || "An error occurred during registration.";
     }
-
-    return "We have sent you a confirmation email. Please verify your email address.";
+    return "success";
   } catch (err) {
     console.error("Registration error:", err);
     return "An error occurred during registration.";
@@ -82,5 +81,25 @@ export async function checkValidToken(token: string): Promise<boolean> {
   } catch (error) {
     console.error("Failed to verify token", error);
     return false;
+  }
+}
+
+export async function getUser(token: string) {
+  try {
+    const response = await fetch(`${process.env.CURRENT_URL}/user/user-data`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      return null;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to get user", error);
+    return null;
   }
 }
