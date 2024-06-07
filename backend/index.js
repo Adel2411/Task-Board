@@ -8,6 +8,8 @@ const authMiddleware = require("./middleware/auth");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const boardRoutes = require("./routes/board");
+const userRoutes = require("./routes/user");
+
 // const taskRoutes = require('./routes/task');
 const option = {
   definition: {
@@ -53,6 +55,7 @@ mongoose
 app.use(`/${process.env.HOST_URL_ENDPOINTS}/auth`, authRoutes);
 app.use(`/${process.env.HOST_URL_ENDPOINTS}/boards`, boardRoutes);
 app.use(`/${process.env.HOST_URL_ENDPOINTS}`, helloWorldRoutes);
+app.use(`/${process.env.HOST_URL_ENDPOINTS}/user`, userRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
