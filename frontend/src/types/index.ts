@@ -1,3 +1,9 @@
+// Gradient borders types
+export interface gradientDivProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
 // Input Types
 export interface inputFieldProps {
   name: string;
@@ -34,7 +40,7 @@ export interface signInInputsProps {
 }
 
 // Auth Context Types
-export interface AuthContextType {
+export type AuthContextType = {
   isAuthorized: boolean;
   setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};

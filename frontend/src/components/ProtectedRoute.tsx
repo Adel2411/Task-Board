@@ -15,18 +15,17 @@ export default function ProtectedRoute({
 
   useEffect(() => {
     console.log("isAuthorized", isAuthorized);
+
     if (!isAuthorized) {
       if (pathname !== "/home" && pathname !== "/auth") {
         router.push("/home");
-      } else if (pathname === "/auth") {
-        router.push("/auth");
-      } else if (pathname === "/home") {
-        router.push("/home");
       }
     } else {
-      router.push("/boards");
+      if (!pathname.startsWith("/boards")) {
+        router.push("/boards");
+      }
     }
-  }, [isAuthorized, router]);
+  }, [isAuthorized, router, pathname]);
 
   return <>{children}</>;
 }

@@ -25,7 +25,10 @@ const Signup = () => {
 
     const response = await postRegister(inputs);
 
-    if (response === "success") {
+    if (
+      response ===
+      "We have sent you a confirmation email. Please verify your email address"
+    ) {
       toast.success(response, {
         duration: 5000,
       });

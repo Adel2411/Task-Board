@@ -31,7 +31,7 @@ export async function postRegister(inputs: signUpInputsType) {
       return errorData.message || "An error occurred during registration.";
     }
 
-    return "success";
+    return "We have sent you a confirmation email. Please verify your email address.";
   } catch (err) {
     console.error("Registration error:", err);
     return "An error occurred during registration.";

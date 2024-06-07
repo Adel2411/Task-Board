@@ -8,10 +8,8 @@ import { SignInInputs } from "@/components";
 import { signInInputsType } from "@/types";
 import { postLogin } from "@/utils";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
 const Signin = () => {
-  const router = useRouter();
   const { theme } = useTheme();
   const [loading, setLoading] = useState(false);
   const [inputs, setInputs] = useState<signInInputsType>({
@@ -28,14 +26,14 @@ const Signin = () => {
     if (response.token) {
       // Successful login
       localStorage.setItem("token", response.token);
-      toast.success("Login successful!", {
+      location.reload();
+      toast.success("Successfuly Signed in", {
         duration: 5000,
       });
       setInputs({
         auth_identifier: "",
         password: "",
       });
-      router.push("/boards");
     } else {
       // Handle different types of errors
       toast.error(response, {
