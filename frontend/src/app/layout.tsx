@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
-import { DarkModeSwitch } from "@/components";
+import { DarkModeSwitch, ProtectedRoute } from "@/components";
 import { poppins } from "@/fonts";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/hooks";
@@ -23,9 +23,11 @@ export default function RootLayout({
       >
         <Providers>
           <AuthProvider>
-            <Toaster position="bottom-left" />
+            <ProtectedRoute>
+              <Toaster position="bottom-left" />
 
-            {children}
+              {children}
+            </ProtectedRoute>
           </AuthProvider>
           <DarkModeSwitch />
         </Providers>

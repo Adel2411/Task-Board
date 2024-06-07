@@ -18,11 +18,13 @@ export default function ProtectedRoute({
     if (!isAuthorized) {
       if (pathname !== "/home" && pathname !== "/auth") {
         router.push("/home");
+      } else if (pathname === "/auth") {
+        router.push("/auth");
+      } else if (pathname === "/home") {
+        router.push("/home");
       }
     } else {
-      if (pathname !== "/boards") {
-        router.push("/boards");
-      }
+      router.push("/boards");
     }
   }, [isAuthorized, router]);
 
