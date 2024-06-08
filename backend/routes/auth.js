@@ -173,5 +173,19 @@ router.get("/validate-reset-token/:token", async (req, res) => {
   }
 });
 
-router.post("/reset-password", async (req, res) => { });
+router.post("/reset-password", async (req, res) => {
+  const { password, token } = req.body;
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded._id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const hashedPassword = await bcrypt.hash(password, 10); // Hash password
+    user.password = hashedPassword;
+    await user.save();
+    res.json({ message: "Password reset successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 module.exports = router;
