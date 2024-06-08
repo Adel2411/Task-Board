@@ -140,7 +140,7 @@ router.post("/login", async (req, res) => {
 });
 
 
-router.post("/forgot-password", async (req, res) => {
+router.post("/request-password-reset", async (req, res) => {
   const { email } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -162,7 +162,7 @@ router.post("/forgot-password", async (req, res) => {
   }
 });
 
-router.post("/password-reset/:token", async (req, res) => { });
+router.post("/validate-reset-token/:token", async (req, res) => { });
 
-
+router.post("/reset-password", async (req, res) => { });
 module.exports = router;
