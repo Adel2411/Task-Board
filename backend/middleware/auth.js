@@ -9,7 +9,8 @@ const auth = async (req, res, next) => {
   if (!token) return res.status(401).json({ message: 'No token, authorization denied' });
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_AUTH);
+    if (decoded.type !== 'auth') return res.status(400).json({ message: "Invalid token" });
     const user = await User.findById(decoded._id);
     if (!user) return res.status(401).json({ message: 'Token is not valid' });
     req.user = user;
