@@ -13,6 +13,12 @@ export interface inputFieldProps {
   type: string;
 }
 
+// Loading Types
+export interface loadingProps {
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 // Sign Up Types
 export type signUpInputsType = {
   username: string;

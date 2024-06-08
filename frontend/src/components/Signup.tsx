@@ -5,13 +5,12 @@ import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { useState, FormEvent } from "react";
 import { SignUpInputs } from "@/components";
-import { signUpInputsType } from "@/types";
+import { loadingProps, signUpInputsType } from "@/types";
 import { postRegister } from "@/utils";
 import toast from "react-hot-toast";
 
-const Signup = () => {
+const Signup = ({ loading, setLoading }: loadingProps) => {
   const { theme } = useTheme();
-  const [loading, setLoading] = useState(false);
   const [inputs, setInputs] = useState<signUpInputsType>({
     username: "",
     email: "",
@@ -86,7 +85,10 @@ const Signup = () => {
         OR
       </div>
       <div className="w-full flex justify-center">
-        <button className="btn btn-ghost w-full  hover:bg-gray-300 dark:hover:bg-gray-700">
+        <button
+          className={`btn btn-ghost w-full ${!loading && "hover:bg-gray-300 dark:hover:bg-gray-700"}`}
+          disabled={loading}
+        >
           <FaGoogle />
           Sign up with Google
         </button>

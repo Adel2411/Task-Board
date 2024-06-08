@@ -5,13 +5,12 @@ import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { useState, FormEvent } from "react";
 import { SignInInputs } from "@/components";
-import { signInInputsType } from "@/types";
+import { loadingProps, signInInputsType } from "@/types";
 import { postLogin } from "@/utils";
 import toast from "react-hot-toast";
 
-const Signin = () => {
+const Signin = ({ loading, setLoading }: loadingProps) => {
   const { theme } = useTheme();
-  const [loading, setLoading] = useState(false);
   const [inputs, setInputs] = useState<signInInputsType>({
     auth_identifier: "",
     password: "",
@@ -82,7 +81,10 @@ const Signin = () => {
         OR
       </div>
       <div className="w-full flex justify-center">
-        <button className="btn btn-ghost w-full  hover:bg-gray-300 dark:hover:bg-gray-700">
+        <button
+          className={`btn btn-ghost w-full ${!loading && "hover:bg-gray-300 dark:hover:bg-gray-700"}`}
+          disabled={loading}
+        >
           <FaGoogle />
           Sign in with Google
         </button>
