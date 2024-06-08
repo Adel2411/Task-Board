@@ -83,7 +83,8 @@ router.post("/register", async (req, res) => {
 router.get("/confirm/:token", async (req, res) => {
   const token = req.params.token;
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_EMAIL_CONFIRM);
+    if (decoded.type !== 'email-confirmation') return res.status(400).json({ message: "Invalid token" });
     const user = await User.findById(decoded._id);
     if (!user) return res.status(404).json({ message: "User not found" });
 
@@ -166,7 +167,8 @@ router.get("/validate-reset-token/:token", async (req, res) => {
 
   const token = req.params.token;
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_PASSWORD_RESET);
+    if (decoded.type !== 'password-reset') return res.status(400).json({ message: "Invalid token" });
     res.redirect(`${process.env.FRONTEND_URL_LOCAL}/reset-password?token=${authToken}`); // Redirect to login page
   } catch (error) {
     res.status(400).json({ message: "Invalid token" });
@@ -240,10 +242,11 @@ router.get("/validate-reset-token/:token", async (req, res) => {
 router.post("/reset-password", async (req, res) => {
   const { password, token } = req.body;
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_PASSWORD_RESET);
+    if (decoded.type !== 'password-reset') return res.status(400).json({ message: "Invalid token" });
+
     const user = await User.findById(decoded._id);
     if (!user) return res.status(404).json({ message: "User not found" });
-
     const hashedPassword = await bcrypt.hash(password, 10); // Hash password
     user.password = hashedPassword;
     await user.save();
