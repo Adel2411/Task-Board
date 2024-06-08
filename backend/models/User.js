@@ -14,29 +14,43 @@ const userSchema = new mongoose.Schema({
 });
 
 // Generate JWT token
-userSchema.methods.generateAuthToken = function() {
+userSchema.methods.generateAuthToken = function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "24h", // Set expiration to 24 hours
+  const token = jwt.sign(
+    {
+      _id: user._id,
+      type: 'auth'
+    },
+    process.env.JWT_SECRET_AUTH, {
+    expiresIn: "24h",
   });
   return token;
 };
 
 // Generate email confirmation token
-userSchema.methods.generateConfirmationToken = function() {
+userSchema.methods.generateConfirmationToken = function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "15min", // Set expiration to 15 minutes
+  const token = jwt.sign(
+    {
+      _id: user._id,
+      type: 'email-confirmation'
+    }, process.env.JWT_SECRET_EMAIL_CONFIRM, {
+    expiresIn: "24h",
   });
 
   return token;
 };
 
 // Generate password reset token
-userSchema.methods.generateResetToken = function() {
+userSchema.methods.generateResetToken = function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "15min",
+  const token = jwt.sign(
+    {
+      _id: user._id,
+      type: 'password-reset'
+    },
+    process.env.JWT_SECRET_PASSWORD_RESET, {
+    expiresIn: "1h",
   });
   return token;
 };
