@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/hooks";
 
 export const metadata: Metadata = {
-  title: "Task Board App",
+  title: "myTaskBoard",
   description: "This is a task board app built with Next.js.",
 };
 

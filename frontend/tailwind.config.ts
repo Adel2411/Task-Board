@@ -10,8 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Authentification Page colors
-        auth_bg: {
+        // Background color
+        background: {
           DEFAULT: "#F1F3F9",
           dark: "#202020",
         },
@@ -24,12 +24,6 @@ const config: Config = {
 
         // Background for theme switcher
         switch_bg: {
-          DEFAULT: "#F1F3F9",
-          dark: "#202020",
-        },
-
-        // Background color
-        background: {
           DEFAULT: "#F1F3F9",
           dark: "#202020",
         },

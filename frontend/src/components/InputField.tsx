@@ -31,7 +31,7 @@ const InputField = ({
         )}
       </div>
       <input
-        className="bg-auth_bg dark:bg-auth_bg-dark border-[1px] w-full h-12 px-3 rounded-xl border-background-dark dark:border-background opacity-50"
+        className="bg-background dark:bg-background-dark border-[1px] w-full h-12 px-3 rounded-xl border-background-dark dark:border-background opacity-50"
         type={type === "password" && showPassword ? "text" : type}
         name={name}
         value={value}
