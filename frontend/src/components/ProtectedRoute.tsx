@@ -22,8 +22,13 @@ export default function ProtectedRoute({
       if (!pathname.startsWith("/boards")) {
         router.push("/boards");
       }
+      const token = localStorage.getItem("token");
+      if (!token) {
+        router.push("/home");
+        return;
+      }
     }
-  }, [isAuthorized, router, pathname]);
+  }, [isAuthorized, router]);
 
   return <>{children}</>;
 }

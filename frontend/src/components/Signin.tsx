@@ -6,11 +6,13 @@ import { motion } from "framer-motion";
 import { useState, FormEvent } from "react";
 import { SignInInputs } from "@/components";
 import { loadingProps, signInInputsType } from "@/types";
-import { postLogin } from "@/utils";
+import { getUser, postLogin } from "@/utils";
 import toast from "react-hot-toast";
+import { useAuth } from "@/hooks";
 
 const Signin = ({ loading, setLoading }: loadingProps) => {
   const { theme } = useTheme();
+  const { setIsAuthorized, setUser } = useAuth();
   const [inputs, setInputs] = useState<signInInputsType>({
     auth_identifier: "",
     password: "",
@@ -32,7 +34,9 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
         auth_identifier: "",
         password: "",
       });
-      location.reload();
+      setIsAuthorized(true);
+      const user = await getUser(response.token);
+      setUser(user);
     } else {
       // Handle different types of errors
       toast.error(response, {

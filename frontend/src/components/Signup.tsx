@@ -8,9 +8,11 @@ import { SignUpInputs } from "@/components";
 import { loadingProps, signUpInputsType } from "@/types";
 import { postRegister } from "@/utils";
 import toast from "react-hot-toast";
+import { useAuth } from "@/hooks";
 
 const Signup = ({ loading, setLoading }: loadingProps) => {
   const { theme } = useTheme();
+  const { setIsAuthorized } = useAuth();
   const [inputs, setInputs] = useState<signUpInputsType>({
     username: "",
     email: "",
@@ -37,6 +39,7 @@ const Signup = ({ loading, setLoading }: loadingProps) => {
         password: "",
         confirmPassword: "",
       });
+      setIsAuthorized(true);
     } else {
       if (response === "Response is not OK") {
         setInputs({

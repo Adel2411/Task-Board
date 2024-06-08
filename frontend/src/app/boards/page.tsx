@@ -9,7 +9,7 @@ import { useAuth } from "@/hooks";
 const Boards = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, setIsAuthorized } = useAuth();
   const { username, email } = user || {};
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Boards = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
-    location.reload();
+    setIsAuthorized(false);
   };
 
   return (

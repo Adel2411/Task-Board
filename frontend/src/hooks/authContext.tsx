@@ -29,15 +29,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const response = await checkValidToken(token);
       setIsAuthorized(response);
       if (response) {
+        router.push("/boards");
         const user = await getUser(token);
         setUser(user);
+      } else {
+        localStorage.removeItem("token");
+        setUser(null);
+        router.push("/home");
       }
     };
 
     checkAuthorization();
   }, [router]);
 
-  const values = { isAuthorized, user };
+  const values = { isAuthorized, setIsAuthorized, user, setUser };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 }
