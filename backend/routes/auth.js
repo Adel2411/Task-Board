@@ -63,7 +63,7 @@ router.post("/register", async (req, res) => {
 
     // Send email confirmation
     const confirmationToken = user.generateAuthToken(); // Ensure this method exists in your User model
-    const confirmationLink = `${process.env.HOST_URL}/${process.env.HOST_URL_ENDPOINTS}/auth/confirm/${confirmationToken}`;
+    const confirmationLink = `${process.env.HOST_URL}/api/v1/auth/confirm/${confirmationToken}`;
     const mailOptions = {
       from: process.env.MAIL_SENDER,
       to: email,
@@ -90,7 +90,7 @@ router.get("/confirm/:token", async (req, res) => {
     user.confirmed = true;
     await user.save();
     const authToken = user.generateAuthToken();
-    res.redirect(`${process.env.REDIRECT_URL}?token=${authToken}`); // Redirect to login page
+    res.redirect(`${process.env.FRONTEND_URL_LOCAL}/boards?token=${authToken}`); // Redirect to login page
   } catch (err) {
     res.status(400).json({ message: "Invalid token" });
   }
@@ -149,7 +149,7 @@ router.post("/request-password-reset", async (req, res) => {
 
     // send email with reset password link
     const resetToken = User.generateResetToken();
-    const confirmationLink = `${process.env.HOST_URL}/${process.env.HOST_URL_ENDPOINTS}/auth/password-reset/${resetToken}`;
+    const confirmationLink = `${process.env.HOST_URL}/api/v1/auth/validate-reset-token/${resetToken}`;
     const mailOptions = {
       from: process.env.MAIL_SENDER,
       to: email,
@@ -162,7 +162,16 @@ router.post("/request-password-reset", async (req, res) => {
   }
 });
 
-router.post("/validate-reset-token/:token", async (req, res) => { });
+router.get("/validate-reset-token/:token", async (req, res) => {
+
+  const token = req.params.token;
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    res.redirect(`${process.env.FRONTEND_URL_LOCAL}/reset-password?token=${authToken}`); // Redirect to login page
+  } catch (error) {
+    res.status(400).json({ message: "Invalid token" });
+  }
+});
 
 router.post("/reset-password", async (req, res) => { });
 module.exports = router;
