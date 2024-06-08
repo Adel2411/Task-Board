@@ -42,7 +42,7 @@ const Boards = () => {
           <p className="text-lg">{email}</p>
         </div>
       </GradientDiv>
-      <GradientDiv className="rounded-xl p-1">
+      <GradientDiv className="rounded-lg p-0.5">
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
