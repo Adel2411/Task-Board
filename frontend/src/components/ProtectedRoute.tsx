@@ -3,32 +3,52 @@
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/hooks";
+import { getUser, checkValidToken } from "@/utils";
 
 export default function ProtectedRoute({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthorized } = useAuth();
+  const { isAuthorized, setUser } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!isAuthorized) {
-      if (pathname !== "/home" && pathname !== "/auth") {
-        router.push("/home");
-      }
-    } else {
-      if (!pathname.startsWith("/boards")) {
-        router.push("/boards");
-      }
+    const fetchUser = async () => {
       const token = localStorage.getItem("token");
-      if (!token) {
+
+      // If token is not present or user is not authorized,
+      // redirect to home except for the /auth route
+      if (!token || !isAuthorized) {
+        if (pathname !== "/auth") {
+          router.push("/home");
+        }
+        return;
+      }
+
+      // Check if the token is still valid
+      const isValidToken = await checkValidToken(token);
+
+      if (!isValidToken) {
+        // If token is invalid, remove it and redirect to home
+        localStorage.removeItem("token");
         router.push("/home");
         return;
       }
-    }
-  }, [isAuthorized, router]);
+
+      // Fetch user information
+      const user = await getUser(token);
+      setUser(user);
+
+      // Redirect to appropriate route based on user's authorization
+      if (user && !pathname.startsWith("/boards")) {
+        router.push("/boards");
+      }
+    };
+
+    fetchUser();
+  }, [isAuthorized, router, setUser, pathname]);
 
   return <>{children}</>;
 }

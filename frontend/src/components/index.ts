@@ -6,6 +6,7 @@ import SignUpInputs from "./SignUpInputs";
 import InputField from "./InputField";
 import ProtectedRoute from "./ProtectedRoute";
 import GradientDiv from "./GradientDiv";
+import Custom404 from "./Custom404";
 
 export {
   DarkModeSwitch,
@@ -16,4 +17,5 @@ export {
   InputField,
   ProtectedRoute,
   GradientDiv,
+  Custom404,
 };
