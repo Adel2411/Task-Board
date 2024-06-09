@@ -62,7 +62,7 @@ router.post("/register", async (req, res) => {
     await user.save();
 
     // Send email confirmation
-    const confirmationToken = user.generateAuthToken(); // Ensure this method exists in your User model
+    const confirmationToken = user.generateConfirmationToken(); // Ensure this method exists in your User model
     const confirmationLink = `${process.env.HOST_URL}/api/v1/auth/confirm/${confirmationToken}`;
     const mailOptions = {
       from: process.env.MAIL_SENDER,
