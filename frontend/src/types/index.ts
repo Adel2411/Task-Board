@@ -56,3 +56,21 @@ export type User = {
   username: string;
   email: string;
 };
+
+// Board Types
+export type Board = {
+  id: string;
+  title: string;
+  description: string;
+  owner?: string;
+  is_public?: boolean;
+};
+
+export interface boardCardProps {
+  board: Board;
+}
+
+export interface boardsBarProps {
+  user: User | null;
+  handleLogOut: () => void;
+}
