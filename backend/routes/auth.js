@@ -117,8 +117,27 @@ router.get("/confirm/:token", async (req, res) => {
  *     responses:
  *       200:
  *         description: User logged in successfully
- *       400:
- *         description: Invalid credentials
+ *         content:
+ *          application/json:
+ *           schema:
+ *             properties:
+ *              token:
+ *               type: string
+ *               example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+*       400:
+ *         description: Invalid credentials or User not confirmed
+ *         content:
+ *           application/json:
+ *             schema:
+ *               oneOf:
+ *                 - properties:
+ *                     message:
+ *                       type: string
+ *                       example: Invalid credentials
+ *                 - properties:
+ *                     message:
+ *                       type: string
+ *                       example: User not confirmed
  *       500:
  *         description: Internal server error
  */
