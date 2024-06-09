@@ -148,6 +148,7 @@ router.post("/login", async (req, res) => {
       $or: [{ email: auth_identifier }, { username: auth_identifier }],
     });
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
+    if (!user.confirmed) return res.status(400).json({ message: "User not confirmed" });
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials" });
@@ -159,6 +160,32 @@ router.post("/login", async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /auth/request-password-reset:
+ *   post:
+ *     summary: request password reset link via email
+ *     tags: 
+ *        - Password Reset
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Password reset link sent successfully
+ *       404:
+ *         description: User not found
+ *       400:
+ *         description: User not confirmed
+ *       500:
+ *         description: Internal server error
+ */
 
 router.post("/request-password-reset", async (req, res) => {
   const { email } = req.body;
