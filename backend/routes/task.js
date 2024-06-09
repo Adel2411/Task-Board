@@ -21,5 +21,21 @@ router.delete("/:id", authMiddleware, async (req, res) => {
   }
 });
 
+router.post("/add", authMiddleware, async (req, res) => {
+  const { board, title, description, taskIcon, status } = req.body;
+  try {
+    const newTask = new Task({
+      board,
+      title,
+      description,
+      taskIcon,
+      status
+    });
+    await newTask.save();
+    res.status(201).json(newTask);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 module.exports = router;
