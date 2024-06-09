@@ -195,7 +195,7 @@ router.post("/request-password-reset", async (req, res) => {
     if (!user.confirmed) return res.status(400).json({ message: "User not confirmed" });
 
     // send email with reset password link
-    const resetToken = User.generateResetToken();
+    const resetToken = user.generateResetToken();
     const confirmationLink = `${process.env.HOST_URL}/api/v1/auth/validate-reset-token/${resetToken}`;
     const mailOptions = {
       from: process.env.MAIL_SENDER,
