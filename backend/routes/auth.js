@@ -246,44 +246,24 @@ router.get("/validate-reset-token/:token", async (req, res) => {
  *     responses:
  *       200:
  *         description: Password reset successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Password reset successfully
  *       400:
- *         description: Invalid request
+ *         description : Invalid token or User not confirmed
  *         content:
  *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Invalid token or password
+ *            schema:
+ *               oneOf:
+ *                 - properties:
+ *                     message:
+ *                       type: string
+ *                       example: Invalid token
+ *                 - properties:
+ *                     message:
+ *                       type: string
+ *                       example: User not confirmed
  *       404:
  *         description: User not found
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: User not found
  *       500:
  *         description: Internal server error
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: An error occurred while processing your request
  */
 router.post("/reset-password", async (req, res) => {
   const { password, token } = req.body;
