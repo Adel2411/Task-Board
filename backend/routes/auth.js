@@ -192,7 +192,7 @@ router.post("/request-password-reset", async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "User not found" });
-
+    if (!user.confirmed) return res.status(400).json({ message: "User not confirmed" });
 
     // send email with reset password link
     const resetToken = User.generateResetToken();
@@ -293,6 +293,7 @@ router.post("/reset-password", async (req, res) => {
 
     const user = await User.findById(decoded._id);
     if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user.confirmed) return res.status(400).json({ message: "User not confirmed" });
     const hashedPassword = await bcrypt.hash(password, 10); // Hash password
     user.password = hashedPassword;
     await user.save();
