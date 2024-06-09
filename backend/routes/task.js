@@ -4,7 +4,7 @@ const authMiddleware = require("../middleware/auth");
 
 const router = express.Router();
 
-router.delete("/:id", authMiddleware, async (req, res) => {
+router.delete("delete/:id", authMiddleware, async (req, res) => {
   const { id } = req.params;
   try {
     const task = await Task.findById(id);
