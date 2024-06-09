@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import daisyui from "daisyui";
+import tailwindscrollbar from "tailwind-scrollbar";
 
 const config: Config = {
   content: [
@@ -14,6 +15,12 @@ const config: Config = {
         background: {
           DEFAULT: "#F1F3F9",
           dark: "#202020",
+        },
+
+        // Primary color
+        primary: {
+          DEFAULT: "#4ACCBF",
+          dark: "#961623",
         },
 
         // Inactive button color
@@ -113,7 +120,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [daisyui],
+  plugins: [daisyui, tailwindscrollbar],
   darkMode: "class",
 };
 export default config;

@@ -7,6 +7,8 @@ import InputField from "./InputField";
 import ProtectedRoute from "./ProtectedRoute";
 import GradientDiv from "./GradientDiv";
 import Custom404 from "./Custom404";
+import BoardCard from "./BoardCard";
+import BoardsBar from "./BoardsBar";
 
 export {
   DarkModeSwitch,
@@ -18,4 +20,6 @@ export {
   ProtectedRoute,
   GradientDiv,
   Custom404,
+  BoardCard,
+  BoardsBar,
 };
