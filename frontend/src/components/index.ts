@@ -3,6 +3,7 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import SignInInputs from "./SignInInputs";
 import SignUpInputs from "./SignUpInputs";
+import ForgetPasswordInputs from "./ForgetPasswordInputs";
 import InputField from "./InputField";
 import ProtectedRoute from "./ProtectedRoute";
 import GradientDiv from "./GradientDiv";
@@ -16,6 +17,7 @@ export {
   Signup,
   SignInInputs,
   SignUpInputs,
+  ForgetPasswordInputs,
   InputField,
   ProtectedRoute,
   GradientDiv,

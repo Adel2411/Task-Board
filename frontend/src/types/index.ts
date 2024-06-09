@@ -43,6 +43,17 @@ export interface signInInputsProps {
   setInputs: React.Dispatch<React.SetStateAction<signInInputsType>>;
 }
 
+// Forget Password Types
+export type forgetPasswordInputsType = {
+  password: string;
+  confirmPassword: string;
+};
+
+export interface forgetPasswordInputsProps {
+  inputs: forgetPasswordInputsType;
+  setInputs: React.Dispatch<React.SetStateAction<forgetPasswordInputsType>>;
+}
+
 // Auth Context Types
 export type AuthContextType = {
   isAuthorized: boolean;

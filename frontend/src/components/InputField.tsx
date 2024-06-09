@@ -36,7 +36,7 @@ const InputField = ({
         name={name}
         value={value}
         onChange={onChange}
-        placeholder={`Enter your ${placeholder}...`}
+        placeholder={`${placeholder}...`}
       />
     </div>
   );

@@ -3,7 +3,7 @@
 import { FaGoogle } from "react-icons/fa";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { SignUpInputs } from "@/components";
 import { loadingProps, signUpInputsType } from "@/types";
 import { postRegister } from "@/utils";
@@ -20,7 +20,7 @@ const Signup = ({ loading, setLoading }: loadingProps) => {
     confirmPassword: "",
   });
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 

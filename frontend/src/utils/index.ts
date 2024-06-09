@@ -1,6 +1,10 @@
 "use server";
 
-import { signUpInputsType, signInInputsType } from "@/types";
+import {
+  signUpInputsType,
+  signInInputsType,
+  forgetPasswordInputsType,
+} from "@/types";
 
 export async function postRegister(inputs: signUpInputsType) {
   const { username, email, password, confirmPassword } = inputs;
@@ -65,6 +69,37 @@ export async function postLogin(inputs: signInInputsType) {
   } catch (err) {
     console.error("Login error:", err);
     return "An error occurred during login.";
+  }
+}
+
+export async function postForgetPassword(
+  token: string,
+  inputs: forgetPasswordInputsType,
+) {
+  const { password, confirmPassword } = inputs;
+
+  if (password.trim() === "") {
+    return "Please provide a password.";
+  } else if (password.trim() !== confirmPassword.trim()) {
+    return "Passwords provided are not matching.";
+  }
+
+  try {
+    const response = await fetch(
+      `${process.env.CURRENT_URL}/auth/reset-password`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password, token }),
+      },
+    );
+
+    return response.ok;
+  } catch (err) {
+    console.error("Forgot password error:", err);
+    return false;
   }
 }
 

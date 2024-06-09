@@ -3,12 +3,13 @@
 import { FaGoogle } from "react-icons/fa";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { SignInInputs } from "@/components";
 import { loadingProps, signInInputsType } from "@/types";
 import { getUser, postLogin } from "@/utils";
 import toast from "react-hot-toast";
 import { useAuth } from "@/hooks";
+import Link from "next/link";
 
 const Signin = ({ loading, setLoading }: loadingProps) => {
   const { theme } = useTheme();
@@ -18,7 +19,7 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
     password: "",
   });
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
@@ -55,8 +56,8 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
   };
 
   return (
-    <main className="w-full h-full flex flex-col items-center justify-evenly md:px-9">
-      <div>
+    <main className="w-full h-full flex flex-col justify-evenly md:px-9">
+      <div className="w-full flex justify-center">
         <h1 className="font-semibold text-2xl md:text-3xl lg:text-4xl">
           Sign In
         </h1>
@@ -79,6 +80,15 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
           {loading ? "Signing in" : "Sign in"}
         </motion.button>
       </form>
+      <div className="">
+        <Link
+          href="/forget-password"
+          className={`${loading ? "pointer-events-none opacity-60" : "link link-hover link-accent dark:link-error"} text-sm`}
+          aria-disabled={loading}
+        >
+          Forgot password ?
+        </Link>
+      </div>
       <div
         className={`divider ${theme === "dark" ? "divider-error" : "divider-accent"} opacity-50`}
       >

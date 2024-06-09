@@ -2,15 +2,13 @@
 
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
-import { GradientDiv, BoardCard, BoardsBar } from "@/components";
+import { BoardCard, BoardsBar } from "@/components";
 import { useAuth } from "@/hooks";
 
 const Boards = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { user, setIsAuthorized } = useAuth();
-  const { username, email } = user || {};
   const boards = [
     {
       id: "1",

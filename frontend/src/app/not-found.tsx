@@ -11,7 +11,7 @@ const NotFound = () => {
 
   useEffect(() => {
     if (!isAuthorized) {
-      router.push("/login");
+      router.push("/home");
     } else {
       router.push("/boards");
     }
