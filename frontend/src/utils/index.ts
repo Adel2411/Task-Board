@@ -3,7 +3,8 @@
 import {
   signUpInputsType,
   signInInputsType,
-  forgetPasswordInputsType,
+  resetPasswordInputsType,
+  forgotPasswordInputsType,
 } from "@/types";
 
 export async function postRegister(inputs: signUpInputsType) {
@@ -72,9 +73,35 @@ export async function postLogin(inputs: signInInputsType) {
   }
 }
 
-export async function postForgetPassword(
+export async function postForgotPassword(inputs: forgotPasswordInputsType) {
+  const { email } = inputs;
+
+  if (email.trim() === "") {
+    return "Please provide an email address.";
+  }
+
+  try {
+    const response = await fetch(
+      `${process.env.CURRENT_URL}/auth/request-password-reset`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputs),
+      },
+    );
+
+    return response.ok;
+  } catch (err) {
+    console.error("Forgot password error:", err);
+    return false;
+  }
+}
+
+export async function postResetPassword(
   token: string,
-  inputs: forgetPasswordInputsType,
+  inputs: resetPasswordInputsType,
 ) {
   const { password, confirmPassword } = inputs;
 

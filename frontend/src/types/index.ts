@@ -43,15 +43,25 @@ export interface signInInputsProps {
   setInputs: React.Dispatch<React.SetStateAction<signInInputsType>>;
 }
 
-// Forget Password Types
-export type forgetPasswordInputsType = {
+// Forgot Password Types
+export type forgotPasswordInputsType = {
+  email: string;
+};
+
+export interface forgotPasswordInputsProps {
+  inputs: forgotPasswordInputsType;
+  setInputs: React.Dispatch<React.SetStateAction<forgotPasswordInputsType>>;
+}
+
+// Reset Password Types
+export type resetPasswordInputsType = {
   password: string;
   confirmPassword: string;
 };
 
-export interface forgetPasswordInputsProps {
-  inputs: forgetPasswordInputsType;
-  setInputs: React.Dispatch<React.SetStateAction<forgetPasswordInputsType>>;
+export interface resetPasswordInputsProps {
+  inputs: resetPasswordInputsType;
+  setInputs: React.Dispatch<React.SetStateAction<resetPasswordInputsType>>;
 }
 
 // Auth Context Types

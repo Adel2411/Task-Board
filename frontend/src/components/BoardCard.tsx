@@ -10,7 +10,7 @@ const BoardCard = ({ board }: boardCardProps) => {
   const [isFav, setIsFav] = useState(false);
 
   return (
-    <main className="flex flex-col justify-center gap-4 bg-white dark:bg-black rounded-2xl p-3 w-[190px] h-[238px]">
+    <main className="shadow-[0_0_50px] shadow-white dark:shadow-black flex flex-col justify-center gap-4 bg-white dark:bg-black rounded-2xl p-3 w-[190px] h-[238px]">
       <div className="flex justify-end">
         <button className="p-1 rounded-full bg-background dark:bg-background-dark">
           <SlOptionsVertical />

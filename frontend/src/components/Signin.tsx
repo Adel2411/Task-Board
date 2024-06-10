@@ -82,7 +82,7 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
       </form>
       <div className="">
         <Link
-          href="/forget-password"
+          href="/forgot-password"
           className={`${loading ? "pointer-events-none opacity-60" : "link link-hover link-accent dark:link-error"} text-sm`}
           aria-disabled={loading}
         >

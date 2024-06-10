@@ -3,7 +3,9 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import SignInInputs from "./SignInInputs";
 import SignUpInputs from "./SignUpInputs";
-import ForgetPasswordInputs from "./ForgetPasswordInputs";
+import ForgotPasswordInputs from "./ForgotPasswordInputs";
+import EmailSent from "./EmailSent";
+import ResetPasswordInputs from "./ResetPasswordInputs";
 import InputField from "./InputField";
 import ProtectedRoute from "./ProtectedRoute";
 import GradientDiv from "./GradientDiv";
@@ -17,7 +19,9 @@ export {
   Signup,
   SignInInputs,
   SignUpInputs,
-  ForgetPasswordInputs,
+  ForgotPasswordInputs,
+  EmailSent,
+  ResetPasswordInputs,
   InputField,
   ProtectedRoute,
   GradientDiv,

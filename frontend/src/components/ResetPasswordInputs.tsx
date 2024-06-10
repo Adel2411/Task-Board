@@ -1,7 +1,10 @@
-import { forgetPasswordInputsProps } from "@/types";
+import { resetPasswordInputsProps } from "@/types";
 import { InputField } from "@/components";
 
-const SignUpInputs = ({ inputs, setInputs }: forgetPasswordInputsProps) => {
+const ResetPasswordInputs = ({
+  inputs,
+  setInputs,
+}: resetPasswordInputsProps) => {
   const { password, confirmPassword } = inputs;
 
   return (
@@ -26,4 +29,4 @@ const SignUpInputs = ({ inputs, setInputs }: forgetPasswordInputsProps) => {
   );
 };
 
-export default SignUpInputs;
+export default ResetPasswordInputs;
