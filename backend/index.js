@@ -40,8 +40,6 @@ app.use(express.json());
 
 const swaggerSpec = swaggerJSDoc(option);
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -50,11 +48,12 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error(err));
 
-app.use(`/${process.env.HOST_URL_ENDPOINTS}/auth`, authRoutes);
-app.use(`/${process.env.HOST_URL_ENDPOINTS}/boards`, boardRoutes);
-app.use(`/${process.env.HOST_URL_ENDPOINTS}`, helloWorldRoutes);
-app.use(`/${process.env.HOST_URL_ENDPOINTS}/user`, userRoutes);
-app.use(`/${process.env.HOST_URL_ENDPOINTS}/tasks`, taskRoutes);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(`/api/v1/auth`, authRoutes);
+app.use(`/api/v1/boards`, boardRoutes);
+app.use(`/api/v1/`, helloWorldRoutes);
+app.use(`/api/v1/users`, userRoutes);
+app.use(`/api/v1/tasks`, taskRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
