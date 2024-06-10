@@ -23,7 +23,6 @@ const ResetPassword = () => {
     const token = searchParams.get("token");
 
     if (token) {
-      console.log(token);
       setToken(token);
       // LINES BELOW ARE FOR DELETE TOKEN PARAM FROM URL
       // const params = new URLSearchParams(searchParams);

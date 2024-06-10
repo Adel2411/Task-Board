@@ -102,5 +102,5 @@ export interface boardCardProps {
 
 export interface boardsBarProps {
   user: User | null;
-  handleLogOut: () => void;
+  handleSignOut: () => void;
 }

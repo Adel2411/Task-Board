@@ -2,8 +2,9 @@
 
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { BoardCard, BoardsBar } from "@/components";
+import { BoardCard, BoardsBar, Toast } from "@/components";
 import { useAuth } from "@/hooks";
+import toast from "react-hot-toast";
 
 const Boards = () => {
   const searchParams = useSearchParams();
@@ -286,15 +287,18 @@ const Boards = () => {
     }
   }, [searchParams, router]);
 
-  const handleLogOut = () => {
+  const handleSignOut = () => {
     localStorage.removeItem("token");
     setIsAuthorized(false);
+    toast.custom((t) => (
+      <Toast type="success" message="Signed out Successfully" t={t} />
+    ));
   };
 
   return (
     <main className="h-screen w-screen flex flex-col gap-10  items-center md:p-10 bg-white dark:bg-black">
       <div className="hidden md:flex md:items-end w-full h-1/6">
-        <BoardsBar user={user} handleLogOut={handleLogOut} />
+        <BoardsBar user={user} handleSignOut={handleSignOut} />
       </div>
       <div className="bg-background dark:bg-background-dark shadow-[0_0_80px] shadow-background dark:shadow-background-dark grid grid-cols-1 min-[500px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:rounded-xl content-start place-items-center gap-y-[32px] h-5/6 w-full p-5 pt-16 overflow-y-auto">
         {boards.map((board) => (
@@ -302,7 +306,7 @@ const Boards = () => {
         ))}
       </div>
       <div className="flex items-start md:hidden w-full h-1/6">
-        <BoardsBar user={user} handleLogOut={handleLogOut} />
+        <BoardsBar user={user} handleSignOut={handleSignOut} />
       </div>
     </main>
   );

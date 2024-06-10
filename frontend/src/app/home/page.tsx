@@ -9,7 +9,7 @@ const Home = () => {
       <h1 className="text-2xl font-semibold">Welcome Home</h1>
       <GradientDiv className="rounded-xl p-1">
         <Link className="btn btn-ghost bg-white dark:bg-black" href="/auth">
-          Login
+          Sign In
         </Link>
       </GradientDiv>
     </main>

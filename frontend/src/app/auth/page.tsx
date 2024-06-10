@@ -5,7 +5,7 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { GradientDiv, Signin, Signup } from "@/components";
 import Link from "next/link";
 
-export default function Login() {
+export default function AuthPage() {
   const [showSignin, setShowSignin] = useState(true);
   const [loading, setLoading] = useState(false);
 

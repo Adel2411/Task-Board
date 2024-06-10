@@ -62,14 +62,14 @@ export async function postLogin(inputs: signInInputsType) {
 
     if (!response.ok) {
       const errorData = await response.json();
-      return errorData.message || "An error occurred during login.";
+      return errorData.message || "An error occurred during Sign in";
     }
 
     const data = await response.json();
     return data;
   } catch (err) {
-    console.error("Login error:", err);
-    return "An error occurred during login.";
+    console.error("Signin error:", err);
+    return "An error occurred during Sign in";
   }
 }
 

@@ -2,7 +2,7 @@ import { IoStar } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
 import { boardsBarProps } from "@/types";
 
-const BoardsBar = ({ user, handleLogOut }: boardsBarProps) => {
+const BoardsBar = ({ user, handleSignOut }: boardsBarProps) => {
   const getShortCut = (username: string | undefined) => {
     return username
       ?.split(" ")
@@ -32,10 +32,10 @@ const BoardsBar = ({ user, handleLogOut }: boardsBarProps) => {
             </div>
             <hr className="h-[0.25px] border-t-0 bg-background-dark dark:bg-background opacity-20 dark:opacity-20" />
             <button
-              onClick={handleLogOut}
+              onClick={handleSignOut}
               className="p-2 h-full w-full hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white  bg-gray-300 dark:bg-gray-700 rounded-md"
             >
-              Log out
+              Sign out
             </button>
           </div>
         </div>

@@ -26,7 +26,7 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
     const response = await postLogin(inputs);
 
     if (response.token) {
-      // Successful login
+      // Successful Sign in
       localStorage.setItem("token", response.token);
       toast.custom((t) => (
         <Toast t={t} message="Successfuly Signed in" type="success" />
