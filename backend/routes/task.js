@@ -69,13 +69,13 @@ router.delete("delete/:id", authMiddleware, async (req, res) => {
  *           schema:
  *             type: object
  *             required:
- *               - board
+ *               - boardId
  *               - title
  *               - description
  *               - taskIcon
  *               - status
  *             properties:
- *               board:
+ *               boardId:
  *                 type: string
  *               title:
  *                 type: string
@@ -93,7 +93,7 @@ router.delete("delete/:id", authMiddleware, async (req, res) => {
  *             schema:
  *               type: object
  *               properties:
- *                 board:
+ *                 boardId:
  *                   type: string
  *                 title:
  *                   type: string
@@ -109,10 +109,10 @@ router.delete("delete/:id", authMiddleware, async (req, res) => {
 
 
 router.post("/add", authMiddleware, async (req, res) => {
-  const { board, title, description, taskIcon, status } = req.body;
+  const { boardId, title, description, taskIcon, status } = req.body;
   try {
     const newTask = new Task({
-      board,
+      board: boardId,
       title,
       description,
       taskIcon,
