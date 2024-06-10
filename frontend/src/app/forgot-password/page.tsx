@@ -24,8 +24,6 @@ const ForgotPassword = () => {
     e.preventDefault();
     setLoading(true);
 
-    setEmailSent(true);
-
     const response = await postForgotPassword(inputs);
 
     if (typeof response === "string") {
