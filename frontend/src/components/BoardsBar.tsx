@@ -1,5 +1,6 @@
 import { IoStar } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
+import { GoSignOut } from "react-icons/go";
 import { boardsBarProps } from "@/types";
 
 const BoardsBar = ({ user, handleSignOut }: boardsBarProps) => {
@@ -15,8 +16,8 @@ const BoardsBar = ({ user, handleSignOut }: boardsBarProps) => {
   return (
     <main className="flex justify-between items-center w-full h-fit px-5">
       <div className="h-fit flex items-center justify-center gap-3">
-        <div className="relative w-full group">
-          <button className="peer">
+        <details className="dropdown dropdown-right dropdown-top md:dropdown-bottom md:dropdown-right">
+          <summary className="list-none cursor-pointer">
             <div className="avatar online ">
               <div className="flex justify-center w-12 h-12 bg-background dark:bg-background-dark rounded-lg">
                 <p className="w-full h-full flex items-center justify-center">
@@ -24,21 +25,24 @@ const BoardsBar = ({ user, handleSignOut }: boardsBarProps) => {
                 </p>
               </div>
             </div>
-          </button>
-          <div className="border-[1px] border-gray-300 dark:border-gray-700 p-1 pb-5 flex flex-col gap-8 absolute z-[10] max-md:bottom-[100%] md:top-[100%] left-[100%] bg-background dark:bg-background-dark rounded-md overflow-hidden shadow-2xl shadow-background dark:shadow-background-dark w-[200px] peer-focus:visible peer-focus:opacity-100 opacity-0 invisible duration-200 text-xs">
-            <div className="flex flex-col justify-center items-center gap-2 h-full w-full p-2">
+          </summary>
+          <div className="dropdown-content rounded-md flex flex-col gap-3 z-[10] bg-background dark:bg-background-dark overflow-hidden shadow-[0_0_20px] shadow-background dark:shadow-background-dark w-fit">
+            <div className="flex flex-col justify-center gap-2 h-full w-full p-3">
               <p className="text-lg font-semibold">{user?.username}</p>
-              <p>{user?.email}</p>
+              <p className="opacity-70 text-xs">{user?.email}</p>
             </div>
             <hr className="h-[0.25px] border-t-0 bg-background-dark dark:bg-background opacity-20 dark:opacity-20" />
-            <button
-              onClick={handleSignOut}
-              className="p-2 h-full w-full hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white  bg-gray-300 dark:bg-gray-700 rounded-md"
-            >
-              Sign out
-            </button>
+            <div className="p-3 h-full w-full">
+              <button
+                onClick={handleSignOut}
+                className="flex justify-center items-center gap-2 p-2 h-full w-full hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white  bg-gray-300 dark:bg-gray-700 rounded-md text-xs font-semibold transition-all duration-200 ease-out"
+              >
+                <GoSignOut />
+                Sign out
+              </button>
+            </div>
           </div>
-        </div>
+        </details>
         <p className="whitespace-nowrap">{user?.username}</p>
       </div>
       <div className="flex items-center gap-3 sm:gap-10 h-fit">
