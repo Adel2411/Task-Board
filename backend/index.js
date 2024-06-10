@@ -18,7 +18,7 @@ const option = {
     },
     servers: [
       {
-        url: `${process.env.HOST_URL}/${process.env.HOST_URL_ENDPOINTS}`,
+        url: `${process.env.HOST_URL}/api/v1`,
       },
     ],
   },
