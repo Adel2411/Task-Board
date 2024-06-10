@@ -1,7 +1,8 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { SlOptionsVertical } from "react-icons/sl";
-import { IoStarOutline, IoStar } from "react-icons/io5";
+import { IoStarOutline, IoStar, IoEnterOutline } from "react-icons/io5";
 import { FaTasks } from "react-icons/fa";
 import { useState } from "react";
 import { boardCardProps } from "@/types";
@@ -21,9 +22,16 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
           <SlOptionsVertical />
         </button>
       </div>
-      <div className="h-full flex justify-center items-center">
-        <FaTasks size={80} />
-      </div>
+      <motion.button
+        whileTap={{ scale: 0.9 }}
+        className="group h-full flex justify-center items-center rounded-xl hover:bg-background dark:hover:bg-background-dark"
+      >
+        <div className="group-hover:flex group-hover:items-center group-hover:justify-center group-hover:gap-3 hidden text-lg font-bold">
+          <p>Enter Board</p>
+          <IoEnterOutline size={20} />
+        </div>
+        <FaTasks size={80} className="group-hover:hidden" />
+      </motion.button>
       <div className="flex items-center justify-between">
         <p>{board.title}</p>
         <button
