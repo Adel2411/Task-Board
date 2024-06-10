@@ -4,7 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { SignInInputs } from "@/components";
+import { SignInInputs, Toast } from "@/components";
 import { loadingProps, signInInputsType } from "@/types";
 import { getUser, postLogin } from "@/utils";
 import toast from "react-hot-toast";
@@ -28,9 +28,9 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
     if (response.token) {
       // Successful login
       localStorage.setItem("token", response.token);
-      toast.success("Successfuly Signed in", {
-        duration: 5000,
-      });
+      toast.custom((t) => (
+        <Toast t={t} message="Successfuly Signed in" type="success" />
+      ));
       setInputs({
         auth_identifier: "",
         password: "",
@@ -40,9 +40,7 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
       setUser(user);
     } else {
       // Handle different types of errors
-      toast.error(response, {
-        duration: 5000,
-      });
+      toast.custom((t) => <Toast t={t} message={response} type="error" />);
 
       if (response === "Response is not OK") {
         setInputs({

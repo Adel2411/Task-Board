@@ -1,4 +1,5 @@
 import DarkModeSwitch from "./DarkModeSwitch";
+import Toast from "./Toast";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import SignInInputs from "./SignInInputs";
@@ -15,6 +16,7 @@ import BoardsBar from "./BoardsBar";
 
 export {
   DarkModeSwitch,
+  Toast,
   Signin,
   Signup,
   SignInInputs,

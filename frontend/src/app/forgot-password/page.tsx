@@ -1,7 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ForgotPasswordInputs, GradientDiv, EmailSent } from "@/components";
+import {
+  ForgotPasswordInputs,
+  GradientDiv,
+  EmailSent,
+  Toast,
+} from "@/components";
 import { useState } from "react";
 import Link from "next/link";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
@@ -21,30 +26,33 @@ const ForgotPassword = () => {
 
     setEmailSent(true);
 
-    // const response = await postForgotPassword(inputs);
-    //
-    // if (typeof response === "string") {
-    //   toast.error(response, {
-    //     duration: 5000,
-    //   });
-    // } else {
-    //   if (!response) {
-    //     toast.error("An error occurred during Sending Email", {
-    //       duration: 5000,
-    //     });
-    //   } else {
-    //     toast.success(
-    //       "Reset link sent successfully, check your email address",
-    //       {
-    //         duration: 5000,
-    //       },
-    //     );
-    //     setEmailSent(true);
-    //   }
-    //   setInputs({
-    //     email: "",
-    //   });
-    // }
+    const response = await postForgotPassword(inputs);
+
+    if (typeof response === "string") {
+      toast.custom((t) => <Toast t={t} message={response} type="error" />);
+    } else {
+      if (!response) {
+        toast.custom((t) => (
+          <Toast
+            t={t}
+            message="An error occurred during Sending Email"
+            type="error"
+          />
+        ));
+      } else {
+        toast.custom((t) => (
+          <Toast
+            t={t}
+            message="Reset link sent successfully, check your email address"
+            type="success"
+          />
+        ));
+        setEmailSent(true);
+      }
+      setInputs({
+        email: "",
+      });
+    }
 
     setLoading(false);
   };

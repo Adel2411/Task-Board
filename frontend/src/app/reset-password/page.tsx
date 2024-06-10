@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ResetPasswordInputs, GradientDiv } from "@/components";
+import { ResetPasswordInputs, GradientDiv, Toast } from "@/components";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -42,18 +42,20 @@ const ResetPassword = () => {
     const response = await postResetPassword(token, inputs);
 
     if (typeof response === "string") {
-      toast.error(response, {
-        duration: 5000,
-      });
+      toast.custom((t) => <Toast t={t} message={response} type="error" />);
     } else {
       if (!response) {
-        toast.error("An error occurred during password reset.", {
-          duration: 5000,
-        });
+        toast.custom((t) => (
+          <Toast
+            t={t}
+            message="An error occurred during password reset."
+            type="error"
+          />
+        ));
       } else {
-        toast.success("Password reset successfully", {
-          duration: 5000,
-        });
+        toast.custom((t) => (
+          <Toast t={t} message="Password reset successfully" type="success" />
+        ));
         router.push("/auth");
       }
       setInputs({

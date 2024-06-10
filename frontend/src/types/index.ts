@@ -1,3 +1,5 @@
+import { Toast } from "react-hot-toast/headless";
+
 // Gradient borders types
 export interface gradientDivProps {
   children: React.ReactNode;
@@ -17,6 +19,13 @@ export interface inputFieldProps {
 export interface loadingProps {
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+// Toast Types
+export interface toastProps {
+  t: Toast;
+  message: string;
+  type: "success" | "error" | "loading";
 }
 
 // Sign Up Types

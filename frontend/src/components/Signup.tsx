@@ -4,7 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { SignUpInputs } from "@/components";
+import { SignUpInputs, Toast } from "@/components";
 import { loadingProps, signUpInputsType } from "@/types";
 import { postRegister } from "@/utils";
 import toast from "react-hot-toast";
@@ -27,12 +27,13 @@ const Signup = ({ loading, setLoading }: loadingProps) => {
     const response = await postRegister(inputs);
 
     if (response === "success") {
-      toast.success(
-        "Signed up Successfully. We have sent you a confirmation email. Please verify your email address",
-        {
-          duration: 5000,
-        },
-      );
+      toast.custom((t) => (
+        <Toast
+          t={t}
+          message="Signed up Successfully. We have sent you a confirmation email. Please verify your email address"
+          type="success"
+        />
+      ));
       setInputs({
         username: "",
         email: "",
@@ -49,9 +50,7 @@ const Signup = ({ loading, setLoading }: loadingProps) => {
           confirmPassword: "",
         });
       }
-      toast.error(response, {
-        duration: 5000,
-      });
+      toast.custom((t) => <Toast t={t} message={response} type="error" />);
     }
 
     setLoading(false);
