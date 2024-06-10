@@ -91,7 +91,7 @@ router.get("/confirm/:token", async (req, res) => {
     user.confirmed = true;
     await user.save();
     const authToken = user.generateAuthToken();
-    res.redirect(`${process.env.FRONTEND_URL_LOCAL}/boards?token=${authToken}`); // Redirect to login page
+    res.redirect(`${process.env.FRONTEND_HOST}/boards?token=${authToken}`); // Redirect to login page
   } catch (err) {
     res.status(400).json({ message: "Invalid token" });
   }
@@ -204,19 +204,26 @@ router.post("/request-password-reset", async (req, res) => {
       html: `Click <a href="${confirmationLink}">here</a> to reset your password.`,
     };
     await transporter.sendMail(mailOptions);
+    res.status(201).json({
+      message: "Password reset link sent successfully. Please check your email",
+    });
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
 router.get("/validate-reset-token/:token", async (req, res) => {
-
   const token = req.params.token;
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_PASSWORD_RESET);
-    if (decoded.type !== 'password-reset') return res.status(400).json({ message: "Invalid token" });
-    res.redirect(`${process.env.FRONTEND_URL_LOCAL}/reset-password?token=${authToken}`); // Redirect to login page
+    console.log(`decoded type : ${decoded.type}`);
+    if (decoded.type !== 'password-reset') {
+      return res.status(400).json({ message: "Invalid token" });
+    }
+    res.redirect(`${process.env.FRONTEND_HOST}/reset-password?token=${token}`); // Redirect to reset password page 
   } catch (error) {
+    console.log("error", error.message);
     res.status(400).json({ message: "Invalid token" });
   }
 });
