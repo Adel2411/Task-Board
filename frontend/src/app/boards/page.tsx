@@ -1,15 +1,11 @@
 "use client";
-
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BoardCard, BoardsBar, Toast } from "@/components";
 import { useAuth } from "@/hooks";
 import toast from "react-hot-toast";
 
 const Boards = () => {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const { user, setIsAuthorized } = useAuth();
   const boards = [
     {
       id: "1",
@@ -272,6 +268,10 @@ const Boards = () => {
       description: "Board 52 description",
     },
   ];
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { user, setIsAuthorized } = useAuth();
+  const [favCounter, setFavCounter] = useState(0);
 
   useEffect(() => {
     const token = searchParams.get("token");
@@ -298,15 +298,28 @@ const Boards = () => {
   return (
     <main className="h-screen w-screen flex flex-col gap-10  items-center md:p-10 bg-white dark:bg-black">
       <div className="hidden md:flex md:items-end w-full h-1/6">
-        <BoardsBar user={user} handleSignOut={handleSignOut} />
+        <BoardsBar
+          user={user}
+          handleSignOut={handleSignOut}
+          favCounter={favCounter}
+        />
       </div>
       <div className="bg-background dark:bg-background-dark shadow-[0_0_80px] shadow-background dark:shadow-background-dark grid grid-cols-1 min-[500px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:rounded-xl content-start place-items-center gap-y-[32px] h-5/6 w-full p-5 pt-16 overflow-y-auto">
         {boards.map((board) => (
-          <BoardCard key={board.id} board={board} />
+          <BoardCard
+            key={board.id}
+            board={board}
+            favCounter={favCounter}
+            setFavCounter={setFavCounter}
+          />
         ))}
       </div>
       <div className="flex items-start md:hidden w-full h-1/6">
-        <BoardsBar user={user} handleSignOut={handleSignOut} />
+        <BoardsBar
+          user={user}
+          handleSignOut={handleSignOut}
+          favCounter={favCounter}
+        />
       </div>
     </main>
   );

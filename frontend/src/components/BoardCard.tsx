@@ -6,8 +6,13 @@ import { FaTasks } from "react-icons/fa";
 import { useState } from "react";
 import { boardCardProps } from "@/types";
 
-const BoardCard = ({ board }: boardCardProps) => {
+const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
   const [isFav, setIsFav] = useState(false);
+
+  const handleFav = () => {
+    setIsFav(!isFav);
+    setFavCounter(isFav ? favCounter - 1 : favCounter + 1);
+  };
 
   return (
     <main className="shadow-[0_0_50px] shadow-white dark:shadow-black flex flex-col justify-center gap-4 bg-white dark:bg-black rounded-2xl p-3 w-[190px] h-[238px]">
@@ -23,9 +28,7 @@ const BoardCard = ({ board }: boardCardProps) => {
         <p>{board.title}</p>
         <button
           className={`p-1 rounded-full ${isFav && "text-primary dark:text-primary-dark"}`}
-          onClick={() => {
-            setIsFav(!isFav);
-          }}
+          onClick={handleFav}
         >
           {isFav ? <IoStar /> : <IoStarOutline />}
         </button>

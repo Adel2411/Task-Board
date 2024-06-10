@@ -3,7 +3,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { GoSignOut } from "react-icons/go";
 import { boardsBarProps } from "@/types";
 
-const BoardsBar = ({ user, handleSignOut }: boardsBarProps) => {
+const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
   const getShortCut = (username: string | undefined) => {
     return username
       ?.split(" ")
@@ -50,7 +50,14 @@ const BoardsBar = ({ user, handleSignOut }: boardsBarProps) => {
           <p>New Board</p>
           <IoIosAddCircle />
         </button>
-        <IoStar size={20} />
+        <button className="relative p-2 hover:bg-background dark:hover:bg-background-dark rounded-lg">
+          <IoStar size={20} />
+          {favCounter > 0 && (
+            <span className="absolute bg-red-500 text-white px-[6px] py-[2.5px] text-xs font-bold rounded-full -top-3 -right-3">
+              {favCounter}
+            </span>
+          )}
+        </button>
       </div>
     </main>
   );

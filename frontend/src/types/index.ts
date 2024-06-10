@@ -98,9 +98,12 @@ export type Board = {
 
 export interface boardCardProps {
   board: Board;
+  favCounter: number;
+  setFavCounter: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface boardsBarProps {
   user: User | null;
   handleSignOut: () => void;
+  favCounter: number;
 }
