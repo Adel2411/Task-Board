@@ -52,7 +52,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(`/api/v1/auth`, authRoutes);
 app.use(`/api/v1/boards`, boardRoutes);
 app.use(`/api/v1/`, helloWorldRoutes);
-app.use(`/api/v1/users`, userRoutes);
+app.use(`/api/v1/user`, userRoutes);
 app.use(`/api/v1/tasks`, taskRoutes);
 
 const port = process.env.PORT || 3000;
