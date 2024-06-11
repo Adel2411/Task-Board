@@ -21,7 +21,10 @@ const Toast = ({ t, message, type }: toastProps) => {
       </div>
       <div className="h-full flex flex-col justify-start">
         <button onClick={() => toast.dismiss(t.id)}>
-          <IoClose size={20} className="text-red-500" />
+          <IoClose
+            size={20}
+            className="text-black dark:text-white opacity-50 dark:opacity-50"
+          />
         </button>
       </div>
     </main>

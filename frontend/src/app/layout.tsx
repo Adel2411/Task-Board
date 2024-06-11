@@ -24,7 +24,7 @@ export default function RootLayout({
         <Providers>
           <AuthProvider>
             <ProtectedRoute>
-              <Toaster position="bottom-left" />
+              <Toaster position="bottom-right" />
 
               {children}
             </ProtectedRoute>
