@@ -5,6 +5,7 @@ import {
   signInInputsType,
   resetPasswordInputsType,
   forgotPasswordInputsType,
+  addBoardModalInputsType,
 } from "@/types";
 
 export async function postRegister(inputs: signUpInputsType) {
@@ -163,5 +164,46 @@ export async function getUser(token: string) {
   } catch (error) {
     console.error("Failed to get user", error);
     return null;
+  }
+}
+
+// Boards API
+export async function getBoards(token: string) {
+  try {
+    const response = await fetch(`${process.env.CURRENT_URL}/boards/getAll`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      return null;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to get boards", error);
+    return null;
+  }
+}
+
+export async function addBoard(token: string, inputs: addBoardModalInputsType) {
+  const body = { ...inputs, is_public: true };
+  console.log(body);
+
+  try {
+    const response = await fetch(`${process.env.CURRENT_URL}/boards/add`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    return response.ok;
+  } catch (error) {
+    console.error("Failed to add board", error);
+    return false;
   }
 }

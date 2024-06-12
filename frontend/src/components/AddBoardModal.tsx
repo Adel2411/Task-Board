@@ -5,12 +5,16 @@ import { motion } from "framer-motion";
 import { addBoardModalProps } from "@/types";
 import AddBoardModalInputs from "./AddBoardModalInputs";
 import { IoClose, IoAdd } from "react-icons/io5";
+import { addBoard } from "@/utils";
+import toast from "react-hot-toast";
+import { Toast } from "@/components";
 
 const AddBoardModal = ({ isOpen, closeModal }: addBoardModalProps) => {
   const [inputs, setInputs] = useState({
     name: "",
     description: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const backdropVariants = {
     hidden: { opacity: 0 },
@@ -26,6 +30,37 @@ const AddBoardModal = ({ isOpen, closeModal }: addBoardModalProps) => {
       transition: { duration: 0.8, type: "spring" },
     },
     exit: { opacity: 0, y: 0, transition: { duration: 0.8 } },
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("Token not found");
+      return;
+    }
+
+    const response = await addBoard(token, inputs);
+
+    toast.custom((t) => (
+      <>
+        {response ? (
+          <Toast type="success" message="Board added successfully" t={t} />
+        ) : (
+          <Toast
+            type="error"
+            message="Error occured when adding the board"
+            t={t}
+          />
+        )}
+      </>
+    ));
+
+    setInputs({ name: "", description: "" });
+    setLoading(false);
+    closeModal();
   };
 
   return (
@@ -51,20 +86,33 @@ const AddBoardModal = ({ isOpen, closeModal }: addBoardModalProps) => {
             <motion.button
               initial={{ opacity: 0.5 }}
               whileHover={{ opacity: 1, transition: { duration: 0.1 } }}
-              className="absolute top-2 right-2"
+              disabled={loading}
+              className="absolute top-2 right-2 disabled:opacity-30"
               onClick={closeModal}
             >
               <IoClose size={20} className="text-black dark:text-white" />
             </motion.button>
-            <form className="flex flex-col justify-center gap-4">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col justify-center gap-4"
+            >
               <AddBoardModalInputs inputs={inputs} setInputs={setInputs} />
               <div className="flex justify-end">
                 <button
+                  disabled={loading}
                   type="submit"
-                  className="text-sm flex items-center justify-center gap-1 px-4 py-2 bg-primary dark:bg-primary-dark hover:bg-opacity-75 dark:hover:bg-opacity-75 text-white rounded-md"
-                  onClick={closeModal}
+                  className="disabled:cursor-not-allowed disabled:opacity-40 text-sm flex items-center justify-center gap-1 px-4 py-2 bg-primary dark:bg-primary-dark hover:bg-opacity-75 dark:hover:bg-opacity-75 text-white rounded-md"
                 >
-                  Add Board <IoAdd />
+                  {loading ? (
+                    <>
+                      <span className="loading loading-spinner loading-xs"></span>
+                      Adding Board
+                    </>
+                  ) : (
+                    <>
+                      Add Board <IoAdd />
+                    </>
+                  )}
                 </button>
               </div>
             </form>

@@ -91,11 +91,13 @@ export type User = {
 
 // Board Types
 export type Board = {
-  id: string;
-  title: string;
+  _id: string;
+  name: string;
   description: string;
   owner?: string;
   is_public?: boolean;
+  tasks?: Task[];
+  __v?: number;
 };
 
 export interface boardCardProps {
@@ -124,3 +126,11 @@ export interface addBoardModalInputsProps {
   inputs: addBoardModalInputsType;
   setInputs: React.Dispatch<React.SetStateAction<addBoardModalInputsType>>;
 }
+
+// Task Types
+export type Task = {
+  _id: string;
+  name: string;
+  description: string;
+  status: string;
+};
