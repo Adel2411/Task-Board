@@ -16,7 +16,7 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
   };
 
   return (
-    <main className="shadow-[0_0_50px] shadow-white dark:shadow-black flex flex-col justify-center gap-4 bg-white dark:bg-black rounded-2xl p-3 w-[190px] h-[238px]">
+    <main className="hover:shadow-[0_0_10px] shadow-background-dark dark:shadow-background flex flex-col justify-center gap-4 bg-white dark:bg-black rounded-2xl p-3 w-[190px] h-[238px]">
       <div className="flex justify-end">
         <button className="p-2 rounded-full hover:bg-background dark:hover:bg-background-dark">
           <SlOptionsVertical />

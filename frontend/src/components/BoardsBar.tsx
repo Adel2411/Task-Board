@@ -46,7 +46,7 @@ const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
         <p className="whitespace-nowrap">{user?.username}</p>
       </div>
       <div className="flex items-center gap-3 sm:gap-10 h-fit">
-        <button className="flex items-center gap-1 text-sm text-white p-2 rounded-lg bg-primary dark:bg-primary-dark">
+        <button className="w-60 flex items-center justify-center gap-1 text-sm text-white p-2 rounded-md bg-primary dark:bg-primary-dark">
           <p>New Board</p>
           <IoIosAddCircle />
         </button>
