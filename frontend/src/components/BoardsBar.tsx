@@ -62,7 +62,7 @@ const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
           onClick={() => setIsOpen(true)}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="hover:bg-opacity-70 dark:hover:bg-opacity-70 w-60 flex items-center justify-center gap-1 text-sm text-white p-2 rounded-md bg-primary dark:bg-primary-dark"
+          className="hover:bg-opacity-70 dark:hover:bg-opacity-70 sm:w-60 flex items-center justify-center gap-1 text-sm text-white p-2 rounded-md bg-primary dark:bg-primary-dark"
         >
           New Board
           <IoIosAddCircle />
