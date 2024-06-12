@@ -29,21 +29,19 @@ const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
               </div>
             </div>
           </summary>
-          <div className="dropdown-content rounded-md flex flex-col gap-3 z-[10] bg-background dark:bg-background-dark overflow-hidden shadow-[0_0_20px] shadow-background dark:shadow-background-dark w-fit">
-            <div className="flex flex-col justify-center gap-2 h-full w-full p-3">
+          <div className="dropdown-content rounded-md flex flex-col z-[10] bg-dropdown dark:bg-dropdown-dark w-fit">
+            <div className="flex flex-col justify-center gap-2 h-full w-full p-3 pb-8">
               <p className="text-lg font-semibold">{user?.username}</p>
               <p className="opacity-70 text-xs">{user?.email}</p>
             </div>
             <hr className="h-[0.25px] border-t-0 bg-background-dark dark:bg-background opacity-20 dark:opacity-20" />
-            <div className="p-3 h-full w-full">
-              <button
-                onClick={handleSignOut}
-                className="flex justify-center items-center gap-2 p-2 h-full w-full hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white  bg-gray-300 dark:bg-gray-700 rounded-md text-xs font-semibold transition-all duration-200 ease-out"
-              >
-                <GoSignOut />
-                Sign out
-              </button>
-            </div>
+            <button
+              onClick={handleSignOut}
+              className="flex justify-center items-center gap-2 p-3 h-full w-full hover:bg-red-500 hover:bg-opacity-70 dark:hover:bg-red-500 dark:hover:bg-opacity-70 rounded-b-md text-sm font-semibold transition-all duration-200 ease-out"
+            >
+              <GoSignOut />
+              Sign out
+            </button>
           </div>
         </details>
         <p className="whitespace-nowrap">{user?.username}</p>
