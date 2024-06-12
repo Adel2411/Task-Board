@@ -106,6 +106,14 @@ export interface boardCardProps {
   setFavCounter: React.Dispatch<React.SetStateAction<number>>;
 }
 
+export interface dropDownMenuProps {
+  loading: boolean;
+  id: string;
+  handleEdit: (id: string) => void;
+  handleShare: (id: string) => void;
+  handleDelete: (id: string) => void;
+}
+
 export interface boardsBarProps {
   user: User | null;
   handleSignOut: () => void;

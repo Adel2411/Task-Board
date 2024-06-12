@@ -8,14 +8,49 @@ import { useState } from "react";
 import { boardCardProps } from "@/types";
 import DropDownMenu from "./DropDownMenu";
 import { useTheme } from "next-themes";
+import toast from "react-hot-toast";
+import { Toast } from "@/components";
+import { TbAtOff } from "react-icons/tb";
+import { deleteBoard } from "@/utils";
 
 const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
   const { theme } = useTheme();
   const [isFav, setIsFav] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleFav = () => {
     setIsFav(!isFav);
     setFavCounter(isFav ? favCounter - 1 : favCounter + 1);
+  };
+
+  const handleEdit = (id: string) => {
+    console.log("Edit", id);
+  };
+
+  const handleShare = (id: string) => {
+    console.log("share", id);
+  };
+
+  const handleDelete = async (id: string) => {
+    setLoading(true);
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("No token found");
+      return;
+    }
+
+    const response = await deleteBoard(token, id);
+
+    toast.custom((t) => (
+      <Toast
+        type={response ? "success" : "error"}
+        message={
+          response ? "Board deleted successfully" : "Failed to delete board"
+        }
+        t={t}
+      />
+    ));
   };
 
   return (
@@ -41,7 +76,13 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
           >
             <SlOptionsVertical />
           </div>
-          <DropDownMenu />
+          <DropDownMenu
+            loading={loading}
+            id={board._id}
+            handleEdit={handleEdit}
+            handleShare={handleShare}
+            handleDelete={handleDelete}
+          />
         </div>
       </div>
       <motion.button
@@ -55,7 +96,7 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
         <FaTasks size={80} className="group-hover:hidden" />
       </motion.button>
       <div className="flex items-center justify-between">
-        <p>{board.title}</p>
+        <p>{board.name}</p>
         <button
           className={`p-1 rounded-full ${isFav && "text-primary dark:text-primary-dark"}`}
           onClick={handleFav}

@@ -181,6 +181,7 @@ export async function getBoards(token: string) {
       return null;
     }
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error("Failed to get boards", error);
@@ -190,7 +191,6 @@ export async function getBoards(token: string) {
 
 export async function addBoard(token: string, inputs: addBoardModalInputsType) {
   const body = { ...inputs, is_public: true };
-  console.log(body);
 
   try {
     const response = await fetch(`${process.env.CURRENT_URL}/boards/add`, {
@@ -204,6 +204,52 @@ export async function addBoard(token: string, inputs: addBoardModalInputsType) {
     return response.ok;
   } catch (error) {
     console.error("Failed to add board", error);
+    return false;
+  }
+}
+
+export async function updateBoard(
+  token: string,
+  id: string,
+  inputs: addBoardModalInputsType,
+) {
+  const body = { ...inputs, is_public: true };
+
+  try {
+    const response = await fetch(
+      `${process.env.CURRENT_URL}/boards/update/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      },
+    );
+
+    return response.ok;
+  } catch (error) {
+    console.error("Failed to update board", error);
+    return false;
+  }
+}
+
+export async function deleteBoard(token: string, id: string) {
+  try {
+    const response = await fetch(
+      `${process.env.CURRENT_URL}/boards/delete/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    return response.ok;
+  } catch (error) {
+    console.error("Failed to delete board", error);
     return false;
   }
 }

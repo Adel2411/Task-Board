@@ -4,49 +4,31 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { BoardCard, BoardsBar, Toast } from "@/components";
 import { useAuth } from "@/hooks";
 import toast from "react-hot-toast";
+import { getBoards } from "@/utils";
+import { Board } from "@/types";
 
 const Boards = () => {
-  const boards = [
-    {
-      id: "1",
-      title: "Board 1",
-      description: "Board 1 description",
-    },
-    {
-      id: "2",
-      title: "Board 2",
-      description: "Board 2 description",
-    },
-    {
-      id: "3",
-      title: "Board 3",
-      description: "Board 3 description",
-    },
-    {
-      id: "4",
-      title: "Board 4",
-      description: "Board 4 description",
-    },
-    {
-      id: "5",
-      title: "Board 5",
-      description: "Board 5 description",
-    },
-    {
-      id: "6",
-      title: "Board 6",
-      description: "Board 6 description",
-    },
-    {
-      id: "7",
-      title: "Board 7",
-      description: "Board 7 description",
-    },
-  ];
+  const [boards, setBoards] = useState<Board[]>([]);
   const searchParams = useSearchParams();
   const router = useRouter();
   const { user, setIsAuthorized } = useAuth();
   const [favCounter, setFavCounter] = useState(0);
+
+  useEffect(() => {
+    const fetchBoards = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        router.push("/home");
+        return;
+      }
+      const response: Board[] | null = await getBoards(token);
+      if (response) {
+        setBoards(response);
+      }
+    };
+
+    fetchBoards();
+  }, []);
 
   useEffect(() => {
     const token = searchParams.get("token");
@@ -82,7 +64,7 @@ const Boards = () => {
       <div className="h-[90%] bg-background dark:bg-background-dark shadow-[0_0_80px] shadow-background dark:shadow-background-dark grid grid-cols-1 min-[500px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:rounded-xl content-start place-items-center gap-y-[32px] w-full p-5 pt-16 overflow-y-auto">
         {boards.map((board) => (
           <BoardCard
-            key={board.id}
+            key={board._id}
             board={board}
             favCounter={favCounter}
             setFavCounter={setFavCounter}
