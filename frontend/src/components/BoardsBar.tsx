@@ -76,6 +76,7 @@ const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
           )}
         </button>
       </div>
+      <AddBoardModal isOpen={isOpen} closeModal={() => setIsOpen(false)} />
     </main>
   );
 };
