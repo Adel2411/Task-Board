@@ -8,7 +8,7 @@ const AddBoardModalInputs = ({
   const { name, description } = inputs;
 
   return (
-    <div className="mb-4">
+    <div className="flex flex-col justify-center gap-2">
       <InputField
         name="name"
         value={name}
