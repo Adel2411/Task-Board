@@ -6,6 +6,7 @@ import { IoStarOutline, IoStar, IoEnterOutline } from "react-icons/io5";
 import { FaTasks } from "react-icons/fa";
 import { useState } from "react";
 import { boardCardProps } from "@/types";
+import DropDownMenu from "./DropDownMenu";
 
 const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
   const [isFav, setIsFav] = useState(false);
@@ -16,18 +17,25 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
   };
 
   return (
-    <main className="hover:shadow-[0_0_10px] shadow-background-dark dark:shadow-background flex flex-col justify-center gap-4 bg-white dark:bg-black rounded-2xl p-3 w-[190px] h-[238px]">
+    <main className="hover:shadow-[0_0_30px] shadow-background-dark dark:shadow-background flex flex-col justify-center gap-4 bg-white dark:bg-black rounded-2xl p-3 w-[190px] h-[238px]">
       <div className="flex justify-end">
-        <button className="p-2 rounded-full hover:bg-background dark:hover:bg-background-dark">
-          <SlOptionsVertical />
-        </button>
+        <div className="dropdown dropdown-end dropdown-left">
+          <div
+            tabIndex={0}
+            role="button"
+            className="p-2 rounded-full hover:bg-background dark:hover:bg-background-dark"
+          >
+            <SlOptionsVertical />
+          </div>
+          <DropDownMenu />
+        </div>
       </div>
       <motion.button
         whileTap={{ scale: 0.9 }}
         className="group h-full flex justify-center items-center rounded-xl hover:bg-background dark:hover:bg-background-dark"
       >
         <div className="group-hover:flex group-hover:items-center group-hover:justify-center group-hover:gap-3 hidden text-lg font-bold">
-          <p>Enter Board</p>
+          <p>Access Board</p>
           <IoEnterOutline size={20} />
         </div>
         <FaTasks size={80} className="group-hover:hidden" />

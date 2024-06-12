@@ -22,6 +22,12 @@ const config: Config = {
           dark: "#961623",
         },
 
+        // Dropdown Menu color
+        dropdown: {
+          DEFAULT: "#DCDDE0",
+          dark: "#231E1B",
+        },
+
         // Inactive button color
         inactive_button: {
           DEFAULT: "#D1D5DB",

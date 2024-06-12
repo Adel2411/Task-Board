@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { IoStar } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
 import { GoSignOut } from "react-icons/go";
@@ -46,10 +49,14 @@ const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
         <p className="whitespace-nowrap">{user?.username}</p>
       </div>
       <div className="flex items-center gap-3 sm:gap-10 h-fit">
-        <button className="w-60 flex items-center justify-center gap-1 text-sm text-white p-2 rounded-md bg-primary dark:bg-primary-dark">
-          <p>New Board</p>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="hover:bg-opacity-70 dark:hover:bg-opacity-70 w-60 flex items-center justify-center gap-1 text-sm text-white p-2 rounded-md bg-primary dark:bg-primary-dark"
+        >
+          New Board
           <IoIosAddCircle />
-        </button>
+        </motion.button>
         <button className="relative p-2 hover:bg-background dark:hover:bg-background-dark rounded-lg">
           <IoStar size={20} />
           {favCounter > 0 && (
