@@ -6,7 +6,7 @@ import {
 
 const DropDownMenu = () => {
   return (
-    <div className="bg-opacity-85 dark:bg-opacity-85 rounded-md bg-dropdown w-[100px] dark:bg-dropdown-dark dropdown-content z-[10] font-light">
+    <div className="rounded-md bg-dropdown w-[100px] dark:bg-dropdown-dark dropdown-content z-[10] font-light">
       <button className="flex items-center justify-start gap-2 rounded-t-md p-2 w-full h-full hover:bg-yellow-500 hover:bg-opacity-20">
         <MdOutlineEdit />
         Edit

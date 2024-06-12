@@ -29,7 +29,15 @@ const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
               </div>
             </div>
           </summary>
-          <div className="dropdown-content rounded-md flex flex-col z-[10] bg-dropdown dark:bg-dropdown-dark w-fit">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{
+              opacity: 1,
+              scale: 1,
+              transition: { duration: 0.3 },
+            }}
+            className="dropdown-content rounded-md flex flex-col z-[10] bg-dropdown dark:bg-dropdown-dark w-fit"
+          >
             <div className="flex flex-col justify-center gap-2 h-full w-full p-3 pb-8">
               <p className="text-lg font-semibold">{user?.username}</p>
               <p className="opacity-70 text-xs">{user?.email}</p>
@@ -42,7 +50,7 @@ const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
               <GoSignOut />
               Sign out
             </button>
-          </div>
+          </motion.div>
         </details>
         <p className="whitespace-nowrap">{user?.username}</p>
       </div>

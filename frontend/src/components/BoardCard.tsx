@@ -7,8 +7,10 @@ import { FaTasks } from "react-icons/fa";
 import { useState } from "react";
 import { boardCardProps } from "@/types";
 import DropDownMenu from "./DropDownMenu";
+import { useTheme } from "next-themes";
 
 const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
+  const { theme } = useTheme();
   const [isFav, setIsFav] = useState(false);
 
   const handleFav = () => {
@@ -17,7 +19,19 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
   };
 
   return (
-    <main className="hover:shadow-[0_0_30px] shadow-background-dark dark:shadow-background flex flex-col justify-center gap-4 bg-white dark:bg-black rounded-2xl p-3 w-[190px] h-[238px]">
+    <motion.main
+      initial={{ opacity: 0, y: 100 }}
+      whileHover={{
+        y: 10,
+        boxShadow:
+          theme === "dark"
+            ? "0px -5px 10px rgba(255, 255, 255, 0.25)"
+            : "0px -5px 10px rgba(0, 0, 0, 0.25)",
+        transition: { duration: 0.3 },
+      }}
+      whileInView={{ opacity: 1, y: 0, transition: { duration: 0.2 } }}
+      className="flex flex-col justify-center gap-4 bg-white dark:bg-black rounded-2xl p-3 w-[190px] h-[238px]"
+    >
       <div className="flex justify-end">
         <div className="dropdown dropdown-end dropdown-left">
           <div
@@ -49,7 +63,7 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
           {isFav ? <IoStar /> : <IoStarOutline />}
         </button>
       </div>
-    </main>
+    </motion.main>
   );
 };
 
