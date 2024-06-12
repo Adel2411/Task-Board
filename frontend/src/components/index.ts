@@ -14,6 +14,7 @@ import Custom404 from "./Custom404";
 import BoardCard from "./BoardCard";
 import BoardsBar from "./BoardsBar";
 import DropDownMenu from "./DropDownMenu";
+import AddBoardModal from "./AddBoardModal";
 
 export {
   DarkModeSwitch,
@@ -32,4 +33,5 @@ export {
   BoardCard,
   BoardsBar,
   DropDownMenu,
+  AddBoardModal,
 };

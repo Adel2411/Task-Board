@@ -107,3 +107,8 @@ export interface boardsBarProps {
   handleSignOut: () => void;
   favCounter: number;
 }
+
+export interface addBoardModalProps {
+  isOpen: boolean;
+  closeModal: () => void;
+}

@@ -5,8 +5,11 @@ import { IoStar } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
 import { GoSignOut } from "react-icons/go";
 import { boardsBarProps } from "@/types";
+import { useState } from "react";
+import AddBoardModal from "./AddBoardModal";
 
 const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const getShortCut = (username: string | undefined) => {
     return username
       ?.split(" ")
@@ -56,6 +59,7 @@ const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
       </div>
       <div className="flex items-center gap-3 sm:gap-10 h-fit">
         <motion.button
+          onClick={() => setIsOpen(true)}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="hover:bg-opacity-70 dark:hover:bg-opacity-70 w-60 flex items-center justify-center gap-1 text-sm text-white p-2 rounded-md bg-primary dark:bg-primary-dark"
