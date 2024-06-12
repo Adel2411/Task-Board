@@ -1,10 +1,7 @@
-import { addBoardModalInputsProps } from "@/types";
+import { boardModalInputsProps } from "@/types";
 import InputField from "./InputField";
 
-const AddBoardModalInputs = ({
-  inputs,
-  setInputs,
-}: addBoardModalInputsProps) => {
+const BoardModalInputs = ({ inputs, setInputs }: boardModalInputsProps) => {
   const { name, description } = inputs;
 
   return (
@@ -27,4 +24,4 @@ const AddBoardModalInputs = ({
   );
 };
 
-export default AddBoardModalInputs;
+export default BoardModalInputs;

@@ -1,20 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { addBoardModalProps } from "@/types";
-import AddBoardModalInputs from "./AddBoardModalInputs";
-import { IoClose, IoAdd } from "react-icons/io5";
-import { addBoard } from "@/utils";
+import { boardModalProps } from "@/types";
+import BoardModalInputs from "./BoardModalInputs";
+import { IoClose, IoAdd, IoSave } from "react-icons/io5";
+import { addBoard, updateBoard } from "@/utils"; // Assuming you have an editBoard function
 import toast from "react-hot-toast";
 import { Toast } from "@/components";
 
-const AddBoardModal = ({ isOpen, closeModal }: addBoardModalProps) => {
+const BoardModal = ({ isOpen, closeModal, type, board }: boardModalProps) => {
   const [inputs, setInputs] = useState({
     name: "",
     description: "",
   });
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (type === "edit" && board) {
+      setInputs({ name: board.name, description: board.description });
+    }
+  }, [type, board]);
 
   const backdropVariants = {
     hidden: { opacity: 0 },
@@ -42,16 +48,25 @@ const AddBoardModal = ({ isOpen, closeModal }: addBoardModalProps) => {
       return;
     }
 
-    const response = await addBoard(token, inputs);
+    let response: boolean;
+    if (type === "add") {
+      response = await addBoard(token, inputs);
+    } else if (type === "edit" && board) {
+      response = await updateBoard(token, board._id, inputs); // Assuming editBoard takes an id and the inputs
+    }
 
     toast.custom((t) => (
       <>
         {response ? (
-          <Toast type="success" message="Board added successfully" t={t} />
+          <Toast
+            type="success"
+            message={`${type === "add" ? "Board added" : "Board updated"} successfully`}
+            t={t}
+          />
         ) : (
           <Toast
             type="error"
-            message="Error occured when adding the board"
+            message={`Error occurred when ${type === "add" ? "adding" : "updating"} the board`}
             t={t}
           />
         )}
@@ -82,7 +97,9 @@ const AddBoardModal = ({ isOpen, closeModal }: addBoardModalProps) => {
             exit="exit"
             variants={modalVariants}
           >
-            <h2 className="text-2xl">Add Board</h2>
+            <h2 className="text-2xl">
+              {type === "add" ? "Add Board" : "Edit Board"}
+            </h2>
             <motion.button
               initial={{ opacity: 0.5 }}
               whileHover={{ opacity: 1, transition: { duration: 0.1 } }}
@@ -96,7 +113,7 @@ const AddBoardModal = ({ isOpen, closeModal }: addBoardModalProps) => {
               onSubmit={handleSubmit}
               className="flex flex-col justify-center gap-4"
             >
-              <AddBoardModalInputs inputs={inputs} setInputs={setInputs} />
+              <BoardModalInputs inputs={inputs} setInputs={setInputs} />
               <div className="flex justify-end">
                 <button
                   disabled={loading}
@@ -106,11 +123,19 @@ const AddBoardModal = ({ isOpen, closeModal }: addBoardModalProps) => {
                   {loading ? (
                     <>
                       <span className="loading loading-spinner loading-xs"></span>
-                      Adding Board
+                      {type === "add" ? "Adding Board" : "Updating Board"}
                     </>
                   ) : (
                     <>
-                      Add Board <IoAdd />
+                      {type === "add" ? (
+                        <>
+                          Add Board <IoAdd />
+                        </>
+                      ) : (
+                        <>
+                          Save Changes <IoSave />
+                        </>
+                      )}
                     </>
                   )}
                 </button>
@@ -123,4 +148,4 @@ const AddBoardModal = ({ isOpen, closeModal }: addBoardModalProps) => {
   );
 };
 
-export default AddBoardModal;
+export default BoardModal;

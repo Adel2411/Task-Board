@@ -120,19 +120,21 @@ export interface boardsBarProps {
   favCounter: number;
 }
 
-export interface addBoardModalProps {
+export interface boardModalProps {
   isOpen: boolean;
   closeModal: () => void;
+  type: "add" | "edit";
+  board?: Board;
 }
 
-export type addBoardModalInputsType = {
+export type boardModalInputsType = {
   name: string;
   description: string;
 };
 
-export interface addBoardModalInputsProps {
-  inputs: addBoardModalInputsType;
-  setInputs: React.Dispatch<React.SetStateAction<addBoardModalInputsType>>;
+export interface boardModalInputsProps {
+  inputs: boardModalInputsType;
+  setInputs: React.Dispatch<React.SetStateAction<boardModalInputsType>>;
 }
 
 // Task Types

@@ -6,7 +6,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { GoSignOut } from "react-icons/go";
 import { boardsBarProps } from "@/types";
 import { useState } from "react";
-import AddBoardModal from "./AddBoardModal";
+import { BoardModal } from "@/components";
 
 const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +76,11 @@ const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
           )}
         </button>
       </div>
-      <AddBoardModal isOpen={isOpen} closeModal={() => setIsOpen(false)} />
+      <BoardModal
+        isOpen={isOpen}
+        closeModal={() => setIsOpen(false)}
+        type="add"
+      />
     </main>
   );
 };
