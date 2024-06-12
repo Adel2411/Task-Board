@@ -15,6 +15,7 @@ import BoardCard from "./BoardCard";
 import BoardsBar from "./BoardsBar";
 import DropDownMenu from "./DropDownMenu";
 import AddBoardModal from "./AddBoardModal";
+import AddBoardModalInputs from "./AddBoardModalInputs";
 
 export {
   DarkModeSwitch,
@@ -34,4 +35,5 @@ export {
   BoardsBar,
   DropDownMenu,
   AddBoardModal,
+  AddBoardModalInputs,
 };

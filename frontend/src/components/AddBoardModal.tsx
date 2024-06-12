@@ -1,10 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { addBoardModalProps } from "@/types";
+import AddBoardModalInputs from "./AddBoardModalInputs";
 
 const AddBoardModal = ({ isOpen, closeModal }: addBoardModalProps) => {
+  const [inputs, setInputs] = useState({
+    name: "",
+    description: "",
+  });
+
   const backdropVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 0.8 },
@@ -20,8 +26,6 @@ const AddBoardModal = ({ isOpen, closeModal }: addBoardModalProps) => {
     },
     exit: { opacity: 0, y: 0, transition: { duration: 0.8 } },
   };
-
-  if (!isOpen) return null;
 
   return (
     <>
@@ -49,22 +53,8 @@ const AddBoardModal = ({ isOpen, closeModal }: addBoardModalProps) => {
             >
               &times;
             </button>
-            {/* Add your form or modal content here */}
             <form>
-              <div className="mb-4">
-                <label
-                  className="block text-sm font-bold mb-2"
-                  htmlFor="boardName"
-                >
-                  Board Name
-                </label>
-                <input
-                  id="boardName"
-                  type="text"
-                  className="w-full px-3 py-2 border rounded-md"
-                  placeholder="Enter board name"
-                />
-              </div>
+              <AddBoardModalInputs inputs={inputs} setInputs={setInputs} />
               <div className="flex justify-end">
                 <button
                   type="button"

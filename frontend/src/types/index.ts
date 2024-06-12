@@ -10,7 +10,9 @@ export interface gradientDivProps {
 export interface inputFieldProps {
   name: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
   placeholder: string;
   type: string;
 }
@@ -111,4 +113,14 @@ export interface boardsBarProps {
 export interface addBoardModalProps {
   isOpen: boolean;
   closeModal: () => void;
+}
+
+export type addBoardModalInputsType = {
+  name: string;
+  description: string;
+};
+
+export interface addBoardModalInputsProps {
+  inputs: addBoardModalInputsType;
+  setInputs: React.Dispatch<React.SetStateAction<addBoardModalInputsType>>;
 }

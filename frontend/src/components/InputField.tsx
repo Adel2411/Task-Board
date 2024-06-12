@@ -30,14 +30,26 @@ const InputField = ({
           </button>
         )}
       </div>
-      <input
-        className="bg-background dark:bg-background-dark border-[1px] w-full h-12 px-3 rounded-xl border-background-dark dark:border-background opacity-50"
-        type={type === "password" && showPassword ? "text" : type}
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={`${placeholder}...`}
-      />
+      {type === "text-area" ? (
+        <textarea
+          className="bg-background dark:bg-background-dark border-[1px] w-full h-32 p-3 rounded-xl border-background-dark dark:border-background opacity-50"
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={`${placeholder}...`}
+        ></textarea>
+      ) : (
+        <>
+          <input
+            className="bg-background dark:bg-background-dark border-[1px] w-full h-12 px-3 rounded-xl border-background-dark dark:border-background opacity-50"
+            type={type === "password" && showPassword ? "text" : type}
+            name={name}
+            value={value}
+            onChange={onChange}
+            placeholder={`${placeholder}...`}
+          />
+        </>
+      )}
     </div>
   );
 };
