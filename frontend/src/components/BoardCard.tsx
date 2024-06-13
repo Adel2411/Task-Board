@@ -9,14 +9,14 @@ import { boardCardProps } from "@/types";
 import DropDownMenu from "./DropDownMenu";
 import { useTheme } from "next-themes";
 import toast from "react-hot-toast";
-import { Toast } from "@/components";
-import { TbAtOff } from "react-icons/tb";
+import { BoardModal, Toast } from "@/components";
 import { deleteBoard } from "@/utils";
 
 const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
   const { theme } = useTheme();
   const [isFav, setIsFav] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   const handleFav = () => {
     setIsFav(!isFav);
@@ -25,6 +25,7 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
 
   const handleEdit = (id: string) => {
     console.log("Edit", id);
+    setIsEdit(true);
   };
 
   const handleShare = (id: string) => {
@@ -104,6 +105,12 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
           {isFav ? <IoStar /> : <IoStarOutline />}
         </button>
       </div>
+      <BoardModal
+        isOpen={isEdit}
+        closeModal={() => setIsEdit(false)}
+        type="edit"
+        board={board}
+      />
     </motion.main>
   );
 };
