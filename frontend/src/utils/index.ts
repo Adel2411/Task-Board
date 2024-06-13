@@ -5,7 +5,7 @@ import {
   signInInputsType,
   resetPasswordInputsType,
   forgotPasswordInputsType,
-  addBoardModalInputsType,
+  boardModalInputsType,
 } from "@/types";
 
 export async function postRegister(inputs: signUpInputsType) {
@@ -181,7 +181,6 @@ export async function getBoards(token: string) {
       return null;
     }
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Failed to get boards", error);
@@ -189,7 +188,7 @@ export async function getBoards(token: string) {
   }
 }
 
-export async function addBoard(token: string, inputs: addBoardModalInputsType) {
+export async function addBoard(token: string, inputs: boardModalInputsType) {
   const body = { ...inputs, is_public: true };
 
   try {
@@ -211,7 +210,7 @@ export async function addBoard(token: string, inputs: addBoardModalInputsType) {
 export async function updateBoard(
   token: string,
   id: string,
-  inputs: addBoardModalInputsType,
+  inputs: boardModalInputsType,
 ) {
   const body = { ...inputs, is_public: true };
 

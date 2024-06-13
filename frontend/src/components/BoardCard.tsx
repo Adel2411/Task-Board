@@ -11,6 +11,7 @@ import { useTheme } from "next-themes";
 import toast from "react-hot-toast";
 import { BoardModal, Toast } from "@/components";
 import { deleteBoard } from "@/utils";
+import ConfirmToast from "@/components/ConfirmToast";
 
 const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
   const { theme } = useTheme();
@@ -24,46 +25,60 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
   };
 
   const handleEdit = (id: string) => {
-    console.log("Edit", id);
     setIsEdit(true);
   };
 
   const handleShare = (id: string) => {
-    console.log("share", id);
+    console.log("Share", id);
   };
 
   const handleDelete = async (id: string) => {
-    setLoading(true);
-
-    const token = localStorage.getItem("token");
-    if (!token) {
-      console.log("No token found");
-      return;
-    }
-
-    const response = await deleteBoard(token, id);
-
     toast.custom((t) => (
-      <Toast
-        type={response ? "success" : "error"}
-        message={
-          response ? "Board deleted successfully" : "Failed to delete board"
-        }
-        t={t}
-      />
-    ));
+  <ConfirmToast
+    t={t}
+    message="Are you sure you want to delete this board?"
+    onConfirm={async () => {
+
+      setLoading(true);
+
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.log("No token found");
+        toast.custom((t) => (
+            <Toast type="error" message="No token found" t={t} />
+        ));
+        setLoading(false);
+        return;
+      }
+
+      const response = await deleteBoard(token, id);
+
+      toast.custom((t) => (
+          <Toast
+              type={response ? "success" : "error"}
+              message={
+                response ? "Board deleted successfully" : "Failed to delete board"
+              }
+              t={t}
+          />
+      ));
+      setLoading(false);
+      toast.dismiss(t.id);
+    }}
+  />
+));
   };
 
   return (
     <motion.main
       initial={{ opacity: 0, y: 100 }}
       whileHover={{
-        y: 10,
+        y: 15,
         boxShadow:
-          theme === "dark"
-            ? "0px -5px 10px rgba(255, 255, 255, 0.25)"
-            : "0px -5px 10px rgba(0, 0, 0, 0.25)",
-        transition: { duration: 0.3 },
+          theme === "light"
+            ? "0px -5px 15px rgba(255, 255, 255, 0.35)"
+            : "0px -5px 10px rgba(0, 0, 0, 0.35)",
+        transition: { duration: 0.2 },
       }}
       whileInView={{ opacity: 1, y: 0, transition: { duration: 0.2 } }}
       className="flex flex-col justify-center gap-4 bg-white dark:bg-black rounded-2xl p-3 w-[190px] h-[238px]"
@@ -80,9 +95,9 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
           <DropDownMenu
             loading={loading}
             id={board._id}
-            handleEdit={handleEdit}
-            handleShare={handleShare}
-            handleDelete={handleDelete}
+            handleEdit={() => handleEdit(board._id)}
+            handleShare={() => handleShare(board._id)}
+            handleDelete={() => handleDelete(board._id)}
           />
         </div>
       </div>

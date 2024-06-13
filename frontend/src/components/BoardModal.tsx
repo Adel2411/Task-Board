@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, {useState, useEffect, } from "react";
+import ReactDOM from "react-dom";
+import {AnimatePresence, motion} from "framer-motion";
 import { boardModalProps } from "@/types";
 import BoardModalInputs from "./BoardModalInputs";
 import { IoClose, IoAdd, IoSave } from "react-icons/io5";
@@ -29,13 +30,13 @@ const BoardModal = ({ isOpen, closeModal, type, board }: boardModalProps) => {
   };
 
   const modalVariants = {
-    hidden: { opacity: 0, y: 0 },
+    hidden: { y: -450 },
     visible: {
       opacity: 1,
-      y: "50%",
-      transition: { duration: 0.8, type: "spring" },
+      y: 0,
+      transition: { duration: 1.5, type: "spring" },
     },
-    exit: { opacity: 0, y: 0, transition: { duration: 0.8 } },
+    exit: { y: -450, transition: { duration: 1, type: "spring" } },
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,6 +46,7 @@ const BoardModal = ({ isOpen, closeModal, type, board }: boardModalProps) => {
     const token = localStorage.getItem("token");
     if (!token) {
       console.error("Token not found");
+      setLoading(false);
       return;
     }
 
@@ -52,7 +54,7 @@ const BoardModal = ({ isOpen, closeModal, type, board }: boardModalProps) => {
     if (type === "add") {
       response = await addBoard(token, inputs);
     } else if (type === "edit" && board) {
-      response = await updateBoard(token, board._id, inputs); // Assuming editBoard takes an id and the inputs
+      response = await updateBoard(token, board._id, inputs);
     }
 
     toast.custom((t) => (
@@ -78,25 +80,25 @@ const BoardModal = ({ isOpen, closeModal, type, board }: boardModalProps) => {
     closeModal();
   };
 
-  return (
-    <>
+  const modalContent = (
+    <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 flex items-start justify-center z-50">
-          <motion.div
-            className="fixed inset-0 bg-background dark:bg-background-dark bg-opacity-80 dark:bg-opacity-80"
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={backdropVariants}
-            onClick={closeModal}
-          />
-          <motion.div
-            className="flex flex-col justify-center gap-8 bg-background dark:bg-background-dark rounded-lg p-6 sm:w-2/3 md:w-1/2 lg:w-1/3 shadow-lg relative"
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={modalVariants}
-          >
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <motion.div
+                className="fixed inset-0 bg-background dark:bg-background-dark bg-opacity-80 dark:bg-opacity-80"
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={backdropVariants}
+                onClick={closeModal}
+            />
+            <motion.div
+                className={`fixed top-0 z-10 flex flex-col justify-center gap-8 bg-background dark:bg-background-dark rounded-lg p-6 sm:w-2/3 md:w-1/2 lg:w-1/3 shadow-lg`}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={modalVariants}
+            >
             <h2 className="text-2xl">
               {type === "add" ? "Add Board" : "Edit Board"}
             </h2>
@@ -144,8 +146,13 @@ const BoardModal = ({ isOpen, closeModal, type, board }: boardModalProps) => {
           </motion.div>
         </div>
       )}
-    </>
+    </AnimatePresence>
   );
+
+  return ReactDOM.createPortal(
+    modalContent,
+    document.body
+  )
 };
 
 export default BoardModal;

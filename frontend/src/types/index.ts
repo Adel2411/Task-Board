@@ -27,7 +27,13 @@ export interface loadingProps {
 export interface toastProps {
   t: Toast;
   message: string;
-  type: "success" | "error" | "loading";
+  type: "success" | "error";
+}
+
+export interface confirmToastProps {
+    t: Toast;
+    message: string;
+    onConfirm: () => void;
 }
 
 // Sign Up Types
