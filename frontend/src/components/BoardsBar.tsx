@@ -7,6 +7,7 @@ import { GoSignOut } from "react-icons/go";
 import { boardsBarProps } from "@/types";
 import { useState } from "react";
 import { BoardModal } from "@/components";
+import { buttonVariants } from "@/animations";
 
 const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,9 +61,10 @@ const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
       <div className="flex items-center gap-3 sm:gap-10 h-fit">
         <motion.button
           onClick={() => setIsOpen(true)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="hover:bg-opacity-70 dark:hover:bg-opacity-70 sm:w-60 flex items-center justify-center gap-1 text-sm text-white p-2 rounded-md bg-primary dark:bg-primary-dark"
+          variants={buttonVariants}
+          whileHover="hover"
+          whileTap="tap"
+          className="sm:w-60 flex items-center justify-center gap-1 text-sm text-white p-2 rounded-md bg-primary dark:bg-primary-dark"
         >
           New Board
           <IoIosAddCircle />

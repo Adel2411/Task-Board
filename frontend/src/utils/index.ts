@@ -6,6 +6,7 @@ import {
   resetPasswordInputsType,
   forgotPasswordInputsType,
   boardModalInputsType,
+  Board,
 } from "@/types";
 
 export async function postRegister(inputs: signUpInputsType) {
@@ -191,6 +192,10 @@ export async function getBoards(token: string) {
 export async function addBoard(token: string, inputs: boardModalInputsType) {
   const body = { ...inputs, is_public: true };
 
+  if (inputs.name.trim() === "") {
+    return "Please provide a title.";
+  }
+
   try {
     const response = await fetch(`${process.env.CURRENT_URL}/boards/add`, {
       method: "POST",
@@ -209,10 +214,20 @@ export async function addBoard(token: string, inputs: boardModalInputsType) {
 
 export async function updateBoard(
   token: string,
-  id: string,
+  board: Board,
   inputs: boardModalInputsType,
 ) {
   const body = { ...inputs, is_public: true };
+  const id = board._id;
+
+  if (inputs.name.trim() === "") {
+    return "Please provide a title.";
+  } else if (
+    inputs.name.trim() === board.name.trim() &&
+    inputs.description.trim() === board.description.trim()
+  ) {
+    return "No changes detected. Please make a change to update the board.";
+  }
 
   try {
     const response = await fetch(

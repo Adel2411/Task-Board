@@ -34,57 +34,58 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
 
   const handleDelete = async (id: string) => {
     toast.custom((t) => (
-  <ConfirmToast
-    t={t}
-    message="Are you sure you want to delete this board?"
-    onConfirm={async () => {
+      <ConfirmToast
+        t={t}
+        message="Are you sure you want to delete this board?"
+        onConfirm={async () => {
+          setLoading(true);
 
-      setLoading(true);
+          const token = localStorage.getItem("token");
+          if (!token) {
+            console.log("No token found");
+            toast.custom((t) => (
+              <Toast type="error" message="No token found" t={t} />
+            ));
+            setLoading(false);
+            return;
+          }
 
-      const token = localStorage.getItem("token");
-      if (!token) {
-        console.log("No token found");
-        toast.custom((t) => (
-            <Toast type="error" message="No token found" t={t} />
-        ));
-        setLoading(false);
-        return;
-      }
+          const response = await deleteBoard(token, id);
 
-      const response = await deleteBoard(token, id);
-
-      toast.custom((t) => (
-          <Toast
+          toast.custom((t) => (
+            <Toast
               type={response ? "success" : "error"}
               message={
-                response ? "Board deleted successfully" : "Failed to delete board"
+                response
+                  ? "Board deleted successfully"
+                  : "Failed to delete board"
               }
               t={t}
-          />
-      ));
-      setLoading(false);
-      toast.dismiss(t.id);
-    }}
-  />
-));
+            />
+          ));
+          setLoading(false);
+          toast.dismiss(t.id);
+        }}
+      />
+    ));
   };
 
   return (
     <motion.main
       initial={{ opacity: 0, y: 100 }}
       whileHover={{
-        y: 15,
+        y: -5,
         boxShadow:
           theme === "light"
-            ? "0px -5px 15px rgba(255, 255, 255, 0.35)"
-            : "0px -5px 10px rgba(0, 0, 0, 0.35)",
+            ? "0px 5px 15px rgba(255, 255, 255, 0.35)"
+            : "0px 5px 10px rgba(0, 0, 0, 0.35)",
         transition: { duration: 0.2 },
       }}
       whileInView={{ opacity: 1, y: 0, transition: { duration: 0.2 } }}
       className="flex flex-col justify-center gap-4 bg-white dark:bg-black rounded-2xl p-3 w-[190px] h-[238px]"
     >
       <div className="flex justify-end">
-        <div className="dropdown dropdown-end dropdown-left">
+        <div className="dropdown dropdown-end dropdown-right">
           <div
             tabIndex={0}
             role="button"

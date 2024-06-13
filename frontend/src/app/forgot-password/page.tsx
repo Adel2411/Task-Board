@@ -12,6 +12,7 @@ import Link from "next/link";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { postForgotPassword } from "@/utils";
+import { buttonVariants } from "@/animations";
 
 const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -80,10 +81,11 @@ const ForgotPassword = () => {
               <ForgotPasswordInputs inputs={inputs} setInputs={setInputs} />
               <motion.button
                 type="submit"
-                whileHover={loading ? { scale: 1 } : { scale: 1.05 }}
-                whileTap={loading ? { scale: 1 } : { scale: 0.95 }}
+                variants={buttonVariants}
+                whileHover={loading ? { scale: 1 } : "hover"}
+                whileTap={loading ? { scale: 1 } : "tap"}
                 disabled={loading}
-                className={`w-full h-10 text-sm font-semibold bg-background-dark dark:bg-background text-background dark:text-background-dark rounded-l-full rounded-r-full ${loading ? "flex justify-center items-center gap-5 bg-opacity-25 dark:bg-opacity-25 cursor-not-allowed" : "hover:bg-opacity-50 dark:hover:bg-opacity-50"}`}
+                className={`w-full h-10 text-sm font-semibold bg-background-dark dark:bg-background text-background dark:text-background-dark rounded-l-full rounded-r-full ${loading && "flex justify-center items-center gap-5 bg-opacity-25 dark:bg-opacity-25 cursor-not-allowed"}`}
               >
                 {loading && (
                   <span className="loading loading-spinner loading-xs"></span>
