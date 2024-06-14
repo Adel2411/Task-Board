@@ -267,3 +267,43 @@ export async function deleteBoard(token: string, id: string) {
     return false;
   }
 }
+
+// Inside Board API
+
+export async function getBoard(token: string, id: string) {
+  try {
+    const response = await fetch(`${process.env.CURRENT_URL}/boards/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to get board", error);
+    return null;
+  }
+}
+
+export async function getPublicBoard(id: string) {
+  try {
+    const response = await fetch(
+      `${process.env.CURRENT_URL}/boards/public/${id}`,
+    );
+
+    if (!response.ok) {
+      return null;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to get board", error);
+    return null;
+  }
+}
