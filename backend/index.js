@@ -8,7 +8,9 @@ const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const boardRoutes = require("./routes/board");
 const userRoutes = require("./routes/user");
-const taskRoutes = require('./routes/task');
+const taskRoutes = require("./routes/task");
+const statusRoutes = require("./routes/status");
+
 const option = {
   definition: {
     openapi: "3.0.0",
@@ -54,6 +56,7 @@ app.use(`/api/v1/boards`, boardRoutes);
 app.use(`/api/v1/`, helloWorldRoutes);
 app.use(`/api/v1/user`, userRoutes);
 app.use(`/api/v1/tasks`, taskRoutes);
+app.use("/api/v1/status", statusRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
