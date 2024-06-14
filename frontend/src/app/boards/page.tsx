@@ -106,10 +106,14 @@ const BoardsContent = () => {
   );
 };
 
-const Boards = () => (
-  <Suspense fallback={<LoadingFallback />}>
-    <BoardsContent />
-  </Suspense>
-);
+const Boards = () => {
+    if (typeof window !== 'undefined') {
+      return (
+          <Suspense fallback={<LoadingFallback />}>
+            <BoardsContent />
+          </Suspense>
+      );
+    }
+};
 
 export default Boards;
