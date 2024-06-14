@@ -72,8 +72,8 @@ router.delete("delete/:id", authMiddleware, async (req, res) => {
  *               - boardId
  *               - title
  *               - description
- *               - taskIcon
- *               - status
+ *               - taskIconName
+ *               - statusId
  *             properties:
  *               boardId:
  *                 type: string
@@ -81,10 +81,10 @@ router.delete("delete/:id", authMiddleware, async (req, res) => {
  *                 type: string
  *               description:
  *                 type: string
- *               taskIcon:
- *                 type: string
- *               status:
- *                 type: string
+ *                 taskIconName:
+ *                   type: string
+ *                 status:
+ *                   type: integer
  *     responses:
  *       201:
  *         description: Task created successfully
@@ -99,24 +99,23 @@ router.delete("delete/:id", authMiddleware, async (req, res) => {
  *                   type: string
  *                 description:
  *                   type: string
- *                 taskIcon:
+ *                 taskIconName:
  *                   type: string
- *                 status:
- *                   type: string
+ *                 statusId:
+ *                   type: integer
  *       500:
  *         description: Server error
  */
 
-
 router.post("/add", authMiddleware, async (req, res) => {
-  const { boardId, title, description, taskIcon, status } = req.body;
+  const { boardId, title, description, taskIconName, statusId } = req.body;
   try {
     const newTask = new Task({
       board: boardId,
       title,
       description,
-      taskIcon,
-      status
+      taskIcon: taskIconName,
+      status: statusId,
     });
     await newTask.save();
     res.status(201).json(newTask);
@@ -151,10 +150,10 @@ router.post("/add", authMiddleware, async (req, res) => {
  *                 type: string
  *               description:
  *                 type: string
- *               taskIcon:
- *                 type: string
- *               status:
- *                 type: string
+ *                 taskIconName:
+ *                   type: string
+ *                 statusId:
+ *                   type: integer
  *     responses:
  *       200:
  *         description: Task updated successfully
@@ -167,10 +166,10 @@ router.post("/add", authMiddleware, async (req, res) => {
  *                   type: string
  *                 description:
  *                   type: string
- *                 taskIcon:
- *                   type: string
- *                 status:
- *                   type: string
+ *               taskIconName:
+ *                 type: string
+ *               statusId:
+ *                 type: Number
  *       404:
  *         description: Task not found
  *       401:
@@ -181,7 +180,7 @@ router.post("/add", authMiddleware, async (req, res) => {
 
 router.put("/update/:id", authMiddleware, async (req, res) => {
   const { id } = req.params;
-  const { title, description, taskIcon, status } = req.body;
+  const { title, description, taskIconName, statusId } = req.body;
   try {
     const task = await Task.findById(id);
     if (!task) {
@@ -193,8 +192,8 @@ router.put("/update/:id", authMiddleware, async (req, res) => {
     }
     task.title = title;
     task.description = description;
-    task.taskIcon = taskIcon;
-    task.status = status;
+    task.taskIcon = taskIconName;
+    task.status = statusId;
 
     await task.save();
 
