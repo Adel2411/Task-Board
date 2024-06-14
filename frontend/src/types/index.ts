@@ -31,9 +31,9 @@ export interface toastProps {
 }
 
 export interface confirmToastProps {
-    t: Toast;
-    message: string;
-    onConfirm: () => void;
+  t: Toast;
+  message: string;
+  onConfirm: () => void;
 }
 
 // Sign Up Types
@@ -114,10 +114,9 @@ export interface boardCardProps {
 
 export interface dropDownMenuProps {
   loading: boolean;
-  id: string;
-  handleEdit: (id: string) => void;
-  handleShare: (id: string) => void;
-  handleDelete: (id: string) => void;
+  handleEdit: () => void;
+  handleShare: () => void;
+  handleDelete: () => void;
 }
 
 export interface boardsBarProps {
@@ -141,6 +140,12 @@ export type boardModalInputsType = {
 export interface boardModalInputsProps {
   inputs: boardModalInputsType;
   setInputs: React.Dispatch<React.SetStateAction<boardModalInputsType>>;
+}
+
+export interface shareModalProps {
+  isOpen: boolean;
+  closeModal: () => void;
+  link: string;
 }
 
 // Task Types

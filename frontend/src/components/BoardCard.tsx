@@ -9,30 +9,34 @@ import { boardCardProps } from "@/types";
 import DropDownMenu from "./DropDownMenu";
 import { useTheme } from "next-themes";
 import toast from "react-hot-toast";
-import { BoardModal, Toast } from "@/components";
+import { BoardModal, ShareModal, Toast } from "@/components";
 import { deleteBoard } from "@/utils";
 import ConfirmToast from "@/components/ConfirmToast";
+import { useRouter } from "next/navigation";
 
 const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
   const { theme } = useTheme();
+  const router = useRouter();
   const [isFav, setIsFav] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [isShare, setIsShare] = useState(false);
+  const shareLink = `${window.location.origin}/boards/${board._id}`;
 
   const handleFav = () => {
     setIsFav(!isFav);
     setFavCounter(isFav ? favCounter - 1 : favCounter + 1);
   };
 
-  const handleEdit = (id: string) => {
+  const handleEdit = () => {
     setIsEdit(true);
   };
 
-  const handleShare = (id: string) => {
-    console.log("Share", id);
+  const handleShare = () => {
+    setIsShare(true);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async () => {
     toast.custom((t) => (
       <ConfirmToast
         t={t}
@@ -50,7 +54,7 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
             return;
           }
 
-          const response = await deleteBoard(token, id);
+          const response = await deleteBoard(token, board._id);
 
           toast.custom((t) => (
             <Toast
@@ -95,14 +99,14 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
           </div>
           <DropDownMenu
             loading={loading}
-            id={board._id}
-            handleEdit={() => handleEdit(board._id)}
-            handleShare={() => handleShare(board._id)}
-            handleDelete={() => handleDelete(board._id)}
+            handleEdit={() => handleEdit()}
+            handleShare={() => handleShare()}
+            handleDelete={() => handleDelete()}
           />
         </div>
       </div>
       <motion.button
+        onClick={() => router.push(`/boards/${board._id}`)}
         whileTap={{ scale: 0.9 }}
         className="group h-full flex justify-center items-center rounded-xl hover:bg-background dark:hover:bg-background-dark"
       >
@@ -126,6 +130,11 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
         closeModal={() => setIsEdit(false)}
         type="edit"
         board={board}
+      />
+      <ShareModal
+        isOpen={isShare}
+        closeModal={() => setIsShare(false)}
+        link={shareLink}
       />
     </motion.main>
   );

@@ -7,7 +7,6 @@ import {
 
 const DropDownMenu = ({
   loading,
-  id,
   handleEdit,
   handleShare,
   handleDelete,
@@ -18,7 +17,7 @@ const DropDownMenu = ({
     >
       <button
         disabled={loading}
-        onClick={() => handleEdit(id)}
+        onClick={() => handleEdit()}
         className="disabled:cursor-not-allowed flex items-center justify-start gap-2 rounded-t-md p-2 w-full h-full hover:bg-yellow-500 hover:bg-opacity-20"
       >
         <MdOutlineEdit />
@@ -26,7 +25,7 @@ const DropDownMenu = ({
       </button>
       <button
         disabled={loading}
-        onClick={() => handleShare(id)}
+        onClick={() => handleShare()}
         className="disabled:cursor-not-allowed flex items-center justify-start gap-2 p-2 w-full h-full hover:bg-blue-500 hover:bg-opacity-20"
       >
         <MdOutlineIosShare />
@@ -35,7 +34,7 @@ const DropDownMenu = ({
       <hr className="h-[0.25px] border-t-0 bg-background-dark dark:bg-background opacity-20 dark:opacity-20" />
       <button
         disabled={loading}
-        onClick={() => handleDelete(id)}
+        onClick={() => handleDelete()}
         className="disabled:cursor-not-allowed flex items-center justify-start gap-2 rounded-b-md p-2 w-full h-full hover:bg-red-500 hover:bg-opacity-20"
       >
         <MdDeleteOutline />
