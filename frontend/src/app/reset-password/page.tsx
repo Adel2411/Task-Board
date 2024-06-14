@@ -1,16 +1,23 @@
 "use client";
 
+import { Suspense, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ResetPasswordInputs, GradientDiv, Toast } from "@/components";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { postResetPassword } from "@/utils";
 import Link from "next/link";
 import { buttonVariants } from "@/animations";
 
-const ResetPassword = () => {
+// Fallback component for Suspense
+const LoadingFallback = () => (
+  <div className="w-full h-full flex justify-center items-center">
+    <span className="loading loading-spinner loading-lg"></span>
+  </div>
+);
+
+const ResetPasswordContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
@@ -25,7 +32,7 @@ const ResetPassword = () => {
 
     if (token) {
       setToken(token);
-      // LINES BELOW ARE FOR DELETE TOKEN PARAM FROM URL
+      // Optional: Remove token from URL
       // const params = new URLSearchParams(searchParams);
       // params.delete("token");
       // const newUrl = `/reset-password?${params.toString()}`;
@@ -39,31 +46,39 @@ const ResetPassword = () => {
     e.preventDefault();
     setLoading(true);
 
-    const response = await postResetPassword(token, inputs);
+    try {
+      const response = await postResetPassword(token, inputs);
 
-    if (typeof response === "string") {
-      toast.custom((t) => <Toast t={t} message={response} type="error" />);
-    } else {
-      if (!response) {
-        toast.custom((t) => (
-          <Toast
-            t={t}
-            message="An error occurred during password reset."
-            type="error"
-          />
-        ));
+      if (typeof response === "string") {
+        toast.custom((t) => <Toast t={t} message={response} type="error" />);
       } else {
-        toast.custom((t) => (
-          <Toast t={t} message="Password reset successfully" type="success" />
-        ));
-        router.push("/auth");
+        if (!response) {
+          toast.custom((t) => (
+            <Toast
+              t={t}
+              message="An error occurred during password reset."
+              type="error"
+            />
+          ));
+        } else {
+          toast.custom((t) => (
+            <Toast t={t} message="Password reset successfully" type="success" />
+          ));
+          router.push("/auth");
+        }
+        setInputs({
+          password: "",
+          confirmPassword: "",
+        });
       }
-      setInputs({
-        password: "",
-        confirmPassword: "",
-      });
+    } catch (error) {
+      console.error("Error resetting password:", error);
+      toast.custom((t) => (
+        <Toast t={t} message="An unexpected error occurred." type="error" />
+      ));
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -107,5 +122,11 @@ const ResetPassword = () => {
     </main>
   );
 };
+
+const ResetPassword = () => (
+  <Suspense fallback={<LoadingFallback />}>
+    <ResetPasswordContent />
+  </Suspense>
+);
 
 export default ResetPassword;

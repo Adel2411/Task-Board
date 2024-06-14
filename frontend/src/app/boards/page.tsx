@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BoardCard, BoardsBar, Toast } from "@/components";
 import { useAuth } from "@/hooks";
@@ -7,7 +8,14 @@ import toast from "react-hot-toast";
 import { getBoards } from "@/utils";
 import { Board } from "@/types";
 
-const Boards = () => {
+// Fallback component for Suspense
+const LoadingFallback = () => (
+  <div className="w-full h-full flex justify-center items-center">
+    <span className="loading loading-spinner loading-lg"></span>
+  </div>
+);
+
+const BoardsContent = () => {
   const [boards, setBoards] = useState<Board[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const searchParams = useSearchParams();
@@ -22,12 +30,12 @@ const Boards = () => {
         router.push("/home");
         return;
       }
-      setIsLoading(true); // Set loading state to true before fetching data
+      setIsLoading(true);
       const response: Board[] | null = await getBoards(token);
       if (response) {
         setBoards(response);
       }
-      setIsLoading(false); // Set loading state to false after fetching data
+      setIsLoading(false);
     };
 
     fetchBoards();
@@ -97,5 +105,11 @@ const Boards = () => {
     </main>
   );
 };
+
+const Boards = () => (
+  <Suspense fallback={<LoadingFallback />}>
+    <BoardsContent />
+  </Suspense>
+);
 
 export default Boards;
