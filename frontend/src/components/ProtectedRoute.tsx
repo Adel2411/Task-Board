@@ -20,11 +20,12 @@ export default function ProtectedRoute({
 
       // If token is not present or user is not authorized,
       // redirect to home except for the /auth route
-      if (!token || !isAuthorized) {
+      if (!token) {
         if (
           pathname !== "/auth" &&
           pathname !== "/forgot-password" &&
-          !pathname.startsWith("/reset-password")
+          !pathname.startsWith("/reset-password") &&
+          !pathname.startsWith("/boards/")
         ) {
           router.push("/home");
         }

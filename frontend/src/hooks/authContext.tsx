@@ -7,7 +7,7 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { checkValidToken, getUser } from "@/utils";
 import { AuthContextType, User } from "@/types";
 
@@ -17,6 +17,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const checkAuthorization = async () => {
@@ -29,13 +30,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const response = await checkValidToken(token);
       setIsAuthorized(response);
       if (response) {
-        router.push("/boards");
+        if (!pathname.startsWith("/boards/")) {
+          router.push("/boards");
+        }
         const user = await getUser(token);
         setUser(user);
       } else {
         localStorage.removeItem("token");
         setUser(null);
-        router.push("/home");
+        if (!pathname.startsWith("/boards/")) {
+          router.push("/home");
+        }
       }
     };
 
