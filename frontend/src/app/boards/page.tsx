@@ -9,6 +9,7 @@ import { Board } from "@/types";
 
 const Boards = () => {
   const [boards, setBoards] = useState<Board[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const searchParams = useSearchParams();
   const router = useRouter();
   const { user, setIsAuthorized } = useAuth();
@@ -21,10 +22,12 @@ const Boards = () => {
         router.push("/home");
         return;
       }
+      setIsLoading(true); // Set loading state to true before fetching data
       const response: Board[] | null = await getBoards(token);
       if (response) {
         setBoards(response);
       }
+      setIsLoading(false); // Set loading state to false after fetching data
     };
 
     fetchBoards();
@@ -62,14 +65,27 @@ const Boards = () => {
         />
       </div>
       <div className="p-28 h-[90%] bg-background dark:bg-background-dark shadow-[0_0_80px] shadow-background dark:shadow-background-dark grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:rounded-xl content-start place-items-center gap-y-[32px] w-full overflow-y-auto">
-        {boards.map((board) => (
-          <BoardCard
-            key={board._id}
-            board={board}
-            favCounter={favCounter}
-            setFavCounter={setFavCounter}
-          />
-        ))}
+        {isLoading ? (
+          <>
+            <div className="skeleton w-[190px] h-[238px]"></div>
+            <div className="skeleton w-[190px] h-[238px]"></div>
+            <div className="skeleton w-[190px] h-[238px]"></div>
+            <div className="skeleton w-[190px] h-[238px]"></div>
+            <div className="skeleton w-[190px] h-[238px]"></div>
+            <div className="skeleton w-[190px] h-[238px]"></div>
+            <div className="skeleton w-[190px] h-[238px]"></div>
+            <div className="skeleton w-[190px] h-[238px]"></div>
+          </>
+        ) : (
+          boards.map((board) => (
+            <BoardCard
+              key={board._id}
+              board={board}
+              favCounter={favCounter}
+              setFavCounter={setFavCounter}
+            />
+          ))
+        )}
       </div>
       <div className="flex items-start md:hidden w-full h-[10%]">
         <BoardsBar

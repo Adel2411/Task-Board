@@ -5,12 +5,20 @@ import { IoStar } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
 import { GoSignOut } from "react-icons/go";
 import { boardsBarProps } from "@/types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BoardModal } from "@/components";
 import { buttonVariants } from "@/animations";
 
 const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isUserLoading, setIsUserLoading] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      setIsUserLoading(false);
+    }
+  }, [user]);
+
   const getShortCut = (username: string | undefined) => {
     return username
       ?.split(" ")
@@ -23,40 +31,49 @@ const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
   return (
     <main className="flex justify-between items-center w-full h-fit px-5">
       <div className="h-fit flex items-center justify-center gap-3">
-        <details className="dropdown dropdown-right dropdown-top md:dropdown-bottom md:dropdown-right">
-          <summary className="list-none cursor-pointer">
-            <div className="avatar online ">
-              <div className="flex justify-center w-12 h-12 bg-background dark:bg-background-dark rounded-lg">
-                <p className="w-full h-full flex items-center justify-center">
-                  {getShortCut(user?.username)}
-                </p>
-              </div>
-            </div>
-          </summary>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{
-              opacity: 1,
-              scale: 1,
-              transition: { duration: 0.3 },
-            }}
-            className="dropdown-content rounded-md flex flex-col z-[10] bg-dropdown dark:bg-dropdown-dark w-fit"
-          >
-            <div className="flex flex-col justify-center gap-2 h-full w-full p-3 pb-8">
-              <p className="text-lg font-semibold">{user?.username}</p>
-              <p className="opacity-70 text-xs">{user?.email}</p>
-            </div>
-            <hr className="h-[0.25px] border-t-0 bg-background-dark dark:bg-background opacity-20 dark:opacity-20" />
-            <button
-              onClick={handleSignOut}
-              className="flex justify-center items-center gap-2 p-3 h-full w-full hover:bg-red-500 hover:bg-opacity-70 dark:hover:bg-red-500 dark:hover:bg-opacity-70 rounded-b-md text-sm font-semibold transition-all duration-200 ease-out"
-            >
-              <GoSignOut />
-              Sign out
-            </button>
-          </motion.div>
-        </details>
-        <p className="whitespace-nowrap">{user?.username}</p>
+        {isUserLoading ? (
+          <>
+            <div className="skeleton w-12 h-12"></div>
+            <div className="skeleton w-20 h-5"></div>
+          </>
+        ) : (
+          <>
+            <details className="dropdown dropdown-right dropdown-top md:dropdown-bottom md:dropdown-right">
+              <summary className="list-none cursor-pointer">
+                <div className="avatar online ">
+                  <div className="flex justify-center w-12 h-12 bg-background dark:bg-background-dark rounded-lg">
+                    <p className="w-full h-full flex items-center justify-center">
+                      {getShortCut(user?.username)}
+                    </p>
+                  </div>
+                </div>
+              </summary>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{
+                  opacity: 1,
+                  scale: 1,
+                  transition: { duration: 0.3 },
+                }}
+                className="dropdown-content rounded-md flex flex-col z-[10] bg-dropdown dark:bg-dropdown-dark w-fit"
+              >
+                <div className="flex flex-col justify-center gap-2 h-full w-full p-3 pb-8">
+                  <p className="text-lg font-semibold">{user?.username}</p>
+                  <p className="opacity-70 text-xs">{user?.email}</p>
+                </div>
+                <hr className="h-[0.25px] border-t-0 bg-background-dark dark:bg-background opacity-20 dark:opacity-20" />
+                <button
+                  onClick={handleSignOut}
+                  className="flex justify-center items-center gap-2 p-3 h-full w-full hover:bg-red-500 hover:bg-opacity-70 dark:hover:bg-red-500 dark:hover:bg-opacity-70 rounded-b-md text-sm font-semibold transition-all duration-200 ease-out"
+                >
+                  <GoSignOut />
+                  Sign out
+                </button>
+              </motion.div>
+            </details>
+            <p className="whitespace-nowrap">{user?.username}</p>
+          </>
+        )}
       </div>
       <div className="flex items-center gap-3 sm:gap-10 h-fit">
         <motion.button
