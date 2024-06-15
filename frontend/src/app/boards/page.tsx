@@ -70,6 +70,7 @@ const BoardsContent = () => {
           user={user}
           handleSignOut={handleSignOut}
           favCounter={favCounter}
+          setBoards={setBoards}
         />
       </div>
       <div className="p-28 h-[90%] bg-background dark:bg-background-dark shadow-[0_0_80px] shadow-background dark:shadow-background-dark grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:rounded-xl content-start place-items-center gap-y-[32px] w-full overflow-y-auto">
@@ -91,6 +92,7 @@ const BoardsContent = () => {
               board={board}
               favCounter={favCounter}
               setFavCounter={setFavCounter}
+              setBoards={setBoards}
             />
           ))
         )}
@@ -100,6 +102,7 @@ const BoardsContent = () => {
           user={user}
           handleSignOut={handleSignOut}
           favCounter={favCounter}
+          setBoards={setBoards}
         />
       </div>
     </main>
@@ -107,13 +110,13 @@ const BoardsContent = () => {
 };
 
 const Boards = () => {
-    if (typeof window !== 'undefined') {
-      return (
-          <Suspense fallback={<LoadingFallback />}>
-            <BoardsContent />
-          </Suspense>
-      );
-    }
+  if (typeof window !== "undefined") {
+    return (
+      <Suspense fallback={<LoadingFallback />}>
+        <BoardsContent />
+      </Suspense>
+    );
+  }
 };
 
 export default Boards;

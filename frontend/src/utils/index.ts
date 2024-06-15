@@ -205,7 +205,13 @@ export async function addBoard(token: string, inputs: boardModalInputsType) {
       },
       body: JSON.stringify(body),
     });
-    return response.ok;
+
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      return false;
+    }
   } catch (error) {
     console.error("Failed to add board", error);
     return false;

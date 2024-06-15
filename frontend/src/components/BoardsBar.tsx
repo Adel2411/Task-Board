@@ -9,7 +9,12 @@ import { useState, useEffect } from "react";
 import { BoardModal } from "@/components";
 import { buttonVariants } from "@/animations";
 
-const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
+const BoardsBar = ({
+  user,
+  handleSignOut,
+  favCounter,
+  setBoards,
+}: boardsBarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUserLoading, setIsUserLoading] = useState(true);
 
@@ -99,6 +104,7 @@ const BoardsBar = ({ user, handleSignOut, favCounter }: boardsBarProps) => {
         isOpen={isOpen}
         closeModal={() => setIsOpen(false)}
         type="add"
+        setBoards={setBoards}
       />
     </main>
   );

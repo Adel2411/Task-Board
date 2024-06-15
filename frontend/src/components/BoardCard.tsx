@@ -14,7 +14,12 @@ import { deleteBoard } from "@/utils";
 import ConfirmToast from "@/components/ConfirmToast";
 import { useRouter } from "next/navigation";
 
-const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
+const BoardCard = ({
+  board,
+  favCounter,
+  setFavCounter,
+  setBoards,
+}: boardCardProps) => {
   const { theme } = useTheme();
   const router = useRouter();
   const [isFav, setIsFav] = useState(false);
@@ -55,6 +60,12 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
           }
 
           const response = await deleteBoard(token, board._id);
+
+          if (response) {
+            setBoards((prevBoards) =>
+              prevBoards.filter((b) => b._id !== board._id),
+            );
+          }
 
           toast.custom((t) => (
             <Toast
@@ -129,6 +140,7 @@ const BoardCard = ({ board, favCounter, setFavCounter }: boardCardProps) => {
         isOpen={isEdit}
         closeModal={() => setIsEdit(false)}
         type="edit"
+        setBoards={setBoards}
         board={board}
       />
       <ShareModal

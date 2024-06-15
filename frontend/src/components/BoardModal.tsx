@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { boardModalProps } from "@/types";
+import { Board, boardModalProps } from "@/types";
 import BoardModalInputs from "./BoardModalInputs";
 import { IoClose, IoAdd, IoSave } from "react-icons/io5";
 import { addBoard, updateBoard } from "@/utils"; // Assuming you have an editBoard function
@@ -11,7 +11,13 @@ import toast from "react-hot-toast";
 import { Toast } from "@/components";
 import { buttonVariants } from "@/animations";
 
-const BoardModal = ({ isOpen, closeModal, type, board }: boardModalProps) => {
+const BoardModal = ({
+  isOpen,
+  closeModal,
+  type,
+  setBoards,
+  board,
+}: boardModalProps) => {
   const [inputs, setInputs] = useState({
     name: "",
     description: "",
@@ -51,11 +57,21 @@ const BoardModal = ({ isOpen, closeModal, type, board }: boardModalProps) => {
       return;
     }
 
-    let response: boolean | string;
+    let response: boolean | string | Board;
     if (type === "add") {
       response = await addBoard(token, inputs);
+
+      if (response) {
+        setBoards((prev) => [...prev, response as Board]);
+      }
     } else if (type === "edit" && board) {
       response = await updateBoard(token, board, inputs);
+
+      if (response) {
+        setBoards((prev) =>
+          prev.map((b) => (b._id === board._id ? { ...b, ...inputs } : b)),
+        );
+      }
     }
 
     toast.custom((t) => (
@@ -63,7 +79,7 @@ const BoardModal = ({ isOpen, closeModal, type, board }: boardModalProps) => {
         {typeof response === "string" && (
           <Toast type="error" message={`${response}`} t={t} />
         )}
-        {response === true ? (
+        {response ? (
           <Toast
             type="success"
             message={`${type === "add" ? "Board added" : "Board updated"} successfully`}

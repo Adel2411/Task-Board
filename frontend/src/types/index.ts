@@ -110,6 +110,7 @@ export interface boardCardProps {
   board: Board;
   favCounter: number;
   setFavCounter: React.Dispatch<React.SetStateAction<number>>;
+  setBoards: React.Dispatch<React.SetStateAction<Board[]>>;
 }
 
 export interface dropDownMenuProps {
@@ -123,12 +124,14 @@ export interface boardsBarProps {
   user: User | null;
   handleSignOut: () => void;
   favCounter: number;
+  setBoards: React.Dispatch<React.SetStateAction<Board[]>>;
 }
 
 export interface boardModalProps {
   isOpen: boolean;
   closeModal: () => void;
   type: "add" | "edit";
+  setBoards: React.Dispatch<React.SetStateAction<Board[]>>;
   board?: Board;
 }
 
