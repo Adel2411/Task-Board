@@ -76,14 +76,14 @@ const BoardsContent = () => {
       <div className="p-28 h-[90%] bg-background dark:bg-background-dark shadow-[0_0_80px] shadow-background dark:shadow-background-dark grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:rounded-xl content-start place-items-center gap-y-[32px] w-full overflow-y-auto">
         {isLoading ? (
           <>
-            <div className="skeleton w-[190px] h-[238px]"></div>
-            <div className="skeleton w-[190px] h-[238px]"></div>
-            <div className="skeleton w-[190px] h-[238px]"></div>
-            <div className="skeleton w-[190px] h-[238px]"></div>
-            <div className="skeleton w-[190px] h-[238px]"></div>
-            <div className="skeleton w-[190px] h-[238px]"></div>
-            <div className="skeleton w-[190px] h-[238px]"></div>
-            <div className="skeleton w-[190px] h-[238px]"></div>
+            <div className="skeleton w-[190px] h-[238px] bg-gray-300 dark:bg-gray-800"></div>
+            <div className="skeleton w-[190px] h-[238px] bg-gray-300 dark:bg-gray-800"></div>
+            <div className="skeleton w-[190px] h-[238px] bg-gray-300 dark:bg-gray-800"></div>
+            <div className="skeleton w-[190px] h-[238px] bg-gray-300 dark:bg-gray-800"></div>
+            <div className="skeleton w-[190px] h-[238px] bg-gray-300 dark:bg-gray-800"></div>
+            <div className="skeleton w-[190px] h-[238px] bg-gray-300 dark:bg-gray-800"></div>
+            <div className="skeleton w-[190px] h-[238px] bg-gray-300 dark:bg-gray-800"></div>
+            <div className="skeleton w-[190px] h-[238px] bg-gray-300 dark:bg-gray-800"></div>
           </>
         ) : (
           boards.map((board) => (

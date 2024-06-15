@@ -38,8 +38,8 @@ const BoardsBar = ({
       <div className="h-fit flex items-center justify-center gap-3">
         {isUserLoading ? (
           <>
-            <div className="skeleton w-12 h-12"></div>
-            <div className="skeleton w-20 h-5"></div>
+            <div className="skeleton w-12 h-12 bg-gray-300 dark:bg-gray-800"></div>
+            <div className="skeleton w-20 h-5 bg-gray-300 dark:bg-gray-800"></div>
           </>
         ) : (
           <>
