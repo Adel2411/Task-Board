@@ -7,6 +7,7 @@ import {
   forgotPasswordInputsType,
   boardModalInputsType,
   Board,
+  Task,
 } from "@/types";
 
 export async function postRegister(inputs: signUpInputsType) {
@@ -311,5 +312,64 @@ export async function getPublicBoard(id: string) {
   } catch (error) {
     console.error("Failed to get board", error);
     return null;
+  }
+}
+
+export async function addTask(token: string, id: string, task: Task) {
+  const body = { ...task, boardId: id };
+
+  try {
+    const response = await fetch(`${process.env.CURRENT_URL}/tasks/add`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    return response.ok;
+  } catch (error) {
+    console.error("Failed to add task", error);
+    return false;
+  }
+}
+
+export async function updateTask(token: string, task: Task) {
+  const body = { ...task };
+  try {
+    const response = await fetch(
+      `${process.env.CURRENT_URL}/tasks/update/${task._id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      },
+    );
+    return response.ok;
+  } catch (error) {
+    console.error("Failed to update task", error);
+    return false;
+  }
+}
+
+export async function deleteTask(token: string, id: string) {
+  try {
+    const response = await fetch(
+      `${process.env.CURRENT_URL}/tasks/delete/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    return response.ok;
+  } catch (error) {
+    console.error("Failed to delete task", error);
+    return false;
   }
 }

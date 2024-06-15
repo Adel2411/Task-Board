@@ -154,7 +154,8 @@ export interface shareModalProps {
 // Task Types
 export type Task = {
   _id: string;
-  name: string;
+  title: string;
   description: string;
-  status: string;
+  taskIconName?: string;
+  statusId?: number;
 };
