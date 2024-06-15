@@ -28,12 +28,6 @@ const config: Config = {
           dark: "#231E1B",
         },
 
-        // Inactive button color
-        inactive_button: {
-          DEFAULT: "#D1D5DB",
-          dark: "#4B5563",
-        },
-
         // Background for theme switcher
         switch_bg: {
           DEFAULT: "#F1F3F9",

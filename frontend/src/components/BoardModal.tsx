@@ -61,16 +61,20 @@ const BoardModal = ({
     if (type === "add") {
       response = await addBoard(token, inputs);
 
-      if (response) {
+      if (typeof response === "object" && response) {
         setBoards((prev) => [...prev, response as Board]);
+        setInputs({ name: "", description: "" });
+        closeModal();
       }
     } else if (type === "edit" && board) {
       response = await updateBoard(token, board, inputs);
 
-      if (response) {
+      if (response === true) {
         setBoards((prev) =>
           prev.map((b) => (b._id === board._id ? { ...b, ...inputs } : b)),
         );
+        setInputs({ name: "", description: "" });
+        closeModal();
       }
     }
 
@@ -79,7 +83,8 @@ const BoardModal = ({
         {typeof response === "string" && (
           <Toast type="error" message={`${response}`} t={t} />
         )}
-        {response ? (
+        {(typeof response === "object" && type === "add" && response) ||
+        (type === "edit" && response === true) ? (
           <Toast
             type="success"
             message={`${type === "add" ? "Board added" : "Board updated"} successfully`}
@@ -98,8 +103,6 @@ const BoardModal = ({
     ));
 
     setLoading(false);
-    setInputs({ name: "", description: "" });
-    closeModal();
   };
 
   const modalContent = (
