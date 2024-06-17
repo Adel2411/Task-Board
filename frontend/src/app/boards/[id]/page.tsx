@@ -44,14 +44,6 @@ const BoardTasks = () => {
     fetchBoard();
   }, [id]);
 
-  useEffect(() => {
-    if (board && isOwner) {
-      console.log("Owner", isOwner);
-    } else if (board && !isOwner) {
-      console.log("not Owner", isOwner);
-    }
-  }, [board, isOwner]);
-
   return (
     <main className="w-full h-full flex flex-col justify-center items-center">
       {loading ? (
@@ -73,7 +65,7 @@ const BoardTasks = () => {
             </Link>
           </motion.div>
           <div className="w-[80%] md:w-[60%] mt-16 h-fit flex flex-col gap-3">
-            <h1 className="w-full text-center text-xl sm:text-2xl lg:text-3xl">
+            <h1 className="font-semibold w-full text-center text-xl sm:text-2xl lg:text-3xl">
               {board?.name}
             </h1>
             <p className="w-full text-center opacity-50">
@@ -81,11 +73,14 @@ const BoardTasks = () => {
             </p>
           </div>
           <div className="w-full h-full"></div>
-          <motion.div className="text-xs md:text-sm fixed bottom-14 right-14 p-4 rounded-xl bg-primary dark:bg-primary-dark">
-            <button>
-              <IoAdd size={30} />
-            </button>
-          </motion.div>
+          <motion.button
+            variants={buttonVariants}
+            whileHover="hover"
+            whileTap="tap"
+            className="text-xs md:text-sm fixed bottom-14 right-14 p-4 rounded-xl bg-primary dark:bg-primary-dark"
+          >
+            <IoAdd size={30} />
+          </motion.button>
         </>
       )}
     </main>
