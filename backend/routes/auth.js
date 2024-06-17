@@ -289,4 +289,22 @@ router.post("/reset-password", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+
+router.get('/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+router.get('/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  async (req, res) => {
+    try {
+      const user = req.user;
+      const authToken = user.generateAuthToken();
+      res.redirect(`${process.env.FRONTEND_HOST}/boards?token=${authToken}`);
+    } catch (err) {
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+);
 module.exports = router;
