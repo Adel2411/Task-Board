@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const User = require("../models/User");
 const { v4: uuidv4 } = require("uuid");
 const nodemailer = require("nodemailer");
+const passport = require('passport');
 
 dotenv.config();
 const router = express.Router();
