@@ -5,8 +5,8 @@ const dotenv = require("dotenv");
 const User = require("../models/User");
 const { v4: uuidv4 } = require("uuid");
 const nodemailer = require("nodemailer");
-const passport = require('passport');
-
+const passport = require("passport");
+require("../config/passport-setup");
 dotenv.config();
 const router = express.Router();
 
@@ -49,6 +49,10 @@ let transporter = nodemailer.createTransport({
 
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
+
+  if (!username || !email || !password)
+    return res.status(400).json({ message: "All fields are required" });
+
   try {
     let user = await User.findOne({ $or: [{ email }, { username }] });
 
@@ -85,7 +89,8 @@ router.get("/confirm/:token", async (req, res) => {
   const token = req.params.token;
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_EMAIL_CONFIRM);
-    if (decoded.type !== 'email-confirmation') return res.status(400).json({ message: "Invalid token" });
+    if (decoded.type !== "email-confirmation")
+      return res.status(400).json({ message: "Invalid token" });
     const user = await User.findById(decoded._id);
     if (!user) return res.status(404).json({ message: "User not found" });
 
@@ -125,7 +130,7 @@ router.get("/confirm/:token", async (req, res) => {
  *              token:
  *               type: string
  *               example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-*       400:
+ *       400:
  *         description: Invalid credentials or User not confirmed
  *         content:
  *           application/json:
@@ -144,12 +149,17 @@ router.get("/confirm/:token", async (req, res) => {
  */
 router.post("/login", async (req, res) => {
   const { auth_identifier, password } = req.body;
+
+  if (!auth_identifier || !password)
+    return res.status(400).json({ message: "All fields are required" });
+
   try {
     const user = await User.findOne({
       $or: [{ email: auth_identifier }, { username: auth_identifier }],
     });
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
-    if (!user.confirmed) return res.status(400).json({ message: "User not confirmed" });
+    if (!user.confirmed)
+      return res.status(400).json({ message: "User not confirmed" });
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials" });
@@ -166,7 +176,7 @@ router.post("/login", async (req, res) => {
  * /auth/request-password-reset:
  *   post:
  *     summary: request password reset link via email
- *     tags: 
+ *     tags:
  *        - Password Reset
  *     requestBody:
  *       required: true
@@ -193,7 +203,8 @@ router.post("/request-password-reset", async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "User not found" });
-    if (!user.confirmed) return res.status(400).json({ message: "User not confirmed" });
+    if (!user.confirmed)
+      return res.status(400).json({ message: "User not confirmed" });
 
     // send email with reset password link
     const resetToken = user.generateResetToken();
@@ -208,7 +219,6 @@ router.post("/request-password-reset", async (req, res) => {
     res.status(201).json({
       message: "Password reset link sent successfully. Please check your email",
     });
-
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -219,10 +229,10 @@ router.get("/validate-reset-token/:token", async (req, res) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_PASSWORD_RESET);
     console.log(`decoded type : ${decoded.type}`);
-    if (decoded.type !== 'password-reset') {
+    if (decoded.type !== "password-reset") {
       return res.status(400).json({ message: "Invalid token" });
     }
-    res.redirect(`${process.env.FRONTEND_HOST}/reset-password?token=${token}`); // Redirect to reset password page 
+    res.redirect(`${process.env.FRONTEND_HOST}/reset-password?token=${token}`); // Redirect to reset password page
   } catch (error) {
     console.log("error", error.message);
     res.status(400).json({ message: "Invalid token" });
@@ -277,11 +287,13 @@ router.post("/reset-password", async (req, res) => {
   const { password, token } = req.body;
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_PASSWORD_RESET);
-    if (decoded.type !== 'password-reset') return res.status(400).json({ message: "Invalid token" });
+    if (decoded.type !== "password-reset")
+      return res.status(400).json({ message: "Invalid token" });
 
     const user = await User.findById(decoded._id);
     if (!user) return res.status(404).json({ message: "User not found" });
-    if (!user.confirmed) return res.status(400).json({ message: "User not confirmed" });
+    if (!user.confirmed)
+      return res.status(400).json({ message: "User not confirmed" });
     const hashedPassword = await bcrypt.hash(password, 10); // Hash password
     user.password = hashedPassword;
     await user.save();
@@ -291,21 +303,22 @@ router.post("/reset-password", async (req, res) => {
   }
 });
 
-
-router.get('/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] }),
 );
 
-router.get('/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
   async (req, res) => {
     try {
       const user = req.user;
       const authToken = user.generateAuthToken();
       res.redirect(`${process.env.FRONTEND_HOST}/boards?token=${authToken}`);
     } catch (err) {
-      res.status(500).json({ message: 'Internal Server Error' });
+      res.status(500).json({ message: "Internal Server Error" });
     }
-  }
+  },
 );
 module.exports = router;
