@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   _id: { type: String, default: uuidv4() }, // Setting _id to use UUID
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  password: { type: String, default: null },
   confirmed: { type: Boolean, default: false }, // Flag to track email confirmation
   googleId: { type: String, default: null },
 });
@@ -19,11 +19,13 @@ userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     {
       _id: user._id,
-      type: 'auth'
+      type: "auth",
     },
-    process.env.JWT_SECRET_AUTH, {
-    expiresIn: "24h",
-  });
+    process.env.JWT_SECRET_AUTH,
+    {
+      expiresIn: "24h",
+    },
+  );
   return token;
 };
 
@@ -33,10 +35,13 @@ userSchema.methods.generateConfirmationToken = function () {
   const token = jwt.sign(
     {
       _id: user._id,
-      type: 'email-confirmation'
-    }, process.env.JWT_SECRET_EMAIL_CONFIRM, {
-    expiresIn: "24h",
-  });
+      type: "email-confirmation",
+    },
+    process.env.JWT_SECRET_EMAIL_CONFIRM,
+    {
+      expiresIn: "24h",
+    },
+  );
 
   return token;
 };
@@ -47,11 +52,13 @@ userSchema.methods.generateResetToken = function () {
   const token = jwt.sign(
     {
       _id: user._id,
-      type: 'password-reset'
+      type: "password-reset",
     },
-    process.env.JWT_SECRET_PASSWORD_RESET, {
-    expiresIn: "1h",
-  });
+    process.env.JWT_SECRET_PASSWORD_RESET,
+    {
+      expiresIn: "1h",
+    },
+  );
   return token;
 };
 
