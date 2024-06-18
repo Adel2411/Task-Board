@@ -10,6 +10,9 @@ const boardRoutes = require("./routes/board");
 const userRoutes = require("./routes/user");
 const taskRoutes = require("./routes/task");
 const statusRoutes = require("./routes/status");
+const session = require("express-session");
+const passport = require("passport");
+require("./config/passport-setup"); // Ensure this line is present and correct
 
 const option = {
   definition: {
@@ -49,6 +52,18 @@ mongoose
   })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error(err));
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, // Set to true if using HTTPS
+  }),
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(`/api/v1/auth`, authRoutes);
