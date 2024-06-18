@@ -159,3 +159,11 @@ export type Task = {
   taskIconName?: string;
   statusId?: number;
 };
+
+export interface tasksProps {
+  tasks: Task[];
+}
+
+export interface taskCardProps {
+  task: Task;
+}

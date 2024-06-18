@@ -17,6 +17,8 @@ import DropDownMenu from "./DropDownMenu";
 import BoardModal from "./BoardModal";
 import BoardModalInputs from "./BoardModalInputs";
 import ShareModal from "./ShareModal";
+import Tasks from "./Tasks";
+import TaskCard from "./TaskCard";
 
 export {
   DarkModeSwitch,
@@ -38,4 +40,6 @@ export {
   BoardModal,
   BoardModalInputs,
   ShareModal,
+  Tasks,
+  TaskCard,
 };

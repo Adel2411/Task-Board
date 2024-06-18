@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Board } from "@/types";
+import { Board, Task } from "@/types";
 import { getBoard, getPublicBoard } from "@/utils";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -9,12 +9,40 @@ import { useEffect, useState } from "react";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { IoAdd } from "react-icons/io5";
 import { buttonVariants } from "@/animations";
+import { Tasks } from "@/components";
 
 const BoardTasks = () => {
   const { id }: { id: string } = useParams();
   const [isOwner, setIsOwner] = useState(false);
   const [board, setBoard] = useState<Board | null>(null);
   const [loading, setLoading] = useState(true);
+  const [tasks, setTasks] = useState<Task[]>([
+    {
+      _id: "1",
+      title: "Task 1",
+      description: "Task 1 description",
+    },
+    {
+      _id: "2",
+      title: "Task 2",
+      description: "Task 2 description",
+    },
+    {
+      _id: "3",
+      title: "Task 3",
+      description: "Task 3 description",
+    },
+    {
+      _id: "4",
+      title: "Task 4",
+      description: "Task 4 description",
+    },
+    {
+      _id: "5",
+      title: "Task 5",
+      description: "Task 5 description",
+    },
+  ]);
 
   useEffect(() => {
     const fetchBoard = async () => {
@@ -50,20 +78,6 @@ const BoardTasks = () => {
         <div className="loading loading-spinner loading-lg"></div>
       ) : (
         <>
-          <motion.div
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            className="text-xs md:text-sm fixed top-4 left-4 px-4 py-2 rounded-xl bg-white dark:bg-black"
-          >
-            <Link
-              href="/boards"
-              className="w-full h-full flex items-center justify-center gap-2"
-            >
-              <RiArrowGoBackFill />
-              Go back to boards
-            </Link>
-          </motion.div>
           <div className="w-[80%] md:w-[60%] mt-16 h-fit flex flex-col gap-3">
             <h1 className="font-semibold w-full text-center text-xl sm:text-2xl lg:text-3xl">
               {board?.name}
@@ -72,15 +86,35 @@ const BoardTasks = () => {
               {board?.description}
             </p>
           </div>
-          <div className="w-full h-full"></div>
-          <motion.button
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            className="text-xs md:text-sm fixed bottom-14 right-14 p-4 rounded-xl bg-primary dark:bg-primary-dark"
-          >
-            <IoAdd size={30} />
-          </motion.button>
+          <div className="w-full h-full">
+            <Tasks tasks={tasks} />
+          </div>
+          {isOwner && (
+            <>
+              <motion.div
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                className="text-xs md:text-sm fixed top-4 left-4 px-4 py-2 rounded-xl bg-white dark:bg-black"
+              >
+                <Link
+                  href="/boards"
+                  className="w-full h-full flex items-center justify-center gap-2"
+                >
+                  <RiArrowGoBackFill />
+                  Go back to boards
+                </Link>
+              </motion.div>
+              <motion.button
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                className="text-xs md:text-sm fixed bottom-14 right-14 p-4 rounded-xl bg-primary dark:bg-primary-dark"
+              >
+                <IoAdd size={30} />
+              </motion.button>
+            </>
+          )}
         </>
       )}
     </main>
