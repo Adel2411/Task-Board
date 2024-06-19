@@ -57,6 +57,10 @@ const Signup = ({ loading, setLoading }: loadingProps) => {
     setLoading(false);
   };
 
+  const handleGoogleSignIn = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_CURRENT_URL}/auth/google`;
+  };
+
   return (
     <main className="w-full h-full flex flex-col justify-evenly items-center md:px-9">
       <div>
@@ -75,7 +79,10 @@ const Signup = ({ loading, setLoading }: loadingProps) => {
           whileHover={loading ? { scale: 1 } : "hover"}
           whileTap={loading ? { scale: 1 } : "tap"}
           disabled={loading}
-          className={`w-full h-10 text-sm font-semibold bg-background-dark dark:bg-background text-background dark:text-background-dark rounded-l-full rounded-r-full ${loading && "flex justify-center items-center gap-5 bg-opacity-25 dark:bg-opacity-25 cursor-not-allowed"}`}
+          className={`w-full h-10 text-sm font-semibold bg-background-dark dark:bg-background text-background dark:text-background-dark rounded-l-full rounded-r-full ${
+            loading &&
+            "flex justify-center items-center gap-5 bg-opacity-25 dark:bg-opacity-25 cursor-not-allowed"
+          }`}
         >
           {loading && (
             <span className="loading loading-spinner loading-xs"></span>
@@ -84,13 +91,18 @@ const Signup = ({ loading, setLoading }: loadingProps) => {
         </motion.button>
       </form>
       <div
-        className={`divider ${theme === "dark" ? "divider-error" : "divider-accent"} opacity-50`}
+        className={`divider ${
+          theme === "dark" ? "divider-error" : "divider-accent"
+        } opacity-50`}
       >
         OR
       </div>
       <div className="w-full flex justify-center">
         <button
-          className={`btn btn-ghost w-full ${!loading && "hover:bg-gray-300 dark:hover:bg-gray-700"}`}
+          onClick={handleGoogleSignIn}
+          className={`btn btn-ghost w-full ${
+            !loading && "hover:bg-gray-300 dark:hover:bg-gray-700"
+          }`}
           disabled={loading}
         >
           <FaGoogle />

@@ -30,7 +30,7 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
       // Successful Sign in
       localStorage.setItem("token", response.token);
       toast.custom((t) => (
-        <Toast t={t} message="Successfuly Signed in" type="success" />
+        <Toast t={t} message="Successfully Signed in" type="success" />
       ));
       setInputs({
         auth_identifier: "",
@@ -52,6 +52,10 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
     }
 
     setLoading(false);
+  };
+
+  const handleGoogleSignIn = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_CURRENT_URL}/auth/google`;
   };
 
   return (
@@ -86,7 +90,7 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
           className={`${loading ? "pointer-events-none opacity-60" : "link link-hover link-accent dark:link-error"} text-sm`}
           aria-disabled={loading}
         >
-          Forgot password ?
+          Forgot password?
         </Link>
       </div>
       <div
@@ -96,6 +100,7 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
       </div>
       <div className="w-full flex justify-center">
         <button
+          onClick={handleGoogleSignIn}
           className={`btn btn-ghost w-full ${!loading && "hover:bg-gray-300 dark:hover:bg-gray-700"}`}
           disabled={loading}
         >
