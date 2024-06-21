@@ -22,28 +22,42 @@ const BoardTasks = () => {
       _id: "1",
       title: "Task 1",
       description: "Task 1 description",
-      taskIconName: "taskIconName",
+      taskIconName: "sad",
       statusId: 0,
     },
     {
       _id: "2",
       title: "Task 2",
       description: "Task 2 description",
-      taskIconName: "taskIconName",
+      taskIconName: "happy",
       statusId: 1,
     },
     {
       _id: "3",
       title: "Task 3",
       description: "Task 3 description",
-      taskIconName: "taskIconName",
-      statusId: 2,
+      taskIconName: "neutral",
+      statusId: 3,
     },
     {
       _id: "4",
       title: "Task 4",
       description: "Task 4 description",
-      taskIconName: "taskIconName",
+      taskIconName: "angry",
+      statusId: 2,
+    },
+    {
+      _id: "5",
+      title: "Task 5",
+      description: "Task 5 description",
+      taskIconName: "sad",
+      statusId: 1,
+    },
+    {
+      _id: "6",
+      title: "Task 6",
+      description: "Task 6 description",
+      taskIconName: "angry",
       statusId: 3,
     },
   ]);
@@ -123,7 +137,7 @@ const BoardTasks = () => {
                 closeModal={() => setIsOpen(false)}
                 type="add"
                 setTasks={setTasks}
-                id={board?._id || ""}
+                id={board?._id}
               />
             </>
           )}

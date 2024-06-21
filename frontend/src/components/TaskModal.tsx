@@ -3,12 +3,11 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { Task, taskModalProps } from "@/types";
-// import TaskModalInputs from "./TaskModalInputs";
+import { Task, taskModalInputsType, taskModalProps } from "@/types";
 import { IoClose, IoAdd, IoSave } from "react-icons/io5";
 import { addTask, updateTask } from "@/utils";
 import toast from "react-hot-toast";
-import { Toast } from "@/components";
+import { TaskModalInputs, Toast } from "@/components";
 import { buttonVariants } from "@/animations";
 
 const TaskModal = ({
@@ -19,10 +18,10 @@ const TaskModal = ({
   id,
   task,
 }: taskModalProps) => {
-  const [inputs, setInputs] = useState({
+  const [inputs, setInputs] = useState<taskModalInputsType>({
     title: "",
     description: "",
-    taskIconName: "",
+    taskIconName: "neutral",
     statusId: 0,
   });
   const [loading, setLoading] = useState(false);
@@ -45,83 +44,83 @@ const TaskModal = ({
   };
 
   const modalVariants = {
-    hidden: { y: 450 },
+    hidden: { y: 650 },
     visible: {
       opacity: 1,
       y: 0,
       transition: { duration: 1.5, type: "spring" },
     },
-    exit: { y: 450, transition: { duration: 1, type: "spring" } },
+    exit: { y: 650, transition: { duration: 0.8, type: "spring" } },
   };
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //
-  //   const token = localStorage.getItem("token");
-  //   if (!token) {
-  //     console.error("Token not found");
-  //     setLoading(false);
-  //     return;
-  //   }
-  //
-  //   let response: boolean | string | Task;
-  //   if (type === "add") {
-  //     response = await addTask(token, id, inputs);
-  //
-  //     if (typeof response === "object" && response) {
-  //       setTasks((prev) => [...prev, response as Task]);
-  //       setInputs({
-  //         title: "",
-  //         description: "",
-  //         taskIconName: "",
-  //         statusId: 0,
-  //       });
-  //       closeModal();
-  //     }
-  //   } else if (type === "edit" && task) {
-  //     response = await updateTask(token, task._id, inputs);
-  //
-  //     if (response === true) {
-  //       setTasks((prev) =>
-  //         prev.map((t) => (t._id === task._id ? { ...t, ...inputs } : t)),
-  //       );
-  //       setInputs({
-  //         title: "",
-  //         description: "",
-  //         taskIconName: "",
-  //         statusId: 0,
-  //       });
-  //       closeModal();
-  //     }
-  //   }
-  //
-  //   toast.custom((t) => (
-  //     <>
-  //       {typeof response === "string" && (
-  //         <Toast type="error" message={`${response}`} t={t} />
-  //       )}
-  //       {(typeof response === "object" && type === "add" && response) ||
-  //       (type === "edit" && response === true) ? (
-  //         <Toast
-  //           type="success"
-  //           message={`${type === "add" ? "Task added" : "Task updated"} successfully`}
-  //           t={t}
-  //         />
-  //       ) : (
-  //         response === false && (
-  //           <Toast
-  //             type="error"
-  //             message={`Error occurred when ${type === "add" ? "adding" : "updating"} the board`}
-  //             t={t}
-  //           />
-  //         )
-  //       )}
-  //     </>
-  //   ));
-  //
-  //   setLoading(false);
-  // };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("Token not found");
+      setLoading(false);
+      return;
+    }
+
+    let response: boolean | string | Task;
+    if (type === "add") {
+      response = await addTask(token, id as string, inputs);
+
+      if (typeof response === "object" && response) {
+        setTasks((prev) => [...prev, response as Task]);
+        setInputs({
+          title: "",
+          description: "",
+          taskIconName: "neutral",
+          statusId: 0,
+        });
+        closeModal();
+      }
+    } else if (type === "edit" && task) {
+      response = await updateTask(token, task._id, inputs);
+
+      if (response === true) {
+        setTasks((prev) =>
+          prev.map((t) => (t._id === task._id ? { ...t, ...inputs } : t)),
+        );
+        setInputs({
+          title: "",
+          description: "",
+          taskIconName: "neutral",
+          statusId: 0,
+        });
+        closeModal();
+      }
+    }
+
+    toast.custom((t) => (
+      <>
+        {typeof response === "string" && (
+          <Toast type="error" message={`${response}`} t={t} />
+        )}
+        {(typeof response === "object" && type === "add" && response) ||
+        (type === "edit" && response === true) ? (
+          <Toast
+            type="success"
+            message={`${type === "add" ? "Task added" : "Task updated"} successfully`}
+            t={t}
+          />
+        ) : (
+          response === false && (
+            <Toast
+              type="error"
+              message={`Error occurred when ${type === "add" ? "adding" : "updating"} the board`}
+              t={t}
+            />
+          )
+        )}
+      </>
+    ));
+
+    setLoading(false);
+  };
 
   const modalContent = (
     <AnimatePresence>
@@ -136,7 +135,7 @@ const TaskModal = ({
             onClick={closeModal}
           />
           <motion.div
-            className={`fixed bottom-0 z-10 flex flex-col justify-center gap-8 bg-background dark:bg-background-dark rounded-lg p-6 sm:w-2/3 md:w-1/2 lg:w-1/3 shadow-lg`}
+            className={`fixed bottom-0 z-10 flex flex-col justify-center gap-8 bg-background dark:bg-background-dark rounded-lg p-6 h-fit sm:w-2/3 md:w-1/2 lg:w-1/3 shadow-lg`}
             initial="hidden"
             animate="visible"
             exit="exit"
@@ -155,22 +154,22 @@ const TaskModal = ({
               <IoClose size={20} className="text-black dark:text-white" />
             </motion.button>
             <form
-              // onSubmit={handleSubmit}
-              className="flex flex-col justify-center gap-4"
+              onSubmit={handleSubmit}
+              className="flex flex-col justify-center gap-6"
             >
-              {/* <TaskModalInputs inputs={inputs} setInputs={setInputs} /> */}
-              <div className="flex justify-between">
-                <motion.button
-                  variants={buttonVariants}
-                  whileHover="hover"
-                  whileTap="tap"
-                  disabled={loading}
-                  type="button"
-                  onClick={closeModal}
-                  className="disabled:cursor-not-allowed disabled:opacity-40 text-sm px-4 py-2 hover:bg-black hover:bg-opacity-10 dark:hover:bg-white dark:hover:bg-opacity-10 rounded-md"
-                >
-                  Close
-                </motion.button>
+              <TaskModalInputs inputs={inputs} setInputs={setInputs} />
+              <div className="flex justify-end">
+                {/* <motion.button */}
+                {/*   variants={buttonVariants} */}
+                {/*   whileHover="hover" */}
+                {/*   whileTap="tap" */}
+                {/*   disabled={loading} */}
+                {/*   type="button" */}
+                {/*   onClick={closeModal} */}
+                {/*   className="disabled:cursor-not-allowed disabled:opacity-40 text-sm px-4 py-2 hover:bg-black hover:bg-opacity-10 dark:hover:bg-white dark:hover:bg-opacity-10 rounded-md" */}
+                {/* > */}
+                {/*   Close */}
+                {/* </motion.button> */}
                 <motion.button
                   variants={buttonVariants}
                   whileHover="hover"

@@ -20,6 +20,7 @@ import ShareModal from "./ShareModal";
 import Tasks from "./Tasks";
 import TaskCard from "./TaskCard";
 import TaskModal from "./TaskModal";
+import TaskModalInputs from "./TaskModalInputs";
 
 export {
   DarkModeSwitch,
@@ -44,4 +45,5 @@ export {
   Tasks,
   TaskCard,
   TaskModal,
+  TaskModalInputs,
 };

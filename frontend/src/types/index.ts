@@ -156,7 +156,7 @@ export type Task = {
   _id: string;
   title: string;
   description: string;
-  taskIconName: string | "";
+  taskIconName: "sad" | "happy" | "neutral" | "angry";
   statusId: number | 0;
 };
 
@@ -182,7 +182,7 @@ export interface taskModalProps {
 export type taskModalInputsType = {
   title: string;
   description: string;
-  taskIconName: string | "";
+  taskIconName: "sad" | "happy" | "neutral" | "angry";
   statusId: number | 0;
 };
 
