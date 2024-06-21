@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const User = require("../models/User");
-const { v4: uuidv4 } = require("uuid");
+const board_controller = require("../controller/board_controller");
 const nodemailer = require("nodemailer");
 const passport = require("passport");
 require("../config/passport-setup");
@@ -65,6 +65,9 @@ router.post("/register", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10); // Hash password
     user = new User({ username, email, password: hashedPassword }); // Save hashed password
     await user.save();
+
+    // create a default board with 4 tasks when a user is created
+    await board_controller.createDefaultBoard(user._id);
 
     // Send email confirmation
     const confirmationToken = user.generateConfirmationToken(); // Ensure this method exists in your User model

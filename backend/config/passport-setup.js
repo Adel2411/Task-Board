@@ -1,7 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/User");
-
+const board_controller = require("../controller/board_controller");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -28,6 +28,9 @@ passport.use(
         });
 
         await user.save();
+
+        await board_controller.createDefaultBoard(user._id);
+
         return done(null, user);
       } catch (error) {
         return done(error, null);
