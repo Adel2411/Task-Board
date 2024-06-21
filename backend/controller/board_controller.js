@@ -15,18 +15,22 @@ exports.createDefaultBoard = async (userId) => {
     {
       title: "Task in Progress",
       board: board._id,
+      status: 1
     },
     {
       title: "Task Completed",
       board: board._id,
+      status: 3
     },
     {
       title: "Task Won't Do",
       board: board._id,
+      status: 2
     },
     {
       title: "Task To Do",
       board: board._id,
+      status: 0
     },
   ];
   await Task.insertMany(tasks);
