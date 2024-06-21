@@ -156,14 +156,37 @@ export type Task = {
   _id: string;
   title: string;
   description: string;
-  taskIconName?: string;
-  statusId?: number;
+  taskIconName: string | "";
+  statusId: number | 0;
 };
 
 export interface tasksProps {
   tasks: Task[];
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
 export interface taskCardProps {
   task: Task;
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+}
+
+export interface taskModalProps {
+  isOpen: boolean;
+  closeModal: () => void;
+  type: "add" | "edit";
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  id?: string;
+  task?: Task;
+}
+
+export type taskModalInputsType = {
+  title: string;
+  description: string;
+  taskIconName: string | "";
+  statusId: number | 0;
+};
+
+export interface taskModalInputsProps {
+  inputs: taskModalInputsType;
+  setInputs: React.Dispatch<React.SetStateAction<taskModalInputsType>>;
 }

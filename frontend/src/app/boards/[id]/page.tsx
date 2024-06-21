@@ -9,9 +9,10 @@ import { useEffect, useState } from "react";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { IoAdd } from "react-icons/io5";
 import { buttonVariants } from "@/animations";
-import { Tasks } from "@/components";
+import { TaskModal, Tasks } from "@/components";
 
 const BoardTasks = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const { id }: { id: string } = useParams();
   const [isOwner, setIsOwner] = useState(false);
   const [board, setBoard] = useState<Board | null>(null);
@@ -21,26 +22,29 @@ const BoardTasks = () => {
       _id: "1",
       title: "Task 1",
       description: "Task 1 description",
+      taskIconName: "taskIconName",
+      statusId: 0,
     },
     {
       _id: "2",
       title: "Task 2",
       description: "Task 2 description",
+      taskIconName: "taskIconName",
+      statusId: 1,
     },
     {
       _id: "3",
       title: "Task 3",
       description: "Task 3 description",
+      taskIconName: "taskIconName",
+      statusId: 2,
     },
     {
       _id: "4",
       title: "Task 4",
       description: "Task 4 description",
-    },
-    {
-      _id: "5",
-      title: "Task 5",
-      description: "Task 5 description",
+      taskIconName: "taskIconName",
+      statusId: 3,
     },
   ]);
 
@@ -86,8 +90,8 @@ const BoardTasks = () => {
               {board?.description}
             </p>
           </div>
-          <div className="w-full h-full">
-            <Tasks tasks={tasks} />
+          <div className="w-full h-full flex items-center justify-center">
+            <Tasks tasks={tasks} setTasks={setTasks} />
           </div>
           {isOwner && (
             <>
@@ -110,9 +114,17 @@ const BoardTasks = () => {
                 whileHover="hover"
                 whileTap="tap"
                 className="text-xs md:text-sm fixed bottom-14 right-14 p-4 rounded-xl bg-primary dark:bg-primary-dark"
+                onClick={() => setIsOpen(true)}
               >
                 <IoAdd size={30} />
               </motion.button>
+              <TaskModal
+                isOpen={isOpen}
+                closeModal={() => setIsOpen(false)}
+                type="add"
+                setTasks={setTasks}
+                id={board?._id || ""}
+              />
             </>
           )}
         </>

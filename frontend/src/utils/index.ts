@@ -7,7 +7,7 @@ import {
   forgotPasswordInputsType,
   boardModalInputsType,
   Board,
-  Task,
+  taskModalInputsType,
 } from "@/types";
 
 export async function postRegister(inputs: signUpInputsType) {
@@ -315,8 +315,12 @@ export async function getPublicBoard(id: string) {
   }
 }
 
-export async function addTask(token: string, id: string, task: Task) {
-  const body = { ...task, boardId: id };
+export async function addTask(
+  token: string,
+  id: string,
+  inputs: taskModalInputsType,
+) {
+  const body = { ...inputs, boardId: id };
 
   try {
     const response = await fetch(`${process.env.CURRENT_URL}/tasks/add`, {
@@ -334,11 +338,15 @@ export async function addTask(token: string, id: string, task: Task) {
   }
 }
 
-export async function updateTask(token: string, task: Task) {
-  const body = { ...task };
+export async function updateTask(
+  token: string,
+  id: string,
+  inputs: taskModalInputsType,
+) {
+  const body = { ...inputs };
   try {
     const response = await fetch(
-      `${process.env.CURRENT_URL}/tasks/update/${task._id}`,
+      `${process.env.CURRENT_URL}/tasks/update/${id}`,
       {
         method: "PUT",
         headers: {
