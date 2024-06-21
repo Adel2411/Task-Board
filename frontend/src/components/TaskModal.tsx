@@ -54,74 +54,74 @@ const TaskModal = ({
     exit: { y: 450, transition: { duration: 1, type: "spring" } },
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const token = localStorage.getItem("token");
-    if (!token) {
-      console.error("Token not found");
-      setLoading(false);
-      return;
-    }
-
-    let response: boolean | string | Task;
-    if (type === "add") {
-      response = await addTask(token, id, inputs);
-
-      if (typeof response === "object" && response) {
-        setTasks((prev) => [...prev, response as Task]);
-        setInputs({
-          title: "",
-          description: "",
-          taskIconName: "",
-          statusId: 0,
-        });
-        closeModal();
-      }
-    } else if (type === "edit" && task) {
-      response = await updateTask(token, task._id, inputs);
-
-      if (response === true) {
-        setTasks((prev) =>
-          prev.map((t) => (t._id === task._id ? { ...t, ...inputs } : t)),
-        );
-        setInputs({
-          title: "",
-          description: "",
-          taskIconName: "",
-          statusId: 0,
-        });
-        closeModal();
-      }
-    }
-
-    toast.custom((t) => (
-      <>
-        {typeof response === "string" && (
-          <Toast type="error" message={`${response}`} t={t} />
-        )}
-        {(typeof response === "object" && type === "add" && response) ||
-        (type === "edit" && response === true) ? (
-          <Toast
-            type="success"
-            message={`${type === "add" ? "Task added" : "Task updated"} successfully`}
-            t={t}
-          />
-        ) : (
-          response === false && (
-            <Toast
-              type="error"
-              message={`Error occurred when ${type === "add" ? "adding" : "updating"} the board`}
-              t={t}
-            />
-          )
-        )}
-      </>
-    ));
-
-    setLoading(false);
-  };
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //
+  //   const token = localStorage.getItem("token");
+  //   if (!token) {
+  //     console.error("Token not found");
+  //     setLoading(false);
+  //     return;
+  //   }
+  //
+  //   let response: boolean | string | Task;
+  //   if (type === "add") {
+  //     response = await addTask(token, id, inputs);
+  //
+  //     if (typeof response === "object" && response) {
+  //       setTasks((prev) => [...prev, response as Task]);
+  //       setInputs({
+  //         title: "",
+  //         description: "",
+  //         taskIconName: "",
+  //         statusId: 0,
+  //       });
+  //       closeModal();
+  //     }
+  //   } else if (type === "edit" && task) {
+  //     response = await updateTask(token, task._id, inputs);
+  //
+  //     if (response === true) {
+  //       setTasks((prev) =>
+  //         prev.map((t) => (t._id === task._id ? { ...t, ...inputs } : t)),
+  //       );
+  //       setInputs({
+  //         title: "",
+  //         description: "",
+  //         taskIconName: "",
+  //         statusId: 0,
+  //       });
+  //       closeModal();
+  //     }
+  //   }
+  //
+  //   toast.custom((t) => (
+  //     <>
+  //       {typeof response === "string" && (
+  //         <Toast type="error" message={`${response}`} t={t} />
+  //       )}
+  //       {(typeof response === "object" && type === "add" && response) ||
+  //       (type === "edit" && response === true) ? (
+  //         <Toast
+  //           type="success"
+  //           message={`${type === "add" ? "Task added" : "Task updated"} successfully`}
+  //           t={t}
+  //         />
+  //       ) : (
+  //         response === false && (
+  //           <Toast
+  //             type="error"
+  //             message={`Error occurred when ${type === "add" ? "adding" : "updating"} the board`}
+  //             t={t}
+  //           />
+  //         )
+  //       )}
+  //     </>
+  //   ));
+  //
+  //   setLoading(false);
+  // };
 
   const modalContent = (
     <AnimatePresence>
@@ -155,7 +155,7 @@ const TaskModal = ({
               <IoClose size={20} className="text-black dark:text-white" />
             </motion.button>
             <form
-              onSubmit={handleSubmit}
+              // onSubmit={handleSubmit}
               className="flex flex-col justify-center gap-4"
             >
               {/* <TaskModalInputs inputs={inputs} setInputs={setInputs} /> */}
