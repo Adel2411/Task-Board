@@ -64,7 +64,7 @@ const BoardTasks = () => {
             </p>
           </div>
           <div className="w-full h-full overflow-auto mb-10 flex items-center justify-center">
-            <Tasks tasks={tasks} setTasks={setTasks} />
+            <Tasks tasks={tasks} setTasks={setTasks} isOwner={isOwner} />
           </div>
           {isOwner && (
             <>

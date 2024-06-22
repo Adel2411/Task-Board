@@ -163,11 +163,13 @@ export type Task = {
 export interface tasksProps {
   tasks: Task[];
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  isOwner: boolean;
 }
 
 export interface taskCardProps {
   task: Task;
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  isOwner: boolean;
 }
 
 export interface taskModalProps {
