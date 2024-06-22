@@ -3,12 +3,16 @@ import {
   MdOutlineEdit,
   MdOutlineIosShare,
   MdDeleteOutline,
+  MdPublic,
+  MdPublicOff,
 } from "react-icons/md";
 
 const DropDownMenu = ({
+  isPrivate,
   loading,
   handleEdit,
   handleShare,
+  handlePrivacy,
   handleDelete,
 }: dropDownMenuProps) => {
   return (
@@ -26,10 +30,28 @@ const DropDownMenu = ({
       <button
         disabled={loading}
         onClick={() => handleShare()}
-        className="disabled:cursor-not-allowed flex items-center justify-start gap-2 p-2 w-full h-full hover:bg-blue-500 hover:bg-opacity-20"
+        className="disabled:cursor-not-allowed flex items-center justify-start gap-2 p-2 w-full h-full hover:bg-green-500 hover:bg-opacity-20"
       >
         <MdOutlineIosShare />
         Share
+      </button>
+      <hr className="h-[0.25px] border-t-0 bg-background-dark dark:bg-background opacity-20 dark:opacity-20" />
+      <button
+        disabled={loading}
+        onClick={() => handlePrivacy()}
+        className="disabled:cursor-not-allowed flex items-center justify-start gap-2 p-2 w-full h-full hover:bg-blue-500 hover:bg-opacity-20"
+      >
+        {isPrivate ? (
+          <>
+            <MdPublicOff />
+            Private
+          </>
+        ) : (
+          <>
+            <MdPublic />
+            Public
+          </>
+        )}
       </button>
       <hr className="h-[0.25px] border-t-0 bg-background-dark dark:bg-background opacity-20 dark:opacity-20" />
       <button

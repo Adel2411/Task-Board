@@ -256,6 +256,34 @@ export async function updateBoard(
   }
 }
 
+export async function toggleBoardPrivacy(
+  token: string,
+  id: string,
+  inputs: boardModalInputsType,
+  isPrivate: boolean,
+) {
+  const body = { ...inputs, is_public: !isPrivate };
+
+  try {
+    const response = await fetch(
+      `${process.env.CURRENT_URL}/boards/update/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      },
+    );
+
+    return response.ok;
+  } catch (error) {
+    console.error("Failed to update board", error);
+    return false;
+  }
+}
+
 export async function deleteBoard(token: string, id: string) {
   try {
     const response = await fetch(

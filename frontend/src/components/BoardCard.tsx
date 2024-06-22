@@ -10,7 +10,7 @@ import DropDownMenu from "./DropDownMenu";
 import { useTheme } from "next-themes";
 import toast from "react-hot-toast";
 import { BoardModal, ShareModal, Toast } from "@/components";
-import { deleteBoard } from "@/utils";
+import { deleteBoard, toggleBoardPrivacy } from "@/utils";
 import ConfirmToast from "@/components/ConfirmToast";
 import { useRouter } from "next/navigation";
 
@@ -26,6 +26,7 @@ const BoardCard = ({
   const [loading, setLoading] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [isShare, setIsShare] = useState(false);
+  const [isPrivate, setIsPrivate] = useState(board.is_public || false);
   const shareLink = `${window.location.origin}/boards/${board._id}`;
 
   const handleFav = () => {
@@ -39,6 +40,52 @@ const BoardCard = ({
 
   const handleShare = () => {
     setIsShare(true);
+  };
+
+  const handlePrivacy = async () => {
+    setLoading(true);
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("No token found");
+      toast.custom((t) => (
+        <Toast type="error" message="No token found" t={t} />
+      ));
+      setLoading(false);
+      return;
+    }
+
+    const response = await toggleBoardPrivacy(
+      token,
+      board._id,
+      {
+        name: board.name,
+        description: board.description,
+      },
+      isPrivate,
+    );
+
+    if (response) {
+      setIsPrivate(!isPrivate);
+      setBoards((prevBoards) =>
+        prevBoards.map((b) =>
+          b._id === board._id ? { ...b, is_public: !isPrivate } : b,
+        ),
+      );
+      toast.custom((t) => (
+        <Toast
+          type="success"
+          message={`Board is now ${isPrivate ? "private" : "public"}`}
+          t={t}
+        />
+      ));
+    } else {
+      toast.custom((t) => (
+        <Toast type="error" message="Failed to update board privacy" t={t} />
+      ));
+    }
+
+    setLoading(false);
   };
 
   const handleDelete = async () => {
@@ -89,7 +136,7 @@ const BoardCard = ({
     <motion.main
       initial={{ opacity: 0, y: 100 }}
       whileHover={{
-        y: -5,
+        y: 5,
         boxShadow:
           theme === "light"
             ? "0px 5px 15px rgba(255, 255, 255, 0.35)"
@@ -109,9 +156,11 @@ const BoardCard = ({
             <SlOptionsVertical />
           </div>
           <DropDownMenu
+            isPrivate={isPrivate}
             loading={loading}
             handleEdit={() => handleEdit()}
             handleShare={() => handleShare()}
+            handlePrivacy={() => handlePrivacy()}
             handleDelete={() => handleDelete()}
           />
         </div>

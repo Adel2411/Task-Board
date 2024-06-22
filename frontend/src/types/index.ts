@@ -114,9 +114,11 @@ export interface boardCardProps {
 }
 
 export interface dropDownMenuProps {
+  isPrivate: boolean;
   loading: boolean;
   handleEdit: () => void;
   handleShare: () => void;
+  handlePrivacy: () => void;
   handleDelete: () => void;
 }
 
