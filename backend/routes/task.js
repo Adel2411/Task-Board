@@ -166,12 +166,20 @@ router.post("/add", authMiddleware, async (req, res) => {
  *             properties:
  *               title:
  *                 type: string
+ *                 description: The task title
+ *                 example: updated task title
  *               description:
  *                 type: string
- *                 taskIconName:
- *                   type: string
- *                 statusId:
- *                   type: integer
+ *                 description: The task description
+ *                 example: updated task description
+ *               taskIcon:
+ *                 type: string
+ *                 description: The task icon name
+ *                 example: updated-icon
+ *               status:
+ *                 type: integer
+ *                 description: The task status id
+ *                 example: 1
  *     responses:
  *       200:
  *         description: Task updated successfully
@@ -180,14 +188,9 @@ router.post("/add", authMiddleware, async (req, res) => {
  *             schema:
  *               type: object
  *               properties:
- *                 title:
- *                   type: string
- *                 description:
- *                   type: string
- *               taskIconName:
+ *                message:
  *                 type: string
- *               statusId:
- *                 type: Number
+ *                 example: Task updated successfully
  *       404:
  *         description: Task not found
  *       401:
