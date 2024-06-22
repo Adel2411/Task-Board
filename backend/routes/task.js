@@ -126,14 +126,14 @@ router.delete("/delete/:id", authMiddleware, async (req, res) => {
  */
 
 router.post("/add", authMiddleware, async (req, res) => {
-  const { boardId, title, description, taskIconName, statusId } = req.body;
+  const { board, title, description, taskIcon, status } = req.body;
   try {
     const newTask = new Task({
-      board: boardId,
+      board,
       title,
       description,
-      taskIcon: taskIconName,
-      status: statusId,
+      taskIcon,
+      status,
     });
     await newTask.save();
     res.status(201).json(newTask);
