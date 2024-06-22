@@ -72,3 +72,21 @@ export const toastVariants = {
     transition: { duration: 0.5, type: "spring" },
   },
 };
+
+export const choiceButtonVariants = {
+  hover: {
+    scale: 1.05,
+    opacity: 0.8,
+    transition: {
+      duration: 0.2,
+      yoyo: Infinity,
+    },
+  },
+  tap: {
+    opacity: 0.6,
+    scale: 0.95,
+    transition: {
+      duration: 0.1,
+    },
+  },
+};
