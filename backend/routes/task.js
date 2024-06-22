@@ -30,6 +30,7 @@ const router = express.Router();
  *               properties:
  *                 message:
  *                   type: string
+ *                   example: Task deleted successfully
  *       404:
  *         description: Task not found
  *       401:
