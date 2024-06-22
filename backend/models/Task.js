@@ -5,7 +5,7 @@ const taskSchema = new mongoose.Schema({
   _id: { type: String, default: uuidv4 },
   board: { type: String, ref: 'Board', required: true },
   title: { type: String, required: true },
-  description: { type: String, required: false },
+  description: { type: String, default: null },
   taskIcon: { type: String, default: 'default-icon' },
   status: { type: Number, ref: 'Status', default: 0 }
 });
