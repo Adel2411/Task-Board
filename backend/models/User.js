@@ -12,9 +12,20 @@ const userSchema = new mongoose.Schema({
   confirmed: { type: Boolean, default: false }, // Flag to track email confirmation
   googleId: { type: String, default: null },
 });
-
+userSchema.pre('save', async function(next) {
+  if (this.isNew) {
+    let unique = false;
+    while (!unique) {
+      this._id = uuidv4();
+      console.log(this._id);
+      const existingUser = await mongoose.models.User.findOne({ _id: this._id });
+      if (!existingUser) unique = true;
+    }
+  }
+  next();
+});
 // Generate JWT token
-userSchema.methods.generateAuthToken = function () {
+userSchema.methods.generateAuthToken = function() {
   const user = this;
   const token = jwt.sign(
     {
@@ -30,7 +41,7 @@ userSchema.methods.generateAuthToken = function () {
 };
 
 // Generate email confirmation token
-userSchema.methods.generateConfirmationToken = function () {
+userSchema.methods.generateConfirmationToken = function() {
   const user = this;
   const token = jwt.sign(
     {
@@ -47,7 +58,7 @@ userSchema.methods.generateConfirmationToken = function () {
 };
 
 // Generate password reset token
-userSchema.methods.generateResetToken = function () {
+userSchema.methods.generateResetToken = function() {
   const user = this;
   const token = jwt.sign(
     {
