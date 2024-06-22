@@ -348,7 +348,7 @@ export async function addTask(
   id: string,
   inputs: taskModalInputsType,
 ) {
-  const body = { ...inputs, boardId: id };
+  const body = { ...inputs, board: id };
 
   try {
     const response = await fetch(`${process.env.CURRENT_URL}/tasks/add`, {
