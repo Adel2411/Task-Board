@@ -39,7 +39,7 @@ const BoardsContent = () => {
     };
 
     fetchBoards();
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     const token = searchParams.get("token");
