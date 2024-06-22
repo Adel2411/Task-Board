@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Task, taskModalInputsType, taskModalProps } from "@/types";
 import { IoClose, IoAdd, IoSave } from "react-icons/io5";
-import { addTask, updateTask } from "@/utils";
+import { addTask, deleteTask, updateTask } from "@/utils";
 import toast from "react-hot-toast";
 import { TaskModalInputs, Toast } from "@/components";
 import { buttonVariants } from "@/animations";
@@ -122,6 +122,41 @@ const TaskModal = ({
     setLoading(false);
   };
 
+  const handleDelete = async () => {
+    setLoading(true);
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("Token not found");
+      setLoading(false);
+      return;
+    }
+
+    const id: string = task?._id as string;
+
+    const response = await deleteTask(token, id);
+
+    console.log(response, id);
+
+    if (response === true) {
+      setTasks((prev) => prev.filter((t) => t._id !== id));
+      closeModal();
+      toast.custom((t) => (
+        <Toast type="success" message="Task deleted successfully" t={t} />
+      ));
+    } else {
+      toast.custom((t) => (
+        <Toast
+          type="error"
+          message="Error occurred when deleting the task"
+          t={t}
+        />
+      ));
+    }
+
+    setLoading(false);
+  };
+
   const modalContent = (
     <AnimatePresence>
       {isOpen && (
@@ -158,18 +193,22 @@ const TaskModal = ({
               className="flex flex-col justify-center gap-6"
             >
               <TaskModalInputs inputs={inputs} setInputs={setInputs} />
-              <div className="flex justify-end">
-                {/* <motion.button */}
-                {/*   variants={buttonVariants} */}
-                {/*   whileHover="hover" */}
-                {/*   whileTap="tap" */}
-                {/*   disabled={loading} */}
-                {/*   type="button" */}
-                {/*   onClick={closeModal} */}
-                {/*   className="disabled:cursor-not-allowed disabled:opacity-40 text-sm px-4 py-2 hover:bg-black hover:bg-opacity-10 dark:hover:bg-white dark:hover:bg-opacity-10 rounded-md" */}
-                {/* > */}
-                {/*   Close */}
-                {/* </motion.button> */}
+              <div
+                className={`flex  ${type === "edit" ? "justify-between" : "justify-end"}`}
+              >
+                {type === "edit" && (
+                  <motion.button
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    whileTap="tap"
+                    disabled={loading}
+                    type="button"
+                    onClick={handleDelete}
+                    className="disabled:cursor-not-allowed disabled:opacity-40 text-sm px-4 py-2 hover:bg-red-800 hover:bg-opacity-30 dark:hover:bg-red-400 dark:hover:bg-opacity-30 rounded-md"
+                  >
+                    Delete
+                  </motion.button>
+                )}
                 <motion.button
                   variants={buttonVariants}
                   whileHover="hover"

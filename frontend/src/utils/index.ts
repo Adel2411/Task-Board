@@ -331,7 +331,12 @@ export async function addTask(
       },
       body: JSON.stringify(body),
     });
-    return response.ok;
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      return false;
+    }
   } catch (error) {
     console.error("Failed to add task", error);
     return false;
