@@ -10,7 +10,7 @@ import { IoIosHappy, IoIosSad } from "react-icons/io";
 import { FaAngry } from "react-icons/fa";
 
 const TaskCard = ({ task, setTasks }: taskCardProps) => {
-  const { _id, title, description, taskIconName, statusId } = task;
+  const { _id, title, description, taskIcon, status } = task;
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -20,7 +20,7 @@ const TaskCard = ({ task, setTasks }: taskCardProps) => {
         whileHover="hover"
         whileTap="tap"
         key={_id}
-        className={`py-4 px-10 flex items-center justify-between hover:cursor-pointer ${statusId === 0 ? "bg-white dark:bg-black" : statusId === 1 ? "bg-red-400 dark:bg-red-800" : statusId === 2 ? "bg-orange-400 dark:bg-orange-800" : "bg-green-400 dark:bg-green-800"} bg-opacity-50 dark:bg-opacity-80 rounded-lg shadow-md`}
+        className={`py-4 px-10 flex items-center justify-between hover:cursor-pointer ${status === 0 ? "bg-white dark:bg-black" : status === 2 ? "bg-red-400 dark:bg-red-800" : status === 1 ? "bg-orange-400 dark:bg-orange-800" : "bg-green-400 dark:bg-green-800"} bg-opacity-50 dark:bg-opacity-80 rounded-lg shadow-md`}
         onClick={() => setIsOpen(true)}
       >
         <div>
@@ -28,11 +28,11 @@ const TaskCard = ({ task, setTasks }: taskCardProps) => {
           <p className="opacity-50">{description}</p>
         </div>
         <div>
-          {taskIconName === "neutral" ? (
+          {taskIcon === "default-icon" ? (
             <BsEmojiNeutralFill size={21} />
-          ) : taskIconName === "happy" ? (
+          ) : taskIcon === "happy" ? (
             <IoIosHappy size={25} />
-          ) : taskIconName === "sad" ? (
+          ) : taskIcon === "sad" ? (
             <IoIosSad size={25} />
           ) : (
             <FaAngry size={21} />

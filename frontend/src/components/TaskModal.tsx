@@ -21,8 +21,8 @@ const TaskModal = ({
   const [inputs, setInputs] = useState<taskModalInputsType>({
     title: "",
     description: "",
-    taskIconName: "neutral",
-    statusId: 0,
+    taskIcon: "default-icon",
+    status: 0,
   });
   const [loading, setLoading] = useState(false);
 
@@ -31,8 +31,8 @@ const TaskModal = ({
       setInputs({
         title: task.title,
         description: task.description,
-        taskIconName: task.taskIconName,
-        statusId: task.statusId,
+        taskIcon: task.taskIcon,
+        status: task.status,
       });
     }
   }, [type, task]);
@@ -73,8 +73,8 @@ const TaskModal = ({
         setInputs({
           title: "",
           description: "",
-          taskIconName: "neutral",
-          statusId: 0,
+          taskIcon: "default-icon",
+          status: 0,
         });
         closeModal();
       }
@@ -88,8 +88,8 @@ const TaskModal = ({
         setInputs({
           title: "",
           description: "",
-          taskIconName: "neutral",
-          statusId: 0,
+          taskIcon: "default-icon",
+          status: 0,
         });
         closeModal();
       }
@@ -135,7 +135,7 @@ const TaskModal = ({
             onClick={closeModal}
           />
           <motion.div
-            className={`fixed bottom-0 z-10 flex flex-col justify-center gap-8 bg-background dark:bg-background-dark rounded-lg p-6 h-fit sm:w-2/3 md:w-1/2 lg:w-1/3 shadow-lg`}
+            className={`fixed bottom-0 z-10 flex flex-col justify-center gap-8 bg-background dark:bg-background-dark rounded-lg p-6 h-fit w-full sm:w-[80%] md:w-[70%] lg:w-[50%] shadow-lg`}
             initial="hidden"
             animate="visible"
             exit="exit"
