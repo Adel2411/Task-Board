@@ -106,16 +106,21 @@ router.delete("/delete/:id", authMiddleware, async (req, res) => {
  *             schema:
  *               type: object
  *               properties:
- *                 boardId:
+ *                 board:
  *                   type: string
+ *                   example: 2ae85590-d8a3-438f-b355-0e6482b2c53b
  *                 title:
  *                   type: string
+ *                   example: Task 1
  *                 description:
  *                   type: string
- *                 taskIconName:
+ *                   example: This is a task
+ *                 taskIcon:
  *                   type: string
- *                 statusId:
+ *                   example: default-icon
+ *                 status:
  *                   type: integer
+ *                   example: 0
  *       500:
  *         description: Server error
  */
