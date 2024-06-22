@@ -231,7 +231,7 @@ export async function updateBoard(
     return "Please provide a title.";
   } else if (
     inputs.name.trim() === board.name.trim() &&
-    inputs.description.trim() === board.description.trim()
+    inputs.description.trim() === board.description?.trim()
   ) {
     return "No changes detected. Please make a change to update the board.";
   }

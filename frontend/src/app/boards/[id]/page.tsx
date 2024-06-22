@@ -50,7 +50,7 @@ const BoardTasks = () => {
   }, [id]);
 
   return (
-    <main className="w-full h-full flex flex-col justify-center items-center">
+    <main className="w-full h-full flex flex-col justify-center items-center gap-16">
       {loading ? (
         <div className="loading loading-spinner loading-lg"></div>
       ) : (
@@ -63,7 +63,7 @@ const BoardTasks = () => {
               {board?.description}
             </p>
           </div>
-          <div className="w-full h-full flex items-center justify-center">
+          <div className="w-full h-full overflow-auto mb-10 flex items-center justify-center">
             <Tasks tasks={tasks} setTasks={setTasks} />
           </div>
           {isOwner && (
