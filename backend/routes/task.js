@@ -1,5 +1,6 @@
 const express = require("express");
 const Task = require("../models/Task");
+const Board = require("../models/Board");
 const authMiddleware = require("../middleware/auth");
 
 const router = express.Router();
@@ -37,14 +38,15 @@ const router = express.Router();
  *         description: Server error
  */
 
-router.delete("delete/:id", authMiddleware, async (req, res) => {
+router.delete("/delete/:id", authMiddleware, async (req, res) => {
   const { id } = req.params;
   try {
     const task = await Task.findById(id);
     if (!task) {
       return res.status(404).json({ message: "Task not found" });
     }
-    if (task.owner.toString() !== req.user._id) {
+    const containerBoard = await Board.findById(task.board);
+    if (containerBoard.owner !== req.user._id) {
       return res.status(401).json({ message: "Not authorized" });
     }
     await Task.findByIdAndDelete(id);
