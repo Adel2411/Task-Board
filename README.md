@@ -1,4 +1,4 @@
-# Task Board Management Web App
+# Task Board Web App
 
 A web application for managing tasks and projects with an intuitive interface, offering features like task assignment, progress tracking, and collaboration.
 
@@ -6,7 +6,7 @@ A web application for managing tasks and projects with an intuitive interface, o
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Installation](#installation)
+- [Demo](#Demo)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
 - [Technologies Used](#technologies-used)
@@ -25,34 +25,9 @@ This Task Board Management web app is designed to streamline project management.
 - Integration with third-party tools
 - Customizable board views
 
-## Installation
+## Demo
 
-### Prerequisites
-
-- Next.js
-- Node.js
-- npm
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/Adel2411/Task-Board.git
-cd Task-Board
-```
-
-### Install Dependencies
-
-```bash
-cd frontend
-npm install
-```
-
-### Run the Application
-
-```bash
-npm run build
-npm start
-```
+Check out the live demo of the project [here](https://task-board-beta.vercel.app).
 
 ## Usage
 
