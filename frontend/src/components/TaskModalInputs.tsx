@@ -6,7 +6,6 @@ import InputField from "./InputField";
 import { BsEmojiNeutralFill } from "react-icons/bs";
 import { IoIosHappy, IoIosSad } from "react-icons/io";
 import { FaAngry } from "react-icons/fa";
-import { choiceButtonVariants } from "@/animations";
 
 const TaskModalInputs = ({ inputs, setInputs }: taskModalInputsProps) => {
   const { title, description, taskIcon, status } = inputs;
@@ -59,36 +58,44 @@ const TaskModalInputs = ({ inputs, setInputs }: taskModalInputsProps) => {
       </div>
       <div className="flex items-center justify-start gap-5 flex-wrap">
         <motion.button
-          // variants={choiceButtonVariants}
           type="button"
-          className={`px-4 py-2 rounded-md ${status === 0 && "bg-white dark:bg-black"}`}
+          className={`group overflow-hidden relative px-4 py-2 rounded-md border-2 border-black dark:border-white border-opacity-10 dark:border-opacity-10 ${status === 0 && "bg-black dark:bg-white bg-opacity-20 dark:bg-opacity-20 border-none"}`}
           onClick={() => setInputs({ ...inputs, status: 0 })}
         >
-          Neutral
+          <div
+            className={`absolute inset-0 bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 translate-y-[100px] ${status !== 1 && "group-hover:translate-y-[0px] transition-all duration-500"}`}
+          />
+          <div className="relative z-10">Neutral</div>
         </motion.button>
         <motion.button
-          // variants={choiceButtonVariants}
           type="button"
-          className={`px-4 py-2 rounded-md ${status === 2 && "bg-red-400 dark:bg-red-800"}`}
+          className={`group overflow-hidden relative px-4 py-2 rounded-md border-2 border-red-400 dark:border-red-800 border-opacity-40 dark:border-opacity-40 ${status === 2 && "bg-red-400 dark:bg-red-800 bg-opacity-60 dark:bg-opacity-60 border-none"}`}
           onClick={() => setInputs({ ...inputs, status: 2 })}
         >
-          Wrong
+          <div
+            className={`absolute inset-0 bg-red-400 dark:bg-red-800 bg-opacity-40 dark:bg-opacity-40 translate-y-[100px] ${status !== 2 && "group-hover:translate-y-[0px] transition-all duration-500"}`}
+          />
+          <div className="relative z-10">Won't do</div>
         </motion.button>
         <motion.button
-          // variants={choiceButtonVariants}
           type="button"
-          className={`px-4 py-2 rounded-md ${status === 1 && "bg-orange-400 dark:bg-orange-800"}`}
+          className={`group overflow-hidden relative px-4 py-2 rounded-md border-2 border-orange-400 dark:border-orange-800 border-opacity-40 dark:border-opacity-40 ${status === 1 && "bg-orange-400 dark:bg-orange-800 bg-opacity-60 dark:bg-opacity-60"}`}
           onClick={() => setInputs({ ...inputs, status: 1 })}
         >
-          Progress
+          <div
+            className={`absolute inset-0 bg-orange-400 dark:bg-orange-800 bg-opacity-40 dark:bg-opacity-40 translate-y-[100px] ${status !== 1 && "group-hover:translate-y-[0px] transition-all duration-500"}`}
+          />
+          <div className="relative z-10">Progress</div>
         </motion.button>
         <motion.button
-          // variants={choiceButtonVariants}
           type="button"
-          className={`px-4 py-2 rounded-md ${status === 3 && "bg-green-400 dark:bg-green-800"}`}
+          className={`group overflow-hidden relative px-4 py-2 rounded-md border-2 border-green-400 dark:border-green-800 border-opacity-40 dark:border-opacity-40 ${status === 3 && "bg-green-400 dark:bg-green-800 bg-opacity-60 dark:bg-opacity-60"}`}
           onClick={() => setInputs({ ...inputs, status: 3 })}
         >
-          Completed
+          <div
+            className={`absolute inset-0 bg-green-400 dark:bg-green-800 bg-opacity-40 dark:bg-opacity-40 translate-y-[100px] ${status !== 3 && "group-hover:translate-y-[0px] transition-all duration-500"}`}
+          />
+          <div className="relative z-10">Completed</div>
         </motion.button>
       </div>
     </div>

@@ -194,3 +194,11 @@ export interface taskModalInputsProps {
   inputs: taskModalInputsType;
   setInputs: React.Dispatch<React.SetStateAction<taskModalInputsType>>;
 }
+
+// JWT Types
+export type jwtPayloadType = {
+  _id: string;
+  type: string;
+  exp: number;
+  iat: number;
+};

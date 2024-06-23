@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Board, Task } from "@/types";
+import { Board, Task, jwtPayloadType } from "@/types";
 import { getBoard, getPublicBoard } from "@/utils";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -10,6 +10,7 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 import { IoAdd } from "react-icons/io5";
 import { buttonVariants } from "@/animations";
 import { TaskModal, Tasks } from "@/components";
+import { jwtDecode } from "jwt-decode";
 
 const BoardTasks = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,9 @@ const BoardTasks = () => {
         if (response) {
           setBoard(response);
           setTasks(response.tasks as Task[]);
-          setIsOwner(true);
+          const payload: jwtPayloadType = jwtDecode(token);
+          const result = payload._id === response.owner;
+          setIsOwner(result);
           setLoading(false);
           return;
         }

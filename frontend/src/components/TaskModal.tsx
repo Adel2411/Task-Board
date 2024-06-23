@@ -170,7 +170,7 @@ const TaskModal = ({
             onClick={closeModal}
           />
           <motion.div
-            className={`fixed bottom-0 z-10 flex flex-col justify-center gap-8 bg-background dark:bg-background-dark rounded-lg p-6 h-fit w-full sm:w-[80%] md:w-[70%] lg:w-[50%] shadow-lg`}
+            className={`fixed bottom-0 z-10 flex flex-col justify-center gap-8 bg-background dark:bg-background-dark rounded-lg px-6 py-10 h-fit w-full sm:w-[80%] md:w-[70%] lg:w-[50%] shadow-lg`}
             initial="hidden"
             animate="visible"
             exit="exit"
@@ -194,7 +194,7 @@ const TaskModal = ({
             >
               <TaskModalInputs inputs={inputs} setInputs={setInputs} />
               <div
-                className={`flex  ${type === "edit" ? "justify-between" : "justify-end"}`}
+                className={`flex  ${type === "edit" ? "justify-evenly" : "justify-end"}`}
               >
                 {type === "edit" && (
                   <motion.button
@@ -204,7 +204,7 @@ const TaskModal = ({
                     disabled={loading}
                     type="button"
                     onClick={handleDelete}
-                    className="disabled:cursor-not-allowed disabled:opacity-40 text-sm px-4 py-2 hover:bg-red-800 hover:bg-opacity-30 dark:hover:bg-red-400 dark:hover:bg-opacity-30 rounded-md"
+                    className="disabled:cursor-not-allowed disabled:opacity-40 text-sm px-4 py-2 hover:bg-red-400 hover:bg-opacity-30 dark:hover:bg-red-700 dark:hover:bg-opacity-30 rounded-md"
                   >
                     Delete
                   </motion.button>
