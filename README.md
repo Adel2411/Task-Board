@@ -6,7 +6,7 @@ A web application for managing tasks and projects with an intuitive interface, o
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Demo](#Demo)
+- [Demo](#demo)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
 - [Technologies Used](#technologies-used)
@@ -42,20 +42,38 @@ Check out the live demo of the project [here](https://task-board-beta.vercel.app
 
 ## Screenshots
 
+#### Sign In Page ![Sign In Page](./assets/SignIn.png)
+
+#### Sign Up Page ![Sign Up Page](./assets/SignUp.png)
+
+#### Home Page ![Home Page](./assets/HomePage.png)
+
+#### Add Board ![Add Board](./assets/AddBoard.png)
+
+#### Share Board ![Share Board](./assets/ShareBoard.png)
+
+#### Board Page ![Board Page](./assets/BoardView.png)
+
+#### Add Task ![Add Task](./assets/AddTask.png)
+
+#### View & Edit Task ![Task Page](./assets/EditTask.png)
+
+#### Sign Out ![Sign Out](./assets/SignOut.png)
+
 ## Technologies Used
 
 - **Frontend:** Next.js, React, TypeScript, Tailwind CSS
-- **Backend:** Node.js, Express, MongoDB
+- **Backend:** Node.js, Express, MongoDB , JWT , bcrypt, nodemailer , oauth2 , google mail services
 
 ## Contributing
 
 ### Fork the Repository
 
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
+git clone https://github.com/Adel2411/Task-Board
 ```
 
-## Make Changes
+### Make Changes
 
 - Create a new branch for your feature or bugfix.
 - Commit your changes with clear messages.
@@ -68,7 +86,7 @@ git clone https://github.com/yourusername/your-repo-name.git
 ## Contact
 
 - Email:
-  - hadjarabadel.2411@example.com
+  - hadjarab.adel2411@gmail.com
   - becharwalid9@gmail.com
 - GitHub:
   - [Adel2411](https://github.com/Adel2411)
