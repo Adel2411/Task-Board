@@ -3,9 +3,7 @@
 import { motion } from "framer-motion";
 import { taskModalInputsProps } from "@/types";
 import InputField from "./InputField";
-import { BsEmojiNeutralFill } from "react-icons/bs";
-import { IoIosHappy, IoIosSad } from "react-icons/io";
-import { FaAngry } from "react-icons/fa";
+import { Angry, Frown, Meh, Smile } from "lucide-react";
 
 const TaskModalInputs = ({ inputs, setInputs }: taskModalInputsProps) => {
   const { title, description, taskIcon, status } = inputs;
@@ -32,28 +30,28 @@ const TaskModalInputs = ({ inputs, setInputs }: taskModalInputsProps) => {
           onClick={() => setInputs({ ...inputs, taskIcon: "default-icon" })}
           className={`p-2 rounded-lg hover:border-2 hover:border-black dark:hover:border-white hover:border-opacity-10 dark:hover:border-opacity-10 ${taskIcon === "default-icon" && "bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 hover:border-none dark:hover:border-none"}`}
         >
-          <BsEmojiNeutralFill size={21} />
+          <Meh />
         </motion.button>
         <motion.button
           type="button"
           onClick={() => setInputs({ ...inputs, taskIcon: "happy" })}
           className={`p-2 rounded-lg hover:border-2 hover:border-black dark:hover:border-white hover:border-opacity-10 dark:hover:border-opacity-10 ${taskIcon === "happy" && "bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 hover:border-none dark:hover:border-none"}`}
         >
-          <IoIosHappy size={25} />
+          <Smile />
         </motion.button>
         <motion.button
           type="button"
           onClick={() => setInputs({ ...inputs, taskIcon: "sad" })}
           className={`p-2 rounded-lg hover:border-2 hover:border-black dark:hover:border-white hover:border-opacity-10 dark:hover:border-opacity-10 ${taskIcon === "sad" && "bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 hover:border-none dark:hover:border-none"}`}
         >
-          <IoIosSad size={25} />
+          <Frown />
         </motion.button>
         <motion.button
           type="button"
           onClick={() => setInputs({ ...inputs, taskIcon: "angry" })}
           className={`p-2 rounded-lg hover:border-2 hover:border-black dark:hover:border-white hover:border-opacity-10 dark:hover:border-opacity-10 ${taskIcon === "angry" && "bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 hover:border-none dark:hover:border-none"}`}
         >
-          <FaAngry size={21} />
+          <Angry />
         </motion.button>
       </div>
       <div className="flex items-center justify-start gap-5 flex-wrap">

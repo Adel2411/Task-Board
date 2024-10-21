@@ -5,9 +5,7 @@ import { taskCardProps } from "@/types";
 import TaskModal from "./TaskModal";
 import { useState } from "react";
 import { buttonVariants } from "@/animations";
-import { BsEmojiNeutralFill } from "react-icons/bs";
-import { IoIosHappy, IoIosSad } from "react-icons/io";
-import { FaAngry } from "react-icons/fa";
+import { Angry, Frown, Meh, Smile } from "lucide-react";
 
 const TaskCard = ({ task, setTasks, isOwner }: taskCardProps) => {
   const { _id, title, description, taskIcon, status } = task;
@@ -29,13 +27,13 @@ const TaskCard = ({ task, setTasks, isOwner }: taskCardProps) => {
         </div>
         <div>
           {taskIcon === "default-icon" ? (
-            <BsEmojiNeutralFill size={21} />
+            <Meh />
           ) : taskIcon === "happy" ? (
-            <IoIosHappy size={25} />
+            <Smile />
           ) : taskIcon === "sad" ? (
-            <IoIosSad size={25} />
+            <Frown />
           ) : (
-            <FaAngry size={21} />
+            <Angry />
           )}
         </div>
       </motion.li>
