@@ -68,7 +68,7 @@ git clone https://github.com/yourusername/your-repo-name.git
 ## Contact
 
 - Email:
-  - hadjarabadel.2411@example.com
+  - hadjarabadel.2411@gmail.com
   - becharwalid9@gmail.com
 - GitHub:
   - [Adel2411](https://github.com/Adel2411)
