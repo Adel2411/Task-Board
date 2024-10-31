@@ -6,7 +6,7 @@ const EmailSent = ({
   setEmailSent: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
-    <div className="flex flex-col items-center gap-8">
+    <div className="z-10 flex flex-col items-center gap-8">
       <div className="flex flex-col items-center gap-2">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-bold">
           Reset link sent successfully

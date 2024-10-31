@@ -59,7 +59,7 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
   };
 
   return (
-    <main className="w-full h-full flex flex-col justify-evenly md:px-9">
+    <main className="w-full h-fit flex flex-col gap-5 justify-evenly md:px-9">
       <div className="w-full flex justify-center">
         <h1 className="font-semibold text-2xl md:text-3xl lg:text-4xl">
           Sign In
@@ -84,7 +84,7 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
           {loading ? "Signing in" : "Sign in"}
         </motion.button>
       </form>
-      <div className="">
+      <div>
         <Link
           href="/forgot-password"
           className={`${loading ? "pointer-events-none opacity-60" : "link link-hover link-accent dark:link-error"} text-sm`}

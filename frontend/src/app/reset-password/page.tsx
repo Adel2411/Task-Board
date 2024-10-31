@@ -9,6 +9,7 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { postResetPassword } from "@/utils";
 import Link from "next/link";
 import { buttonVariants } from "@/animations";
+import Image from "next/image";
 
 // Fallback component for Suspense
 const LoadingFallback = () => (
@@ -82,8 +83,26 @@ const ResetPasswordContent = () => {
   };
 
   return (
-    <main className="w-full h-full flex justify-center px-2 items-center bg-center bg-cover bg-[url('/auth_page_bg_light.png')] dark:bg-[url('/auth_page_bg_dark.png')]">
-      <GradientDiv className="p-1 rounded-xl">
+    <main className="w-full h-full flex justify-center px-2 items-center">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/auth_page_bg_light.png"
+          alt="Auth Background Light"
+          fill
+          className="object-cover dark:hidden"
+          priority
+        />
+        <Image
+          src="/auth_page_bg_dark.png"
+          alt="Auth Background Dark"
+          fill
+          className="object-cover hidden dark:block"
+          priority
+        />
+      </div>
+
+      <GradientDiv className="p-1 rounded-xl z-10">
         <div className="bg-background dark:bg-background-dark rounded-xl md:p-3 py-5 flex flex-col items-center gap-5">
           <div className="w-full">
             <Link

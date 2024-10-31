@@ -62,7 +62,7 @@ const Signup = ({ loading, setLoading }: loadingProps) => {
   };
 
   return (
-    <main className="w-full h-full flex flex-col justify-evenly items-center md:px-9">
+    <main className="w-full h-fit flex flex-col justify-evenly items-center md:px-9">
       <div>
         <h1 className="font-semibold text-2xl md:text-3xl lg:text-4xl">
           Sign Up
