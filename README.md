@@ -42,6 +42,42 @@ Check out the live demo of the project [here](https://task-board-beta.vercel.app
 
 ## Screenshots
 
+### 1. Home Page
+
+This is a screenshot of the home page: (The UI is still under development)
+
+![Home Page](./screenshots/home_page.png)
+
+### 2. Sign In Page
+
+Below is a screenshot of the Sign In page:
+
+![Sign In Page](./screenshots/login.png)
+
+### 2. Boards Page
+
+This is a screenshot of the page where all boards are displayed and can be managed:
+
+![Boards Page](./screenshots/boards.png)
+
+### 3. Sharing Board Link
+
+You can share the board with other users by sending them the board link:
+
+![Sharing Board](./screenshots/share_board.png)
+
+### 4. Tasks Page
+
+This is a screenshot of the page where all tasks are displayed and can be managed:
+
+![Tasks Page](./screenshots/tasks.png)
+
+### 5. Add Task
+
+You can add a new tasks to the board or edit an existing one:
+
+![Add Task](./screenshots/add_task.png)
+
 ## Technologies Used
 
 - **Frontend:** Next.js, React, TypeScript, Tailwind CSS
@@ -52,7 +88,7 @@ Check out the live demo of the project [here](https://task-board-beta.vercel.app
 ### Fork the Repository
 
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
+git clone https://github.com/Adel2411/Task-Board.git
 ```
 
 ## Make Changes
