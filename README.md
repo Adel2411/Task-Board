@@ -54,25 +54,31 @@ Below is a screenshot of the Sign In page:
 
 ![Sign In Page](./screenshots/login.png)
 
-### 2. Boards Page
+### 3. Forgot Password Page
+
+Below is a screenshot of the Forgot Password page:
+
+![Sign In Page](./screenshots/forgot_password.png)
+
+### 4. Boards Page
 
 This is a screenshot of the page where all boards are displayed and can be managed:
 
 ![Boards Page](./screenshots/boards.png)
 
-### 3. Sharing Board Link
+### 5. Sharing Board Link
 
 You can share the board with other users by sending them the board link:
 
 ![Sharing Board](./screenshots/share_board.png)
 
-### 4. Tasks Page
+### 6. Tasks Page
 
 This is a screenshot of the page where all tasks are displayed and can be managed:
 
 ![Tasks Page](./screenshots/tasks.png)
 
-### 5. Add Task
+### 7. Add Task
 
 You can add a new tasks to the board or edit an existing one:
 
