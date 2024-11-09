@@ -97,7 +97,11 @@ const ForgotPassword = () => {
               onSubmit={handleSubmit}
               className="p-5 flex flex-col items-center gap-10"
             >
-              <ForgotPasswordInputs inputs={inputs} setInputs={setInputs} />
+              <ForgotPasswordInputs
+                inputs={inputs}
+                setInputs={setInputs}
+                isLoading={loading}
+              />
               <motion.button
                 type="submit"
                 variants={buttonVariants}

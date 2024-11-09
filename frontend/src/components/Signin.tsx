@@ -69,7 +69,11 @@ const Signin = ({ loading, setLoading }: loadingProps) => {
         onSubmit={handleSubmit}
         className="w-full flex flex-col items-center gap-9"
       >
-        <SignInInputs inputs={inputs} setInputs={setInputs} />
+        <SignInInputs
+          inputs={inputs}
+          setInputs={setInputs}
+          isLoading={loading}
+        />
         <motion.button
           type="submit"
           variants={buttonVariants}

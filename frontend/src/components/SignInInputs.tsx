@@ -1,7 +1,7 @@
 import { signInInputsProps } from "@/types";
 import { InputField } from "@/components";
 
-const SignUpInputs = ({ inputs, setInputs }: signInInputsProps) => {
+const SignUpInputs = ({ inputs, setInputs, isLoading }: signInInputsProps) => {
   const { auth_identifier, password } = inputs;
 
   return (
@@ -14,6 +14,7 @@ const SignUpInputs = ({ inputs, setInputs }: signInInputsProps) => {
         }
         placeholder="Username or Email"
         type="text"
+        loading={isLoading}
       />
       <InputField
         name="password"
@@ -21,6 +22,7 @@ const SignUpInputs = ({ inputs, setInputs }: signInInputsProps) => {
         onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
         placeholder="Password"
         type="password"
+        loading={isLoading}
       />
     </div>
   );

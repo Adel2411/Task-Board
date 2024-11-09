@@ -4,6 +4,7 @@ import InputField from "./InputField";
 const ForgotPasswordInputs = ({
   inputs,
   setInputs,
+  isLoading,
 }: forgotPasswordInputsProps) => {
   const { email } = inputs;
 
@@ -15,6 +16,7 @@ const ForgotPasswordInputs = ({
         onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
         placeholder="Email"
         type="email"
+        loading={isLoading}
       />
     </div>
   );

@@ -10,6 +10,7 @@ const InputField = ({
   onChange,
   placeholder,
   type,
+  loading,
 }: inputFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -24,6 +25,7 @@ const InputField = ({
               e.preventDefault();
               setShowPassword(!showPassword);
             }}
+            disabled={loading}
           >
             {showPassword ? <BiSolidHide /> : <BiSolidShow />}
             {showPassword ? "Hide" : "Show"}
@@ -37,6 +39,7 @@ const InputField = ({
           value={value}
           onChange={onChange}
           placeholder={`${placeholder}...`}
+          disabled={loading}
         ></textarea>
       ) : (
         <>
@@ -47,6 +50,7 @@ const InputField = ({
             value={value}
             onChange={onChange}
             placeholder={`${placeholder}...`}
+            disabled={loading}
           />
         </>
       )}

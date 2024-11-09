@@ -1,7 +1,7 @@
 import { signUpInputsProps } from "@/types";
 import { InputField } from "@/components";
 
-const SignUpInputs = ({ inputs, setInputs }: signUpInputsProps) => {
+const SignUpInputs = ({ inputs, setInputs, isLoading }: signUpInputsProps) => {
   const { username, email, password, confirmPassword } = inputs;
 
   return (
@@ -12,6 +12,7 @@ const SignUpInputs = ({ inputs, setInputs }: signUpInputsProps) => {
         onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
         placeholder="Username"
         type="text"
+        loading={isLoading}
       />
       <InputField
         name="email"
@@ -19,6 +20,7 @@ const SignUpInputs = ({ inputs, setInputs }: signUpInputsProps) => {
         onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
         placeholder="Email"
         type="email"
+        loading={isLoading}
       />
       <InputField
         name="password"
@@ -26,6 +28,7 @@ const SignUpInputs = ({ inputs, setInputs }: signUpInputsProps) => {
         onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
         placeholder="Password"
         type="password"
+        loading={isLoading}
       />
       <InputField
         name="confirmPassword"
@@ -35,6 +38,7 @@ const SignUpInputs = ({ inputs, setInputs }: signUpInputsProps) => {
         }
         placeholder="Confirm Password"
         type="password"
+        loading={isLoading}
       />
     </div>
   );

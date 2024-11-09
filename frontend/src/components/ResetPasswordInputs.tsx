@@ -4,6 +4,7 @@ import { InputField } from "@/components";
 const ResetPasswordInputs = ({
   inputs,
   setInputs,
+  isLoading,
 }: resetPasswordInputsProps) => {
   const { password, confirmPassword } = inputs;
 
@@ -15,6 +16,7 @@ const ResetPasswordInputs = ({
         onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
         placeholder="New password"
         type="password"
+        loading={isLoading}
       />
       <InputField
         name="confirmPassword"
@@ -24,6 +26,7 @@ const ResetPasswordInputs = ({
         }
         placeholder="Confirm new password"
         type="password"
+        loading={isLoading}
       />
     </div>
   );

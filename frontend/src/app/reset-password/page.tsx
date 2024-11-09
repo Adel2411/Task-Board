@@ -121,7 +121,11 @@ const ResetPasswordContent = () => {
             onSubmit={handleSubmit}
             className="p-5 flex flex-col items-center gap-10"
           >
-            <ResetPasswordInputs inputs={inputs} setInputs={setInputs} />
+            <ResetPasswordInputs
+              inputs={inputs}
+              setInputs={setInputs}
+              isLoading={loading}
+            />
             <motion.button
               type="submit"
               variants={buttonVariants}

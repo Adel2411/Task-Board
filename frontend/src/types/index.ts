@@ -15,6 +15,7 @@ export interface inputFieldProps {
   ) => void;
   placeholder: string;
   type: string;
+  loading: boolean;
 }
 
 // Loading Types
@@ -47,6 +48,7 @@ export type signUpInputsType = {
 export interface signUpInputsProps {
   inputs: signUpInputsType;
   setInputs: React.Dispatch<React.SetStateAction<signUpInputsType>>;
+  isLoading: boolean;
 }
 
 // Sign In Types
@@ -58,6 +60,7 @@ export type signInInputsType = {
 export interface signInInputsProps {
   inputs: signInInputsType;
   setInputs: React.Dispatch<React.SetStateAction<signInInputsType>>;
+  isLoading: boolean;
 }
 
 // Forgot Password Types
@@ -68,6 +71,7 @@ export type forgotPasswordInputsType = {
 export interface forgotPasswordInputsProps {
   inputs: forgotPasswordInputsType;
   setInputs: React.Dispatch<React.SetStateAction<forgotPasswordInputsType>>;
+  isLoading: boolean;
 }
 
 // Reset Password Types
@@ -79,6 +83,7 @@ export type resetPasswordInputsType = {
 export interface resetPasswordInputsProps {
   inputs: resetPasswordInputsType;
   setInputs: React.Dispatch<React.SetStateAction<resetPasswordInputsType>>;
+  isLoading: boolean;
 }
 
 // Auth Context Types
