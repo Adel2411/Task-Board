@@ -5,7 +5,11 @@ import { taskModalInputsProps } from "@/types";
 import InputField from "./InputField";
 import { Angry, Frown, Meh, Smile } from "lucide-react";
 
-const TaskModalInputs = ({ inputs, setInputs }: taskModalInputsProps) => {
+const TaskModalInputs = ({
+  inputs,
+  setInputs,
+  isLoading,
+}: taskModalInputsProps) => {
   const { title, description, taskIcon, status } = inputs;
 
   return (
@@ -16,6 +20,7 @@ const TaskModalInputs = ({ inputs, setInputs }: taskModalInputsProps) => {
         onChange={(e) => setInputs({ ...inputs, title: e.target.value })}
         placeholder="Task Title"
         type="text"
+        loading={isLoading}
       />
       <InputField
         name="description"
@@ -23,6 +28,7 @@ const TaskModalInputs = ({ inputs, setInputs }: taskModalInputsProps) => {
         onChange={(e) => setInputs({ ...inputs, description: e.target.value })}
         placeholder="Task Description"
         type="text-area"
+        loading={isLoading}
       />
       <div className="flex items-center justify-start gap-5 flex-wrap">
         <motion.button

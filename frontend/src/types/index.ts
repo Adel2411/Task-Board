@@ -150,6 +150,7 @@ export type boardModalInputsType = {
 export interface boardModalInputsProps {
   inputs: boardModalInputsType;
   setInputs: React.Dispatch<React.SetStateAction<boardModalInputsType>>;
+  isLoading: boolean;
 }
 
 export interface shareModalProps {
@@ -198,6 +199,7 @@ export type taskModalInputsType = {
 export interface taskModalInputsProps {
   inputs: taskModalInputsType;
   setInputs: React.Dispatch<React.SetStateAction<taskModalInputsType>>;
+  isLoading: boolean;
 }
 
 // JWT Types

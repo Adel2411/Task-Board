@@ -1,7 +1,11 @@
 import { boardModalInputsProps } from "@/types";
 import InputField from "./InputField";
 
-const BoardModalInputs = ({ inputs, setInputs }: boardModalInputsProps) => {
+const BoardModalInputs = ({
+  inputs,
+  setInputs,
+  isLoading,
+}: boardModalInputsProps) => {
   const { name, description } = inputs;
 
   return (
@@ -12,6 +16,7 @@ const BoardModalInputs = ({ inputs, setInputs }: boardModalInputsProps) => {
         onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
         placeholder="Board Name"
         type="text"
+        loading={isLoading}
       />
       <InputField
         name="description"
@@ -19,6 +24,7 @@ const BoardModalInputs = ({ inputs, setInputs }: boardModalInputsProps) => {
         onChange={(e) => setInputs({ ...inputs, description: e.target.value })}
         placeholder="Board Description"
         type="text-area"
+        loading={isLoading}
       />
     </div>
   );

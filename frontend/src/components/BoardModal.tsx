@@ -140,7 +140,11 @@ const BoardModal = ({
               onSubmit={handleSubmit}
               className="flex flex-col justify-center gap-4"
             >
-              <BoardModalInputs inputs={inputs} setInputs={setInputs} />
+              <BoardModalInputs
+                inputs={inputs}
+                setInputs={setInputs}
+                isLoading={loading}
+              />
               <div className="flex justify-between">
                 <motion.button
                   variants={buttonVariants}

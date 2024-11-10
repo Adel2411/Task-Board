@@ -192,7 +192,11 @@ const TaskModal = ({
               onSubmit={handleSubmit}
               className="flex flex-col justify-center gap-6"
             >
-              <TaskModalInputs inputs={inputs} setInputs={setInputs} />
+              <TaskModalInputs
+                inputs={inputs}
+                setInputs={setInputs}
+                isLoading={loading}
+              />
               <div
                 className={`flex  ${type === "edit" ? "justify-evenly" : "justify-end"}`}
               >
