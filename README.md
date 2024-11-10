@@ -1,4 +1,4 @@
-# Task Board Web App
+# ![Logo](./frontend/public/Logo.svg) Task Board Web App ![home_page](https://img.shields.io/badge/Task%20Board-Web%20App-blue)
 
 A web application for managing tasks and projects with an intuitive interface, offering features like task assignment, progress tracking, and collaboration.
 
