@@ -34,28 +34,28 @@ const TaskModalInputs = ({
         <motion.button
           type="button"
           onClick={() => setInputs({ ...inputs, taskIcon: "default-icon" })}
-          className={`p-2 rounded-lg hover:border-2 hover:border-black dark:hover:border-white hover:border-opacity-10 dark:hover:border-opacity-10 ${taskIcon === "default-icon" && "bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 hover:border-none dark:hover:border-none"}`}
+          className={`p-2 rounded-lg ${taskIcon === "default-icon" ? "bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 hover:border-none dark:hover:border-none" : "hover:bg-gray-200 dark:hover:bg-gray-800"}`}
         >
           <Meh />
         </motion.button>
         <motion.button
           type="button"
           onClick={() => setInputs({ ...inputs, taskIcon: "happy" })}
-          className={`p-2 rounded-lg hover:border-2 hover:border-black dark:hover:border-white hover:border-opacity-10 dark:hover:border-opacity-10 ${taskIcon === "happy" && "bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 hover:border-none dark:hover:border-none"}`}
+          className={`p-2 rounded-lg ${taskIcon === "happy" ? "bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 hover:border-none dark:hover:border-none" : "hover:bg-gray-200 dark:hover:bg-gray-800"}`}
         >
           <Smile />
         </motion.button>
         <motion.button
           type="button"
           onClick={() => setInputs({ ...inputs, taskIcon: "sad" })}
-          className={`p-2 rounded-lg hover:border-2 hover:border-black dark:hover:border-white hover:border-opacity-10 dark:hover:border-opacity-10 ${taskIcon === "sad" && "bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 hover:border-none dark:hover:border-none"}`}
+          className={`p-2 rounded-lg ${taskIcon === "sad" ? "bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 hover:border-none dark:hover:border-none" : "hover:bg-gray-200 dark:hover:bg-gray-800"}`}
         >
           <Frown />
         </motion.button>
         <motion.button
           type="button"
           onClick={() => setInputs({ ...inputs, taskIcon: "angry" })}
-          className={`p-2 rounded-lg hover:border-2 hover:border-black dark:hover:border-white hover:border-opacity-10 dark:hover:border-opacity-10 ${taskIcon === "angry" && "bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 hover:border-none dark:hover:border-none"}`}
+          className={`p-2 rounded-lg ${taskIcon === "angry" ? "bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 hover:border-none dark:hover:border-none" : "hover:bg-gray-200 dark:hover:bg-gray-800"}`}
         >
           <Angry />
         </motion.button>
@@ -63,17 +63,17 @@ const TaskModalInputs = ({
       <div className="flex items-center justify-start gap-5 flex-wrap">
         <motion.button
           type="button"
-          className={`group overflow-hidden relative px-4 py-2 rounded-md border-2 border-black dark:border-white border-opacity-10 dark:border-opacity-10 ${status === 0 && "bg-black dark:bg-white bg-opacity-20 dark:bg-opacity-20 border-none"}`}
+          className={`group overflow-hidden relative px-4 py-2 rounded-md border-2 border-black dark:border-white border-opacity-10 dark:border-opacity-10 ${status === 0 && "bg-black dark:bg-white bg-opacity-20 dark:bg-opacity-20"}`}
           onClick={() => setInputs({ ...inputs, status: 0 })}
         >
           <div
-            className={`absolute inset-0 bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 translate-y-[100px] ${status !== 1 && "group-hover:translate-y-[0px] transition-all duration-500"}`}
+            className={`absolute inset-0 bg-black dark:bg-white bg-opacity-10 dark:bg-opacity-10 translate-y-[100px] ${status !== 0 && "group-hover:translate-y-[0px] transition-all duration-500"}`}
           />
           <div className="relative z-10">Neutral</div>
         </motion.button>
         <motion.button
           type="button"
-          className={`group overflow-hidden relative px-4 py-2 rounded-md border-2 border-red-400 dark:border-red-800 border-opacity-40 dark:border-opacity-40 ${status === 2 && "bg-red-400 dark:bg-red-800 bg-opacity-60 dark:bg-opacity-60 border-none"}`}
+          className={`group overflow-hidden relative px-4 py-2 rounded-md border-2 border-red-400 dark:border-red-800 border-opacity-40 dark:border-opacity-40 ${status === 2 && "bg-red-400 dark:bg-red-800 bg-opacity-60 dark:bg-opacity-60"}`}
           onClick={() => setInputs({ ...inputs, status: 2 })}
         >
           <div
