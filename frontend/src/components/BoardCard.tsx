@@ -88,7 +88,7 @@ const BoardCard = ({
     setLoading(false);
   };
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     toast.custom((t) => (
       <ConfirmToast
         t={t}

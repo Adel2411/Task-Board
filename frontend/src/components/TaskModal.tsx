@@ -9,6 +9,7 @@ import { addTask, deleteTask, updateTask } from "@/utils";
 import toast from "react-hot-toast";
 import { TaskModalInputs, Toast } from "@/components";
 import { buttonVariants } from "@/animations";
+import ConfirmToast from "./ConfirmToast";
 
 const TaskModal = ({
   isOpen,
@@ -122,39 +123,48 @@ const TaskModal = ({
     setLoading(false);
   };
 
-  const handleDelete = async () => {
-    setLoading(true);
+  const handleDelete = () => {
+    toast.custom((t) => (
+      <ConfirmToast
+        t={t}
+        message={`Are you sure you want to delete task ${task?.title} ?`}
+        onConfirm={async () => {
+          setLoading(true);
 
-    const token = localStorage.getItem("token");
-    if (!token) {
-      console.error("Token not found");
-      setLoading(false);
-      return;
-    }
+          const token = localStorage.getItem("token");
+          if (!token) {
+            console.error("Token not found");
+            setLoading(false);
+            return;
+          }
 
-    const id: string = task?._id as string;
+          const id: string = task?._id as string;
 
-    const response = await deleteTask(token, id);
+          const response = await deleteTask(token, id);
 
-    console.log(response, id);
+          console.log(response, id);
 
-    if (response === true) {
-      setTasks((prev) => prev.filter((t) => t._id !== id));
-      closeModal();
-      toast.custom((t) => (
-        <Toast type="success" message="Task deleted successfully" t={t} />
-      ));
-    } else {
-      toast.custom((t) => (
-        <Toast
-          type="error"
-          message="Error occurred when deleting the task"
-          t={t}
-        />
-      ));
-    }
+          if (response === true) {
+            setTasks((prev) => prev.filter((t) => t._id !== id));
+            closeModal();
+            toast.custom((t) => (
+              <Toast type="success" message="Task deleted successfully" t={t} />
+            ));
+          } else {
+            toast.custom((t) => (
+              <Toast
+                type="error"
+                message="Error occurred when deleting the task"
+                t={t}
+              />
+            ));
+          }
 
-    setLoading(false);
+          setLoading(false);
+          toast.dismiss(t.id);
+        }}
+      />
+    ));
   };
 
   const modalContent = (
