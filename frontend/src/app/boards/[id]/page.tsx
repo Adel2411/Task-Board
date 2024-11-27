@@ -99,7 +99,7 @@ const BoardTasks = () => {
           </h1>
           <p className="w-full text-center opacity-50">{board?.description}</p>
         </div>
-        <div className="bg-primary bg-opacity-5 dark:bg-primary-dark dark:bg-opacity-5 w-full h-full overflow-auto mb-10 flex justify-center">
+        <div className="bg-primary bg-opacity-5 dark:bg-primary-dark dark:bg-opacity-5 w-full h-full overflow-auto flex justify-center">
           <Tasks tasks={tasks} setTasks={setTasks} isOwner={isOwner} />
         </div>
         {isOwner ? (
