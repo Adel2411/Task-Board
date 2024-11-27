@@ -18,12 +18,12 @@ const TaskCard = ({ task, setTasks, isOwner }: taskCardProps) => {
         whileHover="hover"
         whileTap="tap"
         key={_id}
-        className={`p-4 flex items-center justify-center gap-4 ${isOwner && "hover:cursor-pointer"} ${status === 0 ? "bg-white dark:bg-black" : status === 2 ? "bg-red-400 dark:bg-red-800" : status === 1 ? "bg-orange-400 dark:bg-orange-800" : "bg-green-400 dark:bg-green-800"} bg-opacity-50 dark:bg-opacity-80 rounded-lg shadow-md`}
+        className={`p-4 flex items-center justify-between gap-4 sm:gap-10 md:gap-20 ${isOwner && "hover:cursor-pointer"} ${status === 0 ? "bg-white dark:bg-black" : status === 2 ? "bg-red-400 dark:bg-red-800" : status === 1 ? "bg-orange-400 dark:bg-orange-800" : "bg-green-400 dark:bg-green-800"} bg-opacity-50 dark:bg-opacity-80 rounded-lg shadow-md`}
         onClick={() => setIsOpen(true)}
       >
         <div>
           <h1 className="font-semibold text-lg">{title}</h1>
-          <p className="opacity-50 break-all">{description}</p>
+          <p className="opacity-50 break-words">{description}</p>
         </div>
         <div>
           {taskIcon === "default-icon" ? (

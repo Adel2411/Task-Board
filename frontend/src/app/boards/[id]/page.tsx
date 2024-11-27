@@ -93,13 +93,13 @@ const BoardTasks = () => {
   return (
     <main className="w-full h-full flex flex-col justify-center items-center gap-16">
       <>
-        <div className="w-[80%] md:w-[60%] mt-16 h-fit flex flex-col gap-3">
+        <div className="w-[80%] md:w-[60%] mt-16 h-fit flex flex-col">
           <h1 className="font-semibold w-full text-center text-xl sm:text-2xl lg:text-3xl">
             {board?.name}
           </h1>
           <p className="w-full text-center opacity-50">{board?.description}</p>
         </div>
-        <div className="w-full h-full overflow-auto mb-10 flex items-center justify-center">
+        <div className="bg-primary bg-opacity-5 dark:bg-primary-dark dark:bg-opacity-5 w-full h-full overflow-auto mb-10 flex justify-center">
           <Tasks tasks={tasks} setTasks={setTasks} isOwner={isOwner} />
         </div>
         {isOwner ? (

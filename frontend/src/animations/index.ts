@@ -42,7 +42,7 @@ export const gradientBackgroundDark = {
 
 export const buttonVariants = {
   hover: {
-    scale: 1.05,
+    scale: 1.02,
     opacity: 0.8,
     transition: {
       duration: 0.2,
