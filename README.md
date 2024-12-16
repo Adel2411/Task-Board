@@ -1,117 +1,157 @@
-# ![Logo](./frontend/public/Logo.svg) Task Board Web App ![home_page](https://img.shields.io/badge/Task%20Board-Web%20App-blue)
+# ![Logo](./frontend/public/Logo.svg) **Task Board Web App** ![home_page](https://img.shields.io/badge/Task%20Board-Web%20App-blue)
 
 A web application for managing tasks and projects with an intuitive interface, offering features like task assignment, progress tracking, and collaboration.
 
-## Table of Contents
+---
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Demo](#Demo)
-- [Usage](#usage)
-- [Screenshots](#screenshots)
-- [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [Contact](#contact)
+## 📚 Table of Contents
 
-## Introduction
+- [✨ Introduction](#introduction)
+- [🌟 Features](#features)
+- [🚀 Demo](#demo)
+- [⚙️ Usage](#usage)
+- [📸 Screenshots](#screenshots)
+- [🛠️ Technologies Used](#technologies-used)
+- [🤝 Contributing](#contributing)
+- [📬 Contact](#contact)
 
-This Task Board Management web app is designed to streamline project management. It helps users organize tasks, assign responsibilities, and track progress efficiently.
+---
 
-## Features
+## ✨ Introduction
 
-- Light and dark theme
-- Project boards and task lists
-- Board sharing and privacy
-- Integration with third-party tools
-- Customizable board views
+This **Task Board Management** web app is designed to streamline project management. It helps users organize tasks, assign responsibilities, and track progress efficiently.
 
-## Demo
+---
+
+## 🌟 Features
+
+- 🌗 **Light and Dark Theme**
+- 🗂️ **Project Boards and Task Lists**
+- 🔒 **Board Sharing and Privacy Settings**
+- 🔗 **Integration with Third-Party Tools**
+- 🛠️ **Customizable Board Views**
+
+---
+
+## 🚀 Demo
 
 Check out the live demo of the project [here](https://task-board-beta.vercel.app).
 
-## Usage
+---
+
+## ⚙️ Usage
 
 ### Main Features
 
-1. Log in to the application.
-2. Create a new board.
-3. Add tasks to the board.
-4. Manage board Privacy.
-5. Share the board with other users.
-6. Customize the tasks icon and status.
+1. 🔑 Log in to the application.
+2. 📋 Create a new board.
+3. ➕ Add tasks to the board.
+4. 🔒 Manage board privacy.
+5. ✉️ Share the board with other users.
+6. 🎨 Customize the task icons and status.
 
-## Screenshots
+---
 
-### 1. Home Page
+## 📸 Screenshots
 
-This is a screenshot of the home page: (The UI is still under development)
+### 1️⃣ Home Page
+
+This is a screenshot of the home page (UI under development):
 
 ![Home Page](./screenshots/home_page.png)
 
-### 2. Sign In Page
+### 2️⃣ Sign In Page
 
 Below is a screenshot of the Sign In page:
 
 ![Sign In Page](./screenshots/login.png)
 
-### 3. Forgot Password Page
+### 3️⃣ Forgot Password Page
 
 Below is a screenshot of the Forgot Password page:
 
-![Sign In Page](./screenshots/forgot_password.png)
+![Forgot Password Page](./screenshots/forgot_password.png)
 
-### 4. Boards Page
+### 4️⃣ Boards Page
 
-This is a screenshot of the page where all boards are displayed and can be managed:
+A screenshot of the page where all boards are displayed and managed:
 
 ![Boards Page](./screenshots/boards.png)
 
-### 5. Sharing Board Link
+### 5️⃣ Sharing Board Link
 
 You can share the board with other users by sending them the board link:
 
 ![Sharing Board](./screenshots/share_board.png)
 
-### 6. Tasks Page
+### 6️⃣ Tasks Page
 
-This is a screenshot of the page where all tasks are displayed and can be managed:
+A screenshot of the page where all tasks are displayed and managed:
 
 ![Tasks Page](./screenshots/tasks.png)
 
-### 7. Add Task
+### 7️⃣ Add Task
 
-You can add a new tasks to the board or edit an existing one:
+You can add new tasks to the board or edit existing ones:
 
 ![Add Task](./screenshots/add_task.png)
 
-## Technologies Used
+---
+
+## 🛠️ Technologies Used
 
 - **Frontend:** Next.js, React, TypeScript, Tailwind CSS
 - **Backend:** Node.js, Express, MongoDB
 
-## Contributing
+---
 
-### Fork the Repository
+## 🤝 Contributing
+
+We welcome contributions to improve Task Board! Follow these steps:
+
+### 1️⃣ Fork the Repository
 
 ```bash
 git clone https://github.com/Adel2411/Task-Board.git
 ```
 
-## Make Changes
+### 2️⃣ Make Changes
 
-- Create a new branch for your feature or bugfix.
-- Commit your changes with clear messages.
+- Create a new branch for your feature or bugfix:
 
-## Submit a Pull Request
+```bash
+git checkout -b feature/your-feature-name
+```
 
-- Push your branch to GitHub.
+- Commit your changes with clear messages:
+
+```bash
+git commit -m "Add your message here"
+```
+
+### 3️⃣ Submit a Pull Request
+
+- Push your branch to GitHub:
+
+```bash
+git push origin feature/your-feature-name
+```
+
 - Open a pull request for review.
 
-## Contact
+---
 
-- Email:
+## 📬 Contact
+
+If you have any questions or feedback, feel free to reach out:
+
+- **Email:**
   - hadjarabadel.2411@gmail.com
   - becharwalid9@gmail.com
-- GitHub:
+- **GitHub:**
   - [Adel2411](https://github.com/Adel2411)
   - [edaywalid](https://github.com/edaywalid)
+
+---
+
+Thank you for checking out **Task Board**! 🌟
