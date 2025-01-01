@@ -23,7 +23,10 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 bg-background">
+    <section
+      id="features"
+      className="py-20 bg-background dark:bg-background-dark"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center mb-12 text-foreground">
           Key Features
@@ -32,13 +35,13 @@ export default function Features() {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center text-center p-6 bg-background rounded-lg shadow-lg"
+              className="flex flex-col items-center text-center p-6 bg-background dark:bg-background-dark rounded-lg shadow-lg"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
               viewport={{ once: true }}
             >
-              <feature.icon className="w-12 h-12 text-primary mb-4" />
+              <feature.icon className="w-12 h-12 text-primary dark:text-primary-dark mb-4" />
               <h3 className="text-xl font-semibold mb-2 text-foreground">
                 {feature.title}
               </h3>
