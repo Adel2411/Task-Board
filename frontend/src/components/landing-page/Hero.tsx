@@ -57,7 +57,7 @@ export default function Hero() {
             alt="myTaskBoard mockup"
             width={600}
             height={400}
-            className="rounded-lg shadow-2xl"
+            className="mt-12 rounded-lg shadow-2xl"
           />
         </motion.div>
       </div>
