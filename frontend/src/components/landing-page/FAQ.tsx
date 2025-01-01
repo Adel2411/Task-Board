@@ -31,7 +31,7 @@ export default function FAQ() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-20 bg-background">
+    <section id="faq" className="py-20 bg-background dark:bg-background-dark">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           className="text-3xl font-bold text-center mb-12 text-foreground"
@@ -45,13 +45,13 @@ export default function FAQ() {
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
-              className="border border-primary/20 rounded-lg overflow-hidden"
+              className="border border-primary/20 dark:border-primary-dark/20 rounded-lg overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <button
-                className="flex justify-between items-center w-full p-4 text-left bg-background hover:bg-primary/5 transition-colors duration-200"
+                className="flex justify-between items-center w-full p-4 text-left bg-background dark:bg-background-dark hover:bg-primary/5 dark:hover:bg-primary-dark/5 transition-colors duration-200"
                 onClick={() =>
                   setActiveIndex(activeIndex === index ? null : index)
                 }
@@ -60,9 +60,9 @@ export default function FAQ() {
                   {faq.question}
                 </span>
                 {activeIndex === index ? (
-                  <ChevronUp className="h-5 w-5 text-primary" />
+                  <ChevronUp className="h-5 w-5 text-primary dark:text-primary-dark" />
                 ) : (
-                  <ChevronDown className="h-5 w-5 text-primary" />
+                  <ChevronDown className="h-5 w-5 text-primary dark:text-primary-dark" />
                 )}
               </button>
               <AnimatePresence>
