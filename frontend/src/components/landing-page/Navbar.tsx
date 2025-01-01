@@ -41,7 +41,7 @@ export default function Navbar() {
           <ul className="hidden md:flex space-x-8 pr-20">
             <NavLink href="#features">Features</NavLink>
             <NavLink href="#showcase">Showcase</NavLink>
-            <NavLink href="#testimonials">Testimonials</NavLink>
+            <NavLink href="#faq">FAQ</NavLink>
             <NavLink href="#get-started">Get Started</NavLink>
           </ul>
         </div>

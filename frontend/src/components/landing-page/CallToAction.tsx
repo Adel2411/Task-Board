@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function CallToAction() {
   return (
@@ -11,13 +9,12 @@ export default function CallToAction() {
           Join thousands of users who are already enjoying the benefits of
           myTaskBoard.
         </p>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-background dark:bg-background-dark px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-200"
+        <Link
+          href="/auth"
+          className="bg-background hover:bg-background/90 dark:bg-background-dark dark:hover:bg-background-dark/90 px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl hover:text-primary dark:hover:text-primary-dark transition-shadow duration-200"
         >
           Start Now
-        </motion.button>
+        </Link>
       </div>
     </section>
   );
