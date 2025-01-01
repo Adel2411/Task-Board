@@ -18,14 +18,14 @@ export default function DarkModeSwitch() {
         </div>
       ) : theme === "dark" ? (
         <button
-          className="fixed top-4 right-4 p-2 rounded-full bg-switch_bg-dark text-background"
+          className="fixed top-4 right-4  p-2 rounded-full bg-switch_bg-dark text-background z-20"
           onClick={() => setTheme("light")}
         >
           <MdOutlineLightMode />
         </button>
       ) : (
         <button
-          className="fixed top-4 right-4 p-2 rounded-full bg-switch_bg text-background-dark"
+          className="fixed top-4 right-4 p-2 rounded-full bg-switch_bg text-background-dark z-20"
           onClick={() => setTheme("dark")}
         >
           <MdOutlineDarkMode />

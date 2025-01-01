@@ -1,19 +1,21 @@
-"use client";
+import CallToAction from "@/components/landing-page/CallToAction";
+import FAQ from "@/components/landing-page/FAQ";
+import Features from "@/components/landing-page/Features";
+import Hero from "@/components/landing-page/Hero";
+import HowItWorks from "@/components/landing-page/HowItWorks";
+import Navbar from "@/components/landing-page/Navbar";
+import Showcase from "@/components/landing-page/Showcase";
 
-import { GradientDiv } from "@/components";
-import Link from "next/link";
-
-const Home = () => {
+export default function Home() {
   return (
-    <main className="h-screen w-screen flex flex-col items-center justify-center gap-5">
-      <h1 className="text-2xl font-semibold">Welcome Home</h1>
-      <GradientDiv className="rounded-xl p-1">
-        <Link className="btn btn-ghost bg-white dark:bg-black" href="/auth">
-          Sign In
-        </Link>
-      </GradientDiv>
+    <main className="bg-background">
+      <Navbar />
+      <Hero />
+      <Features />
+      <HowItWorks />
+      <Showcase />
+      <FAQ />
+      <CallToAction />
     </main>
   );
-};
-
-export default Home;
+}
