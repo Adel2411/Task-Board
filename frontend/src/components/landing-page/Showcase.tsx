@@ -9,25 +9,25 @@ const showcaseItems = [
     title: "Create and Manage Boards",
     description:
       "Effortlessly create boards with customizable titles and descriptions. Manage your boards by toggling privacy settings or sharing them via public links.",
-    image: "/create-manage-boards.png",
+    image: "/boards.png",
   },
   {
     title: "Track Task Progress",
     description:
       "Keep your tasks organized with status colors: green for completed, red for not doing, orange for in-progress, and neutral for unclassified tasks.",
-    image: "/track-task-progress.png",
+    image: "/add_task.png",
   },
   {
     title: "Interactive Task Management",
     description:
       "Organize tasks with ease. Add titles, descriptions, emojis, and status colors to stay on top of your work. Update tasks quickly with our intuitive interface.",
-    image: "/interactive-tasks.png",
+    image: "/tasks.png",
   },
   {
     title: "Share Boards with Ease",
     description:
       "Generate a shareable link for public boards, allowing anyone to view your content. Perfect for showcasing your work to others without requiring login.",
-    image: "/share-board.png",
+    image: "/share_board.png",
   },
 ];
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 const NavLink = ({
@@ -33,8 +34,9 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link
               href="/"
-              className="text-2xl font-bold text-primary dark:text-primary-dark"
+              className="text-xl font-black text-primary dark:text-primary-dark flex items-center justify-center gap-2"
             >
+              <Image src="/Logo.svg" alt="Logo" width={24} height={24} />
               myTaskBoard
             </Link>
           </div>
