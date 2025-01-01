@@ -56,9 +56,9 @@ Check out the live demo of the project [here](https://task-board-beta.vercel.app
 
 ### 1️⃣ Home Page
 
-This is a screenshot of the home page (UI under development):
+This is a screenshot of the home page :
 
-![Home Page](./screenshots/home_page.png)
+![Home Page](./screenshots/home.png)
 
 ### 2️⃣ Sign In Page
 
