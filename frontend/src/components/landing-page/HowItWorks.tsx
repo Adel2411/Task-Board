@@ -25,7 +25,10 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-20 bg-background">
+    <section
+      id="how-it-works"
+      className="py-20 bg-background dark:bg-background-dark"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           className="text-3xl font-bold text-center mb-12 text-foreground"
@@ -45,11 +48,11 @@ export default function HowItWorks() {
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
               <motion.div
-                className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4"
+                className="w-16 h-16 bg-primary/10 dark:bg-primary-dark/10 rounded-full flex items-center justify-center mb-4"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <step.icon className="w-8 h-8 text-primary" />
+                <step.icon className="w-8 h-8 text-primary dark:text-primary-dark" />
               </motion.div>
               <h3 className="text-xl font-semibold mb-2 text-foreground">
                 {step.title}
