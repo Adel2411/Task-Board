@@ -8,17 +8,17 @@ const faqs = [
   {
     question: "What is myTaskBoard?",
     answer:
-      "myTaskBoard is a powerful task management application that helps you organize your work, collaborate with team members, and boost productivity.",
+      "myTaskBoard is a powerful task management application that helps you organize your work, and boost productivity.",
   },
   {
     question: "How does the free trial work?",
     answer:
-      "We offer a 14-day free trial for all new users. You can explore all features of the Pro plan during this period without any commitment.",
+      "We only offer a free Plan for all users. You can explore all features without any commitment.",
   },
   {
-    question: "Can I share my boards with external collaborators?",
+    question: "Can I share my boards with external users?",
     answer:
-      "Yes, you can easily share your boards with anyone, even if they don't have a myTaskBoard account. They'll receive a special link to view and interact with the shared board.",
+      "Yes, you can easily share your boards with anyone as long as they are public, even if they don't have a myTaskBoard account. They'll receive a special link to view the shared board.",
   },
   {
     question: "Is my data secure?",
