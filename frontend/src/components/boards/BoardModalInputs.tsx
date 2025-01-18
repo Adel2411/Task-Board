@@ -1,5 +1,5 @@
 import { boardModalInputsProps } from "@/types";
-import InputField from "./InputField";
+import InputField from "../InputField";
 
 const BoardModalInputs = ({
   inputs,

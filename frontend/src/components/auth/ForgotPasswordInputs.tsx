@@ -1,5 +1,5 @@
 import { forgotPasswordInputsProps } from "@/types";
-import InputField from "./InputField";
+import InputField from "../InputField";
 
 const ForgotPasswordInputs = ({
   inputs,

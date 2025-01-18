@@ -6,7 +6,7 @@ import { IoStarOutline, IoStar, IoEnterOutline } from "react-icons/io5";
 import { FaTasks } from "react-icons/fa";
 import { useState } from "react";
 import { boardCardProps } from "@/types";
-import DropDownMenu from "./DropDownMenu";
+import DropDownMenu from "../DropDownMenu";
 import { useTheme } from "next-themes";
 import toast from "react-hot-toast";
 import { BoardModal, ShareModal, Toast } from "@/components";
