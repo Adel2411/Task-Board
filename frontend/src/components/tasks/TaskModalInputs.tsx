@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { taskModalInputsProps } from "@/types";
-import InputField from "./InputField";
+import InputField from "../InputField";
 import { Angry, Frown, Meh, Smile } from "lucide-react";
 
 const TaskModalInputs = ({

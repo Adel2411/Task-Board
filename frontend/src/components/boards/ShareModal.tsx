@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 import { HiClipboardDocument, HiClipboardDocumentCheck } from "react-icons/hi2";
 import { buttonVariants } from "@/animations";
 import { useState } from "react";
-import Toast from "./Toast";
+import Toast from "../Toast";
 import toast from "react-hot-toast";
 
 const ShareModal = ({ isOpen, closeModal, link }: shareModalProps) => {

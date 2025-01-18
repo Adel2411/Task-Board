@@ -9,7 +9,7 @@ import { addTask, deleteTask, updateTask } from "@/utils";
 import toast from "react-hot-toast";
 import { TaskModalInputs, Toast } from "@/components";
 import { buttonVariants } from "@/animations";
-import ConfirmToast from "./ConfirmToast";
+import ConfirmToast from "../ConfirmToast";
 
 const TaskModal = ({
   isOpen,
