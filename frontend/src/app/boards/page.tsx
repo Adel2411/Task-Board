@@ -23,21 +23,21 @@ const BoardsContent = () => {
   const { user, setIsAuthorized } = useAuth();
   const [favCounter, setFavCounter] = useState(0);
 
-  useEffect(() => {
-    const fetchBoards = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        router.push("/home");
-        return;
-      }
-      setIsLoading(true);
-      const response: Board[] | null = await getBoards(token);
-      if (response) {
-        setBoards(response);
-      }
-      setIsLoading(false);
-    };
+  const fetchBoards = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/home");
+      return;
+    }
+    setIsLoading(true);
+    const response: Board[] | null = await getBoards(token);
+    if (response) {
+      setBoards(response);
+    }
+    setIsLoading(false);
+  };
 
+  useEffect(() => {
     fetchBoards();
   }, [router]);
 
@@ -52,6 +52,7 @@ const BoardsContent = () => {
       params.delete("token");
       const newUrl = `/boards?${params.toString()}`;
       router.replace(newUrl);
+      fetchBoards();
     }
   }, [searchParams, router]);
 
